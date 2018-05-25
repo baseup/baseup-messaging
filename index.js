@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
+const facebook = require('./setup/facebook');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
    extended: false
@@ -18,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/webhook', function (req, res) {
-   if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
+   if (req.query['hub.verify_token'] === facebook.VALIDATION_TOKEN) {
       console.log("Validating webhook");
       res.status(200).send(req.query['hub.challenge']);
    } else {
