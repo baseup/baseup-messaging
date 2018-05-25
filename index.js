@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.listen(5000, () => console.log("Webhook server is listening, port 5000"));
 
+app.set('port', process.env.PORT || 5000);
 app.get('/', (req, res) => {
    res.send('HELLO WORLD');
 });
