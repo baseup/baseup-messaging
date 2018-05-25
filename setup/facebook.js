@@ -6,7 +6,7 @@ const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
 
 const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
    (process.env.MESSENGER_VALIDATION_TOKEN) :
-   config.get('validation_toke');
+   config.get('validation_token');
 
 const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
    (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
