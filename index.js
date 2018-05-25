@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
    extended: false
 }));
-app.listen(5000, () => console.log("Webhook server is listening, port 3000"));
+app.listen(5000, () => console.log("Webhook server is listening, port 5000"));
 
 app.get('/', (req, res) => {
    res.send('HELLO WORLD');
