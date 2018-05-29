@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
 
          entry.messaging.forEach((event) => {
             if (event.message) {
-               console.log(event);
+               console.log(event.message);
             } else {
                console.log('Unknown Event: ', event);
             }
