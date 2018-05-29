@@ -57,7 +57,9 @@ app.post('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
    let response;
 
-   if (received_message.text) {}
+   if (received_message.text) {
+      facebookServ.sendMainQuickReply(sender_psid);
+   }
 }
 
 function callSendAPI(sender_psid, response) {
