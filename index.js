@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-const facebookServ = require('./settings/facebook.constants');
+const facebookServ = require('./providers/facebook.service');
 const facebookConst = require('./settings/facebook.constants');
 
 app.set('port', process.env.PORT || 5000);
@@ -57,12 +57,7 @@ app.post('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
    let response;
 
-   if (received_message.text) {
-      response = {
-         "text": `You sent the message: "${received_message.text}". Now send me an image!`
-      };
-   }
-   callSendAPI(sender_psid, response);
+   if (received_message.text) {}
 }
 
 function callSendAPI(sender_psid, response) {
