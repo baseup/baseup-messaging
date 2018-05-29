@@ -6,15 +6,14 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-const facebook = require('./setup/facebook');
+const facebook = require('./settings/facebook');
 
+app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
    extended: false
 }));
-app.listen(5000, () => console.log("Webhook server is listening, port 5000"));
 
-app.set('port', process.env.PORT || 5000);
 app.get('/', (req, res) => {
    res.send('HELLO WORLD');
 });
@@ -26,6 +25,20 @@ app.get('/webhook', function (req, res) {
    } else {
       console.error("Failed validation. Make sure the validation tokens match.");
       res.sendStatus(403);
+   }
+});
+
+app.post('/webhook', (req, res) => {
+   const body = req.body;
+
+   if (body.object === 'page') {
+      body.entry.forEach(function (entry) {
+         const webhook_event = entry.messaging[0];
+         console.log(webhook_event);
+      });
+      res.status(200).send('EVENT_RECEIVED');
+   } else {
+      res.sendStatus(404);
    }
 });
 
