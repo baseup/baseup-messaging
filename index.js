@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-const facebook = require('./settings/facebook');
+const facebookServ = require('./providers/facebook.service');
+const facebookConst = require('./settings/facebook.constants');
 
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/webhook', (req, res) => {
-   if (req.query['hub.verify_token'] === facebook.VALIDATION_TOKEN) {
+   if (req.query['hub.verify_token'] === facebookConst.VALIDATION_TOKEN) {
       console.log("Validating webhook");
       res.status(200).send(req.query['hub.challenge']);
    } else {
@@ -56,14 +57,7 @@ app.post('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
    let response;
 
-   if (received_message.text) {
-
-      response = {
-         "text": `You sent the message: "${received_message.text}". Now send me an image!`
-      };
-   }
-
-   callSendAPI(sender_psid, response);
+   facebookServ.sendMainQuickReply(sender_psid);
 }
 
 function callSendAPI(sender_psid, response) {
@@ -77,7 +71,7 @@ function callSendAPI(sender_psid, response) {
    request({
       "uri": "https://graph.facebook.com/v2.9/me/messages",
       "qs": {
-         "access_token": facebook.PAGE_ACCESS_TOKEN
+         "access_token": facebookConst.PAGE_ACCESS_TOKEN
       },
       "method": "POST",
       "json": request_body
