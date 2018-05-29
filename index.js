@@ -35,6 +35,14 @@ app.post('/webhook', (req, res) => {
       body.entry.forEach((entry) => {
          const id = entry.id;
          const time = entry.time;
+
+         entry.messaging.forEach((event) => {
+            if (event.message) {
+               console.log(event);
+            } else {
+               console.log('Unknown Event: ', event);
+            }
+         });
          const webhook_event = entry.messaging[0];
          console.log('WEBHOOK EVENT: ', entry);
       });
