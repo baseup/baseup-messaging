@@ -1,3 +1,5 @@
+const request = require('request');
+
 module.exports = {
    sendMainQuickReply: sendMainQuickReply,
 };
