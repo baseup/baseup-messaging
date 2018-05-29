@@ -1,5 +1,7 @@
 const request = require('request');
 
+const facebookConst = require('../settings/facebook.constants');
+
 module.exports = {
    sendMainQuickReply: sendMainQuickReply,
 };
@@ -7,7 +9,7 @@ module.exports = {
 function sendMainQuickReply(recipientId) {
    sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
-      var messageData = {
+      const messageData = {
          recipient: {
             id: recipientId
          },
@@ -33,7 +35,7 @@ function sendMainQuickReply(recipientId) {
       };
 
       callSendAPI(messageData);
-      setTimeout(function () {
+      setTimeout(() => {
          sendTypingOff(recipientId);
          sendReadReceipt(recipientId);
       }, 2000);
@@ -45,7 +47,7 @@ function getCustomerName(recipientId) {
       request({
          uri: 'https://graph.facebook.com/v2.9/' + recipientId,
          qs: {
-            access_token: PAGE_ACCESS_TOKEN,
+            access_token: facebookConst.PAGE_ACCESS_TOKEN,
             fields: "first_name,last_name"
          },
          method: 'GET',
@@ -66,7 +68,7 @@ function notifyHumanOperators(recipientId) {
    request({
       uri: 'https://graph.facebook.com/v2.9/' + recipientId,
       qs: {
-         access_token: PAGE_ACCESS_TOKEN,
+         access_token: facebookConst.PAGE_ACCESS_TOKEN,
          fields: "first_name,last_name"
       },
       method: 'GET',
@@ -133,7 +135,7 @@ function callSendAPI(messageData) {
    request({
       uri: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {
-         access_token: PAGE_ACCESS_TOKEN
+         access_token: facebookConst.PAGE_ACCESS_TOKEN
       },
       method: 'POST',
       json: messageData
