@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
    res.send('HELLO WORLD');
 });
 
-app.get('/webhook', function (req, res) {
+app.get('/webhook', (req, res) => {
    if (req.query['hub.verify_token'] === facebook.VALIDATION_TOKEN) {
       console.log("Validating webhook");
       res.status(200).send(req.query['hub.challenge']);
@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
    const body = req.body;
 
    if (body.object === 'page') {
-      body.entry.forEach(function (entry) {
+      body.entry.forEach((entry) => {
 
          const webhook_event = entry.messaging[0];
          console.log(webhook_event);
@@ -107,7 +107,7 @@ function handlePostback(sender_psid, received_postback) {
    callSendAPI(sender_psid, response);
 }
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), () => {
    console.log('Node app is running on port', app.get('port'));
 });
 
