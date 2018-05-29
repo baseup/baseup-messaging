@@ -32,9 +32,11 @@ app.post('/webhook', (req, res) => {
    const body = req.body;
 
    if (body.object === 'page') {
-      body.entry.forEach(function (entry) {
+      body.entry.forEach((entry) => {
+         const id = entry.id;
+         const time = entry.time;
          const webhook_event = entry.messaging[0];
-         console.log('WEBHOOK EVENT: ', webhook_event);
+         console.log('WEBHOOK EVENT: ', entry);
       });
       res.status(200).send('EVENT_RECEIVED');
    } else {
