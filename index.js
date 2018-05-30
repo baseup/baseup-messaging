@@ -1,9 +1,10 @@
 /* jshint node: true, devel: true */
 'use strict';
 
+const Nexmo = require('nexmo');
 const express = require('express');
-const bodyParser = require('body-parser');
 const request = require('request');
+const bodyParser = require('body-parser');
 const app = express();
 
 const facebookServ = require('./providers/facebook.service');
@@ -27,6 +28,14 @@ app.get('/webhook', (req, res) => {
       console.error("Failed validation. Make sure the validation tokens match.");
       res.sendStatus(403);
    }
+});
+
+app.get('/nexmo', (req, res) => {
+   console.log(req.body);
+});
+
+app.post('/nexmo-outbound', (req, res) => {
+   console.log(req.body);
 });
 
 app.post('/webhook', (req, res) => {
@@ -94,7 +103,7 @@ function handlePostback(sender_psid, received_postback) {
    if (payload === 'yes') {
       response = {
          "text": "Thanks!"
-      }
+      };
    } else if (payload === 'no') {
       response = {
          "text": "Oops, try sending another image."
