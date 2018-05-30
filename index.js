@@ -31,7 +31,7 @@ app.get('/webhook', (req, res) => {
 });
 
 app.get('/nexmo', (req, res) => {
-   console.log('NEXMO: ', req.body);
+   console.log('NEXMO: ', req);
 });
 
 app.post('/nexmo-outbound', (req, res) => {
