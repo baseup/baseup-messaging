@@ -30,7 +30,7 @@ app.get('/webhook', (req, res) => {
    }
 });
 
-app.post('/nexmo', (req, res) => {
+app.get('/nexmo', (req, res) => {
    console.log('NEXMO: ', req);
 });
 
