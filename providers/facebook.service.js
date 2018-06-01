@@ -62,7 +62,7 @@ function sendMainQuickReply(recipientId) {
                   elements: [{
                      title: 'Welcome!',
                      subtitle: 'welcome subtitle',
-                     image_url: '../assets/imgs/felipe.png',
+                     image_url: 'https://petersfancybrownhats.com/company_image.png',
                      default_action: {
                         type: 'web_url',
                         url: 'https://www.messenger.com',
