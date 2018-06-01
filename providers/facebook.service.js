@@ -60,18 +60,18 @@ function sendMainQuickReply(recipientId) {
                payload: {
                   template_type: 'generic',
                   elements: [{
-                     title: 'Welcome!',
-                     subtitle: 'welcome subtitle',
-                     image_url: 'https://petersfancybrownhats.com/company_image.png',
+                     title: 'Felipe and Sons!',
+                     subtitle: 'Barberdashery',
+                     image_url: 'http://felipeandsons.com/wp-content/uploads/2016/06/FS_LOGO_tall.png',
                      default_action: {
                         type: 'web_url',
-                        url: 'https://www.messenger.com',
+                        url: 'http://felipeandsons.com/',
                         messenger_extensions: false,
                         webview_height_ratio: 'tall',
                      },
                      buttons: [{
                         type: 'web_url',
-                        url: 'https://petersfancybrownhats.com',
+                        url: 'http://felipeandsons.com/',
                         title: 'View Website'
                      }, {
                         type: 'postback',
