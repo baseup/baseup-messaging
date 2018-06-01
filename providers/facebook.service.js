@@ -42,6 +42,14 @@ function sendMainQuickReply(recipientId) {
                      "type": "web_url",
                      "url": "https://www.messenger.com",
                      "title": "Visit Messenger"
+                  }, {
+                     "type": "web_url",
+                     "url": "https://www.messenger.com",
+                     "title": "Visit Messenger"
+                  }, {
+                     "type": "web_url",
+                     "url": "https://www.messenger.com",
+                     "title": "Visit Messenger"
                   }]
                }
             }
