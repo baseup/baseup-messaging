@@ -60,27 +60,24 @@ function sendMainQuickReply(recipientId) {
                payload: {
                   template_type: "generic",
                   elements: [{
-                     title: "<TITLE_TEXT>",
-                     image_url: "https://scontent.fmnl3-2.fna.fbcdn.net/v/t1.0-9/12006203_10154088276211729_2432197377106462187_n.png?_nc_cat=0&_nc_eui2=AeHQwssc928g8S1ZK2MSqEVeYNFNelFNzDXKHvkWK_dcHnZmo-8SaLryr2OZv3rIuHFU-2LCMPDcjUt1aYFJwUR_qLTcqlJfshdmTaYrIPa2sycOq-SLEdqvOLg3M86Potk&oh=e5c223687cd98314190dbe5196c8e567&oe=5BBADC0F",
-                     subtitle: "<SUBTITLE_TEXT>",
-                     default_action: {
-                        type: "web_url",
-                        url: "https://www.messenger.com",
-                        messenger_extensions: true,
-                        webview_height_ratio: "COMPACT"
+                     "title": "Welcome!",
+                     "image_url": "https://petersfancybrownhats.com/company_image.png",
+                     "subtitle": "We have the right hat for everyone.",
+                     "default_action": {
+                        "type": "web_url",
+                        "url": "https://petersfancybrownhats.com/view?item=103",
+                        "messenger_extensions": false,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://petersfancybrownhats.com/"
                      },
-                     buttons: [{
-                        type: 'web_url',
-                        url: 'https://www.messenger.com',
-                        title: 'Visit Messenger'
+                     "buttons": [{
+                        "type": "web_url",
+                        "url": "https://petersfancybrownhats.com",
+                        "title": "View Website"
                      }, {
-                        type: 'web_url',
-                        url: 'https://www.messenger.com',
-                        title: 'Visit Messenger'
-                     }, {
-                        type: 'web_url',
-                        url: 'https://www.messenger.com',
-                        title: 'Visit Messenger'
+                        "type": "postback",
+                        "title": "Start Chatting",
+                        "payload": "DEVELOPER_DEFINED_PAYLOAD"
                      }]
                   }]
                }
