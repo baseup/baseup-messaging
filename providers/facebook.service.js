@@ -61,7 +61,12 @@ function sendMainQuickReply(recipientId) {
                   template_type: 'generic',
                   elements: [{
                      title: 'Welcome!',
-                     subtitle: 'welcome subtitle'
+                     subtitle: 'welcome subtitle',
+                     default_action: {
+                        type: 'web_url',
+                        messenger_extensions: false,
+                        webview_height_ratio: 'tall',
+                     }
                   }]
                }
             }
