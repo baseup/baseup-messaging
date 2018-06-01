@@ -14,46 +14,54 @@ function sendMainQuickReply(recipientId) {
             id: recipientId
          },
          //    message: {
-         //       text: "Hi " + fullName + ". I'm BotBot, BaseUp's automated assistant. I'm here to help. For your concerns, choose a button below:",
+         //       text: 'Hi ' + fullName + '. I'm BotBot, BaseUp's automated assistant. I'm here to help. For your concerns, choose a button below:',
          //       quick_replies: [{
-         //             "content_type": "text",
-         //             "title": "TRACK",
-         //             "payload": "TRACK_ORDER_NOW"
+         //             content_type: 'text',
+         //             title: 'TRACK',
+         //             payload: 'TRACK_ORDER_NOW'
          //          },
          //          {
-         //             "content_type": "text",
-         //             "title": "OTHER",
-         //             "payload": "OTHER_CONCERNS"
+         //             content_type: 'text',
+         //             title: 'OTHER',
+         //             payload: 'OTHER_CONCERNS'
          //          },
          //          {
-         //             "content_type": "text",
-         //             "title": "GENERAL INQUIRY",
-         //             "payload": "GENERAL_INQUIRY"
+         //             content_type: 'text',
+         //             title: 'GENERAL INQUIRY',
+         //             payload: 'GENERAL_INQUIRY'
          //          }
          //       ]
          //    }
-         "message": {
-            "attachment": {
-               "type": "template",
-               "payload": {
-                  "template_type": "button",
-                  "text": "What do you want to do next?",
-                  "buttons": [{
-                     "type": "web_url",
-                     "url": "https://www.messenger.com",
-                     "title": "Visit Messenger"
-                  }, {
-                     "type": "web_url",
-                     "url": "https://www.messenger.com",
-                     "title": "Visit Messenger"
-                  }, {
-                     "type": "web_url",
-                     "url": "https://www.messenger.com",
-                     "title": "Visit Messenger"
-                  }]
-               }
+         // message: {
+         //    attachment: {
+         //       type: 'template',
+         //       payload: {
+         //          template_type: 'button',
+         //          text: 'What do you want to do next?',
+         //          buttons: [{
+         //             type: 'web_url',
+         //             url: 'https://www.messenger.com',
+         //             title: 'Visit Messenger'
+         //          }, {
+         //             type: 'web_url',
+         //             url: 'https://www.messenger.com',
+         //             title: 'Visit Messenger'
+         //          }, {
+         //             type: 'web_url',
+         //             url: 'https://www.messenger.com',
+         //             title: 'Visit Messenger'
+         //          }]
+         //       }
+         //    }
+         // }
+         message: {
+            attachment: {
+               type: 'postback',
+               title: 'TEST',
+               payload: 'TRACK_ORDER_NOW'
             }
          }
+
       };
 
       callSendAPI(messageData);
@@ -70,17 +78,17 @@ function getCustomerName(recipientId) {
          uri: 'https://graph.facebook.com/v2.9/' + recipientId,
          qs: {
             access_token: facebookConst.PAGE_ACCESS_TOKEN,
-            fields: "first_name,last_name"
+            fields: 'first_name,last_name'
          },
          method: 'GET',
       }, (error, response, body) => {
          if (!error && response.statusCode == 200) {
             const firstName = JSON.parse(body).first_name;
             const lastName = JSON.parse(body).last_name;
-            const fullName = (firstName + " " + lastName);
+            const fullName = (firstName + ' ' + lastName);
             resolve(fullName);
          } else {
-            console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+            console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
          }
       });
    });
@@ -91,7 +99,7 @@ function notifyHumanOperators(recipientId) {
       uri: 'https://graph.facebook.com/v2.9/' + recipientId,
       qs: {
          access_token: facebookConst.PAGE_ACCESS_TOKEN,
-         fields: "first_name,last_name"
+         fields: 'first_name,last_name'
       },
       method: 'GET',
    }, (error, response, body) => {
@@ -101,53 +109,53 @@ function notifyHumanOperators(recipientId) {
          console.log(body);
          const firstName = JSON.parse(body).first_name;
          const lastName = JSON.parse(body).last_name;
-         const fullName = (firstName + " " + lastName);
+         const fullName = (firstName + ' ' + lastName);
          // firebase.database().ref('agents').once('value', (snapshot) => {
          //    snapshot.forEach((childSnapshot) => {
          //       const currentKey = childSnapshot.key;
-         //       sendTextMessage(currentKey, fullName + " " + USER_NOTIFICATION_TO_AGENT);
+         //       sendTextMessage(currentKey, fullName + ' ' + USER_NOTIFICATION_TO_AGENT);
          //    });
          // });
       } else {
-         console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
       }
    });
 }
 
 function sendReadReceipt(recipientId) {
-   console.log("Sending a read receipt to mark message as seen");
+   console.log('Sending a read receipt to mark message as seen');
 
    const messageData = {
       recipient: {
          id: recipientId
       },
-      sender_action: "mark_seen"
+      sender_action: 'mark_seen'
    };
 
    callSendAPI(messageData);
 }
 
 function sendTypingOn(recipientId) {
-   console.log("Turning typing indicator on");
+   console.log('Turning typing indicator on');
 
    const messageData = {
       recipient: {
          id: recipientId
       },
-      sender_action: "typing_on"
+      sender_action: 'typing_on'
    };
 
    callSendAPI(messageData);
 }
 
 function sendTypingOff(recipientId) {
-   console.log("Turning typing indicator off");
+   console.log('Turning typing indicator off');
 
    const messageData = {
       recipient: {
          id: recipientId
       },
-      sender_action: "typing_off"
+      sender_action: 'typing_off'
    };
 
    callSendAPI(messageData);
@@ -168,14 +176,14 @@ function callSendAPI(messageData) {
          const messageId = body.message_id;
 
          if (messageId) {
-            console.log("Successfully sent message with id %s to recipient %s",
+            console.log('Successfully sent message with id %s to recipient %s',
                messageId, recipientId);
          } else {
-            console.log("Successfully called Send API for recipient %s",
+            console.log('Successfully called Send API for recipient %s',
                recipientId);
          }
       } else {
-         console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
       }
    });
 }
