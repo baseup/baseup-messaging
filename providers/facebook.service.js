@@ -56,9 +56,80 @@ function sendMainQuickReply(recipientId) {
          // }
          message: {
             attachment: {
-               type: 'postback',
-               title: 'TEST',
-               payload: 'TRACK_ORDER_NOW'
+               type: 'template',
+               payload: {
+                  template_type: "generic",
+                  elements: [{
+                     title: "<TITLE_TEXT>",
+                     image_url: "<IMAGE_URL_TO_DISPLAY>",
+                     subtitle: "<SUBTITLE_TEXT>",
+                     default_action: {
+                        type: "web_url",
+                        url: "https://www.messenger.com",
+                        messenger_extensions: TRUE,
+                        webview_height_ratio: "COMPACT>"
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }]
+                  }, {
+                     title: "<TITLE_TEXT>",
+                     image_url: "<IMAGE_URL_TO_DISPLAY>",
+                     subtitle: "<SUBTITLE_TEXT>",
+                     default_action: {
+                        type: "web_url",
+                        url: "https://www.messenger.com",
+                        messenger_extensions: TRUE,
+                        webview_height_ratio: "COMPACT>"
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }]
+                  }, {
+                     title: "<TITLE_TEXT>",
+                     image_url: "<IMAGE_URL_TO_DISPLAY>",
+                     subtitle: "<SUBTITLE_TEXT>",
+                     default_action: {
+                        type: "web_url",
+                        url: "https://www.messenger.com",
+                        messenger_extensions: TRUE,
+                        webview_height_ratio: "COMPACT>"
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }, {
+                        type: 'web_url',
+                        url: 'https://www.messenger.com',
+                        title: 'Visit Messenger'
+                     }]
+                  }]
+               }
             }
          }
 
