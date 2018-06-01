@@ -64,6 +64,7 @@ function sendMainQuickReply(recipientId) {
                      subtitle: 'welcome subtitle',
                      default_action: {
                         type: 'web_url',
+                        url: 'https://www.messenger.com',
                         messenger_extensions: false,
                         webview_height_ratio: 'tall',
                      }
