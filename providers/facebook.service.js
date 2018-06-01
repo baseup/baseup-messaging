@@ -73,10 +73,6 @@ function sendMainQuickReply(recipientId) {
                         "type": "web_url",
                         "url": "https://www.messenger.com",
                         "title": "View Website"
-                     }, {
-                        "type": "postback",
-                        "title": "Start Chatting",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD"
                      }]
                   }]
                }
