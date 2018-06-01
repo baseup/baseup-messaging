@@ -62,7 +62,7 @@ function sendMainQuickReply(recipientId) {
                   elements: [{
                      title: 'Felipe and Sons!',
                      subtitle: 'Barberdashery',
-                     image_url: 'https://baseup.co/assets/img/home/partners/felipe.png',
+                     image_url: 'https://baseup.co/assets/img/home/partners/fine.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
