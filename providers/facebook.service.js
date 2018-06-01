@@ -58,22 +58,9 @@ function sendMainQuickReply(recipientId) {
             attachment: {
                type: 'template',
                payload: {
-                  template_type: "generic",
+                  template_type: 'generic',
                   elements: [{
-                     "title": "Welcome!",
-                     "subtitle": "We have the right hat for everyone.",
-                     "default_action": {
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "messenger_extensions": false,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.messenger.com"
-                     },
-                     "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "View Website"
-                     }]
+                     title: 'Welcome!'
                   }]
                }
             }
