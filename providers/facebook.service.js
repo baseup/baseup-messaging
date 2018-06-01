@@ -13,24 +13,38 @@ function sendMainQuickReply(recipientId) {
          recipient: {
             id: recipientId
          },
-         message: {
-            text: "Hi " + fullName + ". I'm BotBot, BaseUp's automated assistant. I'm here to help. For your concerns, choose a button below:",
-            quick_replies: [{
-                  "content_type": "text",
-                  "title": "TRACK",
-                  "payload": "TRACK_ORDER_NOW"
-               },
-               {
-                  "content_type": "text",
-                  "title": "OTHER",
-                  "payload": "OTHER_CONCERNS"
-               },
-               {
-                  "content_type": "text",
-                  "title": "GENERAL INQUIRY",
-                  "payload": "GENERAL_INQUIRY"
+         //    message: {
+         //       text: "Hi " + fullName + ". I'm BotBot, BaseUp's automated assistant. I'm here to help. For your concerns, choose a button below:",
+         //       quick_replies: [{
+         //             "content_type": "text",
+         //             "title": "TRACK",
+         //             "payload": "TRACK_ORDER_NOW"
+         //          },
+         //          {
+         //             "content_type": "text",
+         //             "title": "OTHER",
+         //             "payload": "OTHER_CONCERNS"
+         //          },
+         //          {
+         //             "content_type": "text",
+         //             "title": "GENERAL INQUIRY",
+         //             "payload": "GENERAL_INQUIRY"
+         //          }
+         //       ]
+         //    }
+         "message": {
+            "attachment": {
+               "type": "template",
+               "payload": {
+                  "template_type": "button",
+                  "text": "What do you want to do next?",
+                  "buttons": [{
+                     "type": "web_url",
+                     "url": "https://www.messenger.com",
+                     "title": "Visit Messenger"
+                  }]
                }
-            ]
+            }
          }
       };
 

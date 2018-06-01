@@ -72,47 +72,6 @@ function handleMessage(sender_psid, received_message) {
    }
 }
 
-function callSendAPI(sender_psid, response) {
-   let request_body = {
-      "recipient": {
-         "id": sender_psid
-      },
-      "message": response
-   };
-
-   request({
-      "uri": "https://graph.facebook.com/v2.9/me/messages",
-      "qs": {
-         "access_token": facebookConst.PAGE_ACCESS_TOKEN
-      },
-      "method": "POST",
-      "json": request_body
-   }, (err, res, body) => {
-      if (!err) {
-         console.log('message sent!');
-      } else {
-         console.error("Unable to send message:" + err);
-      }
-   });
-}
-
-function handlePostback(sender_psid, received_postback) {
-   let response;
-
-   let payload = received_postback.payload;
-
-   if (payload === 'yes') {
-      response = {
-         "text": "Thanks!"
-      };
-   } else if (payload === 'no') {
-      response = {
-         "text": "Oops, try sending another image."
-      };
-   }
-   callSendAPI(sender_psid, response);
-}
-
 app.listen(app.get('port'), () => {
    console.log('Node app is running on port', app.get('port'));
 });
