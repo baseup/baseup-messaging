@@ -61,7 +61,6 @@ function sendMainQuickReply(recipientId) {
                   template_type: "generic",
                   elements: [{
                      "title": "Welcome!",
-                     "image_url": "https://z-m-static.xx.fbcdn.net/rsrc.php/v3/y6/r/FY3ZevCxUjj.png",
                      "subtitle": "We have the right hat for everyone.",
                      "default_action": {
                         "type": "web_url",
