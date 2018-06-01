@@ -62,7 +62,7 @@ function sendMainQuickReply(recipientId) {
                   elements: [{
                      title: 'Felipe and Sons!',
                      subtitle: 'Barberdashery',
-                     image_url: 'https://testing.baseup.me/assets/img/home/partners/felipe.png',
+                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/felipe.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
@@ -80,7 +80,7 @@ function sendMainQuickReply(recipientId) {
                      }]
                   }, {
                      title: 'TUF',
-                     image_url: 'https://testing.baseup.me/assets/img/home/partners/tuf.png',
+                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/tuf.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://tufbarbershop.ph/',
