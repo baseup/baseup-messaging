@@ -60,7 +60,8 @@ function sendMainQuickReply(recipientId) {
                payload: {
                   template_type: 'generic',
                   elements: [{
-                     title: 'Welcome!'
+                     title: 'Welcome!',
+                     subtitle: 'welcome subtitle'
                   }]
                }
             }
