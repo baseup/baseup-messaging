@@ -67,7 +67,16 @@ function sendMainQuickReply(recipientId) {
                         url: 'https://www.messenger.com',
                         messenger_extensions: false,
                         webview_height_ratio: 'tall',
-                     }
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'https://petersfancybrownhats.com',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Start Chatting',
+                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                     }]
                   }]
                }
             }
