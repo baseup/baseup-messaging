@@ -62,12 +62,12 @@ function sendMainQuickReply(recipientId) {
                   elements: [{
                      title: 'Felipe and Sons!',
                      subtitle: 'Barberdashery',
-                     image_url: 'http://felipeandsons.com/wp-content/uploads/2016/06/FS_LOGO_tall.png',
+                     image_url: 'https://baseup.co/assets/img/home/partners/felipe.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
                         messenger_extensions: false,
-                        webview_height_ratio: 'compact',
+                        webview_height_ratio: 'full',
                      },
                      buttons: [{
                         type: 'web_url',
@@ -75,7 +75,25 @@ function sendMainQuickReply(recipientId) {
                         title: 'View Website'
                      }, {
                         type: 'postback',
-                        title: 'Start Chatting',
+                        title: 'Check Branch',
+                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                     }]
+                  }, {
+                     title: 'TUF',
+                     image_url: 'https://baseup.co/assets/img/home/partners/tuf.png',
+                     default_action: {
+                        type: 'web_url',
+                        url: 'http://tufbarbershop.ph/',
+                        messenger_extensions: false,
+                        webview_height_ratio: 'full',
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'http://tufbarbershop.ph/',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
                         payload: 'DEVELOPER_DEFINED_PAYLOAD'
                      }]
                   }]
