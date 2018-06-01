@@ -66,7 +66,7 @@ function sendMainQuickReply(recipientId) {
                      default_action: {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
-                        messenger_extensions: true,
+                        messenger_extensions: false,
                         webview_height_ratio: 'compact',
                      },
                      buttons: [{
