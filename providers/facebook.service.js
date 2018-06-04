@@ -14,27 +14,47 @@ function sendMainQuickReply(recipientId) {
             id: recipientId
          },
          message: {
-            attachment: {
-               type: 'template',
-               payload: {
-                  template_type: 'button',
-                  text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help.For your concerns, choose a button below:`,
-                  buttons: [{
-                     type: 'postback',
-                     title: 'General Inquiries',
-                     payload: 'GENERAL_INQUIRIES'
-                  }, {
-                     type: 'postback',
-                     title: 'Check Partners',
-                     payload: 'CHECK_PARTNERS'
-                  }, {
-                     type: 'postback',
-                     title: 'Others',
-                     payload: 'OTHERS'
-                  }]
+            text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+            quick_replies: [{
+                  "content_type": "text",
+                  "title": "General Inquiries",
+                  "payload": "GENERAL_INQUIRIES"
+               },
+               {
+                  "content_type": "text",
+                  "title": "Check Partners",
+                  "payload": "CHECK_PARTNERS"
+               },
+               {
+                  "content_type": "text",
+                  "title": "Other Concerns",
+                  "payload": "OTHER_CONCERNS"
                }
-            }
+            ]
          }
+
+         // message: {
+         //    attachment: {
+         //       type: 'template',
+         //       payload: {
+         //          template_type: 'button',
+         //          text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+         //          buttons: [{
+         //             type: 'postback',
+         //             title: 'General Inquiries',
+         //             payload: 'GENERAL_INQUIRIES'
+         //          }, {
+         //             type: 'postback',
+         //             title: 'Check Partners',
+         //             payload: 'CHECK_PARTNERS'
+         //          }, {
+         //             type: 'postback',
+         //             title: 'Other Concerns',
+         //             payload: 'OTHER_CONCERNS'
+         //          }]
+         //       }
+         //    }
+         // }
 
          // message: {
          //    attachment: {
