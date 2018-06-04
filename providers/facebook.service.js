@@ -36,7 +36,7 @@ function sendPartners(recipientId) {
                      }, {
                         type: 'postback',
                         title: 'Check Branch',
-                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                        payload: 'FELIPEANDSONS'
                      }]
                   }, {
                      title: 'TUF',
@@ -54,7 +54,7 @@ function sendPartners(recipientId) {
                      }, {
                         type: 'postback',
                         title: 'Check Branch',
-                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                        payload: 'TUF'
                      }]
                   }]
                }
@@ -96,100 +96,6 @@ function sendMainQuickReply(recipientId) {
                }
             ]
          }
-
-         // message: {
-         //    attachment: {
-         //       type: 'template',
-         //       payload: {
-         //          template_type: 'button',
-         //          text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
-         //          buttons: [{
-         //             type: 'postback',
-         //             title: 'General Inquiries',
-         //             payload: 'GENERAL_INQUIRIES'
-         //          }, {
-         //             type: 'postback',
-         //             title: 'Check Partners',
-         //             payload: 'CHECK_PARTNERS'
-         //          }, {
-         //             type: 'postback',
-         //             title: 'Other Concerns',
-         //             payload: 'OTHER_CONCERNS'
-         //          }]
-         //       }
-         //    }
-         // }
-
-         // message: {
-         //    attachment: {
-         //       type: 'template',
-         //       payload: {
-         //          template_type: 'button',
-         //          text: 'What do you want to do next?',
-         //          buttons: [{
-         //             type: 'web_url',
-         //             url: 'https://www.messenger.com',
-         //             title: 'Visit Messenger'
-         //          }, {
-         //             type: 'web_url',
-         //             url: 'https://www.messenger.com',
-         //             title: 'Visit Messenger'
-         //          }, {
-         //             type: 'web_url',
-         //             url: 'https://www.messenger.com',
-         //             title: 'Visit Messenger'
-         //          }]
-         //       }
-         //    }
-         // }
-
-         // message: {
-         //    attachment: {
-         //       type: 'template',
-         //       payload: {
-         //          template_type: 'generic',
-         //          elements: [{
-         //             title: 'Felipe and Sons!',
-         //             subtitle: 'Barberdashery',
-         //             image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/felipe.png',
-         //             default_action: {
-         //                type: 'web_url',
-         //                url: 'http://felipeandsons.com/',
-         //                messenger_extensions: false,
-         //                webview_height_ratio: 'full',
-         //             },
-         //             buttons: [{
-         //                type: 'web_url',
-         //                url: 'http://felipeandsons.com/',
-         //                title: 'View Website'
-         //             }, {
-         //                type: 'postback',
-         //                title: 'Check Branch',
-         //                payload: 'DEVELOPER_DEFINED_PAYLOAD'
-         //             }]
-         //          }, {
-         //             title: 'TUF',
-         //             image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/tuf.png',
-         //             default_action: {
-         //                type: 'web_url',
-         //                url: 'http://tufbarbershop.ph/',
-         //                messenger_extensions: false,
-         //                webview_height_ratio: 'full',
-         //             },
-         //             buttons: [{
-         //                type: 'web_url',
-         //                url: 'http://tufbarbershop.ph/',
-         //                title: 'View Website'
-         //             }, {
-         //                type: 'postback',
-         //                title: 'Check Branch',
-         //                payload: 'DEVELOPER_DEFINED_PAYLOAD'
-         //             }]
-         //          }]
-         //       }
-         //    }
-         // }
-
       };
 
       callSendAPI(messageData);
@@ -231,10 +137,7 @@ function notifyHumanOperators(recipientId) {
       },
       method: 'GET',
    }, (error, response, body) => {
-      console.log(body);
-      console.log(response.statusCode);
       if (!error && response.statusCode == 200) {
-         console.log(body);
          const firstName = JSON.parse(body).first_name;
          const lastName = JSON.parse(body).last_name;
          const fullName = (firstName + ' ' + lastName);
@@ -251,8 +154,6 @@ function notifyHumanOperators(recipientId) {
 }
 
 function sendReadReceipt(recipientId) {
-   console.log('Sending a read receipt to mark message as seen');
-
    const messageData = {
       recipient: {
          id: recipientId
@@ -264,8 +165,6 @@ function sendReadReceipt(recipientId) {
 }
 
 function sendTypingOn(recipientId) {
-   console.log('Turning typing indicator on');
-
    const messageData = {
       recipient: {
          id: recipientId
@@ -277,8 +176,6 @@ function sendTypingOn(recipientId) {
 }
 
 function sendTypingOff(recipientId) {
-   console.log('Turning typing indicator off');
-
    const messageData = {
       recipient: {
          id: recipientId
