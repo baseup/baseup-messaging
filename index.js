@@ -60,7 +60,8 @@ function handleMessage(sender_psid, received_message) {
    const quickreply = received_message.quick_reply;
 
    if (quickreply) {
-      if (quickreply === 'CHECK_PARTNERS') {
+      console.log('QUICKREPLY: ', quickreply);
+      if (quickreply.payload === 'CHECK_PARTNERS') {
          facebookServ.sendPartners(sender_psid);
       }
    } else {

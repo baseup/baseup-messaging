@@ -80,19 +80,19 @@ function sendMainQuickReply(recipientId) {
          message: {
             text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
             quick_replies: [{
-                  "content_type": "text",
-                  "title": "General Inquiries",
-                  "payload": "GENERAL_INQUIRIES"
+                  content_type: 'text',
+                  title: 'General Inquiries',
+                  payload: 'GENERAL_INQUIRIES'
                },
                {
-                  "content_type": "text",
-                  "title": "Check Partners",
-                  "payload": "CHECK_PARTNERS"
+                  content_type: 'text',
+                  title: 'Check Partners',
+                  payload: 'CHECK_PARTNERS'
                },
                {
-                  "content_type": "text",
-                  "title": "Other Concerns",
-                  "payload": "OTHER_CONCERNS"
+                  content_type: 'text',
+                  title: 'Other Concerns',
+                  payload: 'OTHER_CONCERNS'
                }
             ]
          }
