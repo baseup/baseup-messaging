@@ -57,10 +57,16 @@ app.post('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
    let response;
+   const text = received_message.text;
+   const quickreply = received_message.quick_reply;
 
    console.log('HANDLE MESSAGE: ', received_message);
-   if (received_message.text) {
+   if (text) {
       facebookServ.sendMainQuickReply(sender_psid);
+   } else if (quickreply) {
+      if (quickreply === 'CHECK_PARTNERS') {
+         facebookServ.sendPartners(sender_psid);
+      }
    }
 }
 

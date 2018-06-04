@@ -3,8 +3,72 @@ const request = require('request');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
+   sendPartners: sendPartners,
    sendMainQuickReply: sendMainQuickReply,
 };
+
+function sendPartners(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            attachment: {
+               type: 'template',
+               payload: {
+                  template_type: 'generic',
+                  elements: [{
+                     title: 'Felipe and Sons!',
+                     subtitle: 'Barberdashery',
+                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                     default_action: {
+                        type: 'web_url',
+                        url: 'http://felipeandsons.com/',
+                        messenger_extensions: false,
+                        webview_height_ratio: 'full',
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'http://felipeandsons.com/',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                     }]
+                  }, {
+                     title: 'TUF',
+                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/tuf.png',
+                     default_action: {
+                        type: 'web_url',
+                        url: 'http://tufbarbershop.ph/',
+                        messenger_extensions: false,
+                        webview_height_ratio: 'full',
+                     },
+                     buttons: [{
+                        type: 'web_url',
+                        url: 'http://tufbarbershop.ph/',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'DEVELOPER_DEFINED_PAYLOAD'
+                     }]
+                  }]
+               }
+            }
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
 
 function sendMainQuickReply(recipientId) {
    sendTypingOn(recipientId);
