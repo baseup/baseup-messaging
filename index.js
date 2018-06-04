@@ -30,15 +30,6 @@ app.get('/webhook', (req, res) => {
    }
 });
 
-app.post('/nexmo', (req, res) => {
-   console.log('NEXMO REQ: ' + req);
-   console.log('NEXMO RES: ' + res);
-});
-
-app.post('/nexmo-outbound', (req, res) => {
-   console.log(req.body);
-});
-
 app.post('/webhook', (req, res) => {
    const body = req.body;
 
@@ -67,9 +58,27 @@ app.post('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
    let response;
 
+   console.log(JSON.stringify(response));
    if (received_message.text) {
       facebookServ.sendMainQuickReply(sender_psid);
    }
+}
+
+function handlePostback(sender_psid, received_postback) {
+   let response;
+
+   let payload = received_postback.payload;
+
+   console.log('RECEIVED POSTBACK: ', received_postback);
+   // if (payload === 'yes') {
+   //    response = {
+   //       "text": "Thanks!"
+   //    };
+   // } else if (payload === 'no') {
+   //    response = {
+   //       "text": "Oops, try sending another image."
+   //    };
+   // }
 }
 
 app.listen(app.get('port'), () => {
