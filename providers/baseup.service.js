@@ -7,7 +7,7 @@ module.exports = {
 function getBranches(slug) {
    return new Promise((resolve, reject) => {
       request({
-         uri: 'https://baseup.staging/api/v1/branches/get/',
+         uri: 'https://staging.baseup.me/api/v1/branches/get/',
          qs: {
             include: 'account',
             slug
