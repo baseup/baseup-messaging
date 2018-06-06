@@ -18,13 +18,14 @@ function getBranches(slug) {
          if (error) {
             reject(error);
          } else if (response) {
-            new JSONAPIDeserializer().deserialize(response, (err, resp) => {
-               if (err) {
-                  reject(err);
-               } else {
-                  resolve(resp);
-               }
-            });
+            resolve(response);
+            // return new JSONAPIDeserializer().deserialize(response, (err, resp) => {
+            //    if (err) {
+            //       reject(err);
+            //    } else {
+            //       resolve(resp);
+            //    }
+            // });
          }
       });
    });
