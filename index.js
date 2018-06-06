@@ -70,9 +70,12 @@ function handleMessage(sender_psid, received_message) {
 }
 
 function handlePostback(sender_psid, received_postback) {
-   let response;
+   const title = received_postback.title;
+   const payload = received_postback.payload;
 
-   let payload = received_postback.payload;
+   if (title === 'Check Branch') {
+      console.log(payload.toLowerCase());
+   }
 
    console.log('RECEIVED POSTBACK: ', received_postback);
    // if (payload === 'yes') {
