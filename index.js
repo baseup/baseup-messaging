@@ -7,7 +7,9 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const app = express();
 
+const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
+
 const facebookConst = require('./settings/facebook.constants');
 
 app.set('port', process.env.PORT || 5000);
@@ -75,9 +77,13 @@ function handlePostback(sender_psid, received_postback) {
 
    if (title === 'Check Branch') {
       console.log(payload.toLowerCase());
+      baseupServ.getBranches(payload.toLowerCase()).then((result) => {
+         console.log('BRANCH SUCCESS: ', result);
+      }).catch((error) => {
+         console.log('BRANCH ERROR: ', error);
+      });
    }
 
-   console.log('RECEIVED POSTBACK: ', received_postback);
    // if (payload === 'yes') {
    //    response = {
    //       "text": "Thanks!"

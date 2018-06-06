@@ -3,8 +3,12 @@ const request = require('request');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
+   callSendAPI: callSendAPI,
+   sendTypingOn: sendTypingOn,
    sendPartners: sendPartners,
-   sendMainQuickReply: sendMainQuickReply,
+   sendTypingOff: sendTypingOff,
+   sendReadReceipt: sendReadReceipt,
+   sendMainQuickReply: sendMainQuickReply
 };
 
 function sendPartners(recipientId) {
