@@ -12,7 +12,6 @@ function getBranches(slug) {
       };
 
       request({
-         method: 'GET',
          url: 'https://baseup.staging/api/v1/branches/get/',
          qs: params,
       }, (resp) => {
