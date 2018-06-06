@@ -1,4 +1,5 @@
-var request = require('request');
+const request = require('request');
+const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
 module.exports = {
    getBranches: getBranches
@@ -17,9 +18,12 @@ function getBranches(slug) {
          if (error) {
             reject(error);
          } else if (response) {
-            resolve({
-               response,
-               body
+            new JSONAPIDeserializer().deserialize(response, (err, resp) => {
+               if (err) {
+                  reject(err);
+               } else {
+                  resolve(resp);
+               }
             });
          }
       });
