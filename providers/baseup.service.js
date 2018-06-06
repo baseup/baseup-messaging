@@ -18,7 +18,7 @@ function getBranches(slug) {
          if (error) {
             reject(error);
          } else if (response) {
-            resolve(response);
+            resolve(body);
             // return new JSONAPIDeserializer().deserialize(response, (err, resp) => {
             //    if (err) {
             //       reject(err);
