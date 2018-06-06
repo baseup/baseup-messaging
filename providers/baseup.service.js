@@ -6,19 +6,21 @@ module.exports = {
 
 function getBranches(slug) {
    return new Promise((resolve, reject) => {
-      const params = {
-         include: 'account',
-         slug
-      };
-
       request({
-         url: 'https://baseup.staging/api/v1/branches/get/',
-         qs: params,
-      }, (error, response) => {
+         uri: 'https://baseup.staging/api/v1/branches/get/',
+         qs: {
+            include: 'account',
+            slug
+         },
+         method: 'GET'
+      }, (error, response, body) => {
          if (error) {
             reject(error);
          } else if (response) {
-            resolve(response);
+            resolve({
+               response,
+               body
+            });
          }
       });
    });
