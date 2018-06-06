@@ -14,10 +14,12 @@ function getBranches(slug) {
       request({
          url: 'https://baseup.staging/api/v1/branches/get/',
          qs: params,
-      }, (resp) => {
-         resolve(resp);
-      }).on("error", (err) => {
-         reject(err);
+      }, (error, response) => {
+         if (error) {
+            reject(error);
+         } else if (response) {
+            resolve(response);
+         }
       });
    });
 }
