@@ -62,7 +62,6 @@ function handleMessage(sender_psid, received_message) {
    const quickreply = received_message.quick_reply;
 
    if (quickreply) {
-      console.log('QUICKREPLY: ', quickreply);
       if (quickreply.payload === 'CHECK_PARTNERS') {
          facebookServ.sendPartners(sender_psid);
       }
@@ -83,7 +82,7 @@ function handlePostback(sender_psid, received_postback) {
          console.log('BRANCH ERROR: ', error);
       });
    } else if (payload === 'GET_STARTED') {
-      facebookServ.sendPartners(sender_psid);
+      facebookServ.sendMainQuickReply(sender_psid);
    }
 
    // if (payload === 'yes') {
