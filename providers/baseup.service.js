@@ -19,13 +19,6 @@ function getBranches(slug) {
             reject(error);
          } else if (response) {
             resolve(body);
-            // return new JSONAPIDeserializer().deserialize(response, (err, resp) => {
-            //    if (err) {
-            //       reject(err);
-            //    } else {
-            //       resolve(resp);
-            //    }
-            // });
          }
       });
    });

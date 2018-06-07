@@ -82,6 +82,8 @@ function handlePostback(sender_psid, received_postback) {
       }).catch((error) => {
          console.log('BRANCH ERROR: ', error);
       });
+   } else if (payload === 'GET_STARTED') {
+      facebookServ.sendPartners(sender_psid);
    }
 
    // if (payload === 'yes') {
