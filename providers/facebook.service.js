@@ -20,11 +20,17 @@ function sendLogin(recipientId) {
             id: recipientId
          },
          message: {
-            text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
-            quick_replies: [{
-               type: 'account_link',
-               url: 'https://testing.baseup.me/login'
-            }]
+            attachment: {
+               type: 'template',
+               payload: {
+                  template_type: 'button',
+                  text: 'Try the log in button!',
+                  buttons: [{
+                     type: 'account_link',
+                     url: 'https://testing.baseup.me/messenger-login'
+                  }]
+               }
+            }
          }
       };
 
