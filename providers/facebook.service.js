@@ -3,6 +3,7 @@ const request = require('request');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
+   sendLogin: sendLogin,
    callSendAPI: callSendAPI,
    sendTypingOn: sendTypingOn,
    sendPartners: sendPartners,
@@ -10,6 +11,29 @@ module.exports = {
    sendReadReceipt: sendReadReceipt,
    sendMainQuickReply: sendMainQuickReply
 };
+
+function sendLogin(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            attachment: {
+               type: 'account_link',
+               url: 'https://testing.baseup.me/login'
+            }
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
 
 function sendPartners(recipientId) {
    sendTypingOn(recipientId);

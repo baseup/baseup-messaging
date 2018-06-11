@@ -82,7 +82,7 @@ function handlePostback(sender_psid, received_postback) {
          console.log('BRANCH ERROR: ', error);
       });
    } else if (payload === 'GET_STARTED') {
-      facebookServ.sendMainQuickReply(sender_psid);
+      facebookServ.sendLogin(sender_psid);
    }
 
    // if (payload === 'yes') {
