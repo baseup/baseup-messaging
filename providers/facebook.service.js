@@ -20,10 +20,11 @@ function sendLogin(recipientId) {
             id: recipientId
          },
          message: {
-            attachment: {
+            text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+            quick_replies: [{
                type: 'account_link',
                url: 'https://testing.baseup.me/login'
-            }
+            }]
          }
       };
 
