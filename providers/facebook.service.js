@@ -20,17 +20,23 @@ function sendWelcomeMessage(recipientId) {
             id: recipientId
          },
          message: {
-            attachment: {
-               type: 'template',
-               payload: {
-                  template_type: 'button',
-                  text: 'Try the log in button!',
-                  buttons: [{
-                     type: 'account_link',
-                     url: 'https://testing.baseup.me/messenger-login'
-                  }]
+            text: `Hi. ${fullName}, WELCOME! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+            quick_replies: [{
+                  content_type: 'text',
+                  title: 'General Inquiries',
+                  payload: 'GENERAL_INQUIRIES'
+               },
+               {
+                  content_type: 'text',
+                  title: 'Check Partners',
+                  payload: 'CHECK_PARTNERS'
+               },
+               {
+                  content_type: 'text',
+                  title: 'Other Concerns',
+                  payload: 'OTHER_CONCERNS'
                }
-            }
+            ]
          }
       };
 
@@ -54,7 +60,7 @@ function sendLogin(recipientId) {
                type: 'template',
                payload: {
                   template_type: 'button',
-                  text: 'Try the log in button!',
+                  text: `Hi. ${fullName}, please login to your Base Up Account to continue the subscription.`,
                   buttons: [{
                      type: 'account_link',
                      url: 'https://testing.baseup.me/messenger-login'

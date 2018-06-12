@@ -92,7 +92,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 
    console.log('ACCOUNT LINKING: ', received_account_linking);
    if (status === 'linked') {
-      // facebookConst.sendWelcomeMessage(sender_psid);
+      facebookConst.sendWelcomeMessage(sender_psid);
    }
 }
 
