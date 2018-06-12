@@ -12,6 +12,36 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
+function sendWelcomeMessage(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            attachment: {
+               type: 'template',
+               payload: {
+                  template_type: 'button',
+                  text: 'Try the log in button!',
+                  buttons: [{
+                     type: 'account_link',
+                     url: 'https://testing.baseup.me/messenger-login'
+                  }]
+               }
+            }
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
 function sendLogin(recipientId) {
    sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {

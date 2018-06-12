@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 
 app.get('/webhook', (req, res) => {
    if (req.query['hub.verify_token'] === facebookConst.VALIDATION_TOKEN) {
-      console.log("Validating webhook");
       res.status(200).send(req.query['hub.challenge']);
    } else {
       console.error("Failed validation. Make sure the validation tokens match.");
@@ -48,6 +47,8 @@ app.post('/webhook', (req, res) => {
             handleMessage(sender_psid, webhook_event.message);
          } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
+         } else if (webhook_event.account_linking) {
+            handleAccountLinking(sender_psid, webhook_event.account_linking);
          }
 
       });
@@ -84,16 +85,15 @@ function handlePostback(sender_psid, received_postback) {
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendLogin(sender_psid);
    }
+}
 
-   // if (payload === 'yes') {
-   //    response = {
-   //       "text": "Thanks!"
-   //    };
-   // } else if (payload === 'no') {
-   //    response = {
-   //       "text": "Oops, try sending another image."
-   //    };
-   // }
+function handleAccountLinking(sender_psid, received_account_linking) {
+   const status = received_account_linking.status;
+
+   console.log('ACCOUNT LINKING: ', received_account_linking);
+   if (status === 'linked') {
+      // facebookConst.sendWelcomeMessage(sender_psid);
+   }
 }
 
 app.listen(app.get('port'), () => {
