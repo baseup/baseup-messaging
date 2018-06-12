@@ -94,7 +94,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
    if (status === 'linked') {
       baseupServ.getAuthBaseupUser(authCode).then((authResponse) => {
          console.log('Auth Response: ', authResponse);
-         const metaData = authResponse.meta_data;
+         const metaData = authResponse.metadata;
          const fullname = `${authResponse.first_name}  ${authResponse.first_name}`;
          metaData.psid = sender_psid;
 
