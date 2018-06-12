@@ -14,14 +14,14 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
-function sendWelcomeMessage(recipientId) {
+function sendWelcomeMessage(recipientId, fullname) {
    sendTypingOn(recipientId);
    const messageData = {
       recipient: {
          id: recipientId
       },
       message: {
-         text: `WELCOME! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+         text: `WELCOME ${fullname}! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
          quick_replies: [{
                content_type: 'text',
                title: 'General Inquiries',

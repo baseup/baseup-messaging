@@ -93,9 +93,9 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 
    if (status === 'linked') {
       baseupServ.getAuthBaseupUser(authCode).then((authResponse) => {
-         console.log('Auth Response: ', authResponse);
+         const fullname = `${authResponse.first_name}  ${authResponse.first_name}`;
+         facebookServ.sendWelcomeMessage(sender_psid, fullname);
       });
-      facebookServ.sendWelcomeMessage(sender_psid);
    }
 }
 
