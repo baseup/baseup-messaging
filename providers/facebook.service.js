@@ -9,6 +9,7 @@ module.exports = {
    sendPartners: sendPartners,
    sendTypingOff: sendTypingOff,
    sendReadReceipt: sendReadReceipt,
+   sendWelcomeMessage: sendWelcomeMessage,
    sendMainQuickReply: sendMainQuickReply
 };
 
