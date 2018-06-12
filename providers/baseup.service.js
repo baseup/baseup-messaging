@@ -27,6 +27,7 @@ function getBranches(slug) {
 
 function getAuthBaseupUser(authCode) {
    return new Promise((resolve, reject) => {
+      console.log('Auth Code: ', authCode);
       request({
             url: 'https://staging.baseup.me/api/v1/users/get_auth_user/',
             headers: {
