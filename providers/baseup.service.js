@@ -38,7 +38,15 @@ function getAuthBaseupUser(authCode) {
             if (error) {
                reject(error);
             } else if (response) {
-               resolve(body);
+               new JSONAPIDeserializer({
+                  keyForAttribute: 'snake_case'
+               }).deserialize(body, (err, users) => {
+                  if (err) {
+                     reject(err);
+                  } else if (users) {
+                     resolve(users);
+                  }
+               });
             }
          }
       );
