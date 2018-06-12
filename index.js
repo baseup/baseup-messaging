@@ -95,7 +95,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
       baseupServ.getAuthBaseupUser(authCode).then((authResponse) => {
          console.log('Auth Response: ', authResponse);
       });
-      facebookServ.sendWelcomeMessage(sender_psid, authCode);
+      facebookServ.sendWelcomeMessage(sender_psid);
    }
 }
 

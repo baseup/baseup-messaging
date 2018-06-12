@@ -14,9 +14,8 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
-function sendWelcomeMessage(recipientId, authCode) {
+function sendWelcomeMessage(recipientId) {
    sendTypingOn(recipientId);
-   console.log('', response);
    const messageData = {
       recipient: {
          id: recipientId
