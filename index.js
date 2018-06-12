@@ -101,7 +101,11 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          const attributes = {
             meta_data: metaData
          };
-         facebookServ.sendWelcomeMessage(sender_psid, fullname, attributes);
+
+         baseupServ.storeUserPSID(sender_psid, authResponse.id, attributes).then((updateResponse) => {
+            console.log('updateResponse: ', updateResponse);
+            facebookServ.sendWelcomeMessage(sender_psid, fullname);
+         });
       });
    }
 }
