@@ -1,5 +1,6 @@
 const request = require('request');
 
+const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
@@ -13,40 +14,39 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
-function sendWelcomeMessage(recipientId) {
+function sendWelcomeMessage(recipientId, authCode) {
    sendTypingOn(recipientId);
-   getCustomerName(recipientId).then(fullName => {
-      const messageData = {
-         recipient: {
-            id: recipientId
-         },
-         message: {
-            text: `Hi. ${fullName}, WELCOME! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
-            quick_replies: [{
-                  content_type: 'text',
-                  title: 'General Inquiries',
-                  payload: 'GENERAL_INQUIRIES'
-               },
-               {
-                  content_type: 'text',
-                  title: 'Check Partners',
-                  payload: 'CHECK_PARTNERS'
-               },
-               {
-                  content_type: 'text',
-                  title: 'Other Concerns',
-                  payload: 'OTHER_CONCERNS'
-               }
-            ]
-         }
-      };
+   console.log('', response);
+   const messageData = {
+      recipient: {
+         id: recipientId
+      },
+      message: {
+         text: `WELCOME! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+         quick_replies: [{
+               content_type: 'text',
+               title: 'General Inquiries',
+               payload: 'GENERAL_INQUIRIES'
+            },
+            {
+               content_type: 'text',
+               title: 'Check Partners',
+               payload: 'CHECK_PARTNERS'
+            },
+            {
+               content_type: 'text',
+               title: 'Other Concerns',
+               payload: 'OTHER_CONCERNS'
+            }
+         ]
+      }
+   };
 
-      callSendAPI(messageData);
-      setTimeout(() => {
-         sendTypingOff(recipientId);
-         sendReadReceipt(recipientId);
-      }, 2000);
-   });
+   callSendAPI(messageData);
+   setTimeout(() => {
+      sendTypingOff(recipientId);
+      sendReadReceipt(recipientId);
+   }, 2000);
 }
 
 function sendLogin(recipientId) {

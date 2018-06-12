@@ -89,10 +89,13 @@ function handlePostback(sender_psid, received_postback) {
 
 function handleAccountLinking(sender_psid, received_account_linking) {
    const status = received_account_linking.status;
+   const authCode = received_account_linking.authorization_code;
 
-   console.log('ACCOUNT LINKING: ', received_account_linking);
    if (status === 'linked') {
-      facebookServ.sendWelcomeMessage(sender_psid);
+      baseupServ.getAuthBaseupUser(authCode).then((authResponse) => {
+         console.log('Auth Response: ', authResponse);
+      });
+      facebookServ.sendWelcomeMessage(sender_psid, authCode);
    }
 }
 

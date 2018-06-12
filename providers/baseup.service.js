@@ -2,7 +2,8 @@ const request = require('request');
 const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
 module.exports = {
-   getBranches: getBranches
+   getBranches: getBranches,
+   getAuthBaseupUser: getAuthBaseupUser
 };
 
 function getBranches(slug) {
@@ -21,5 +22,25 @@ function getBranches(slug) {
             resolve(body);
          }
       });
+   });
+}
+
+function getAuthBaseupUser(authCode) {
+   return new Promise((resolve, reject) => {
+      request({
+            url: 'https://staging.baseup.me/api/v1/users/get_auth_user/',
+            headers: {
+               'Authorization': `Bearer ${authCode}`,
+               'COntent-Type': 'application/vnd.api+json'
+            }
+         },
+         (error, response, body) => {
+            if (error) {
+               reject(error);
+            } else if (response) {
+               resolve(body);
+            }
+         }
+      );
    });
 }
