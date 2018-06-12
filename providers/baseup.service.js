@@ -3,6 +3,7 @@ const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
 module.exports = {
    getBranches: getBranches,
+   storeUserPSID: storeUserPSID,
    getAuthBaseupUser: getAuthBaseupUser
 };
 
@@ -33,6 +34,43 @@ function getAuthBaseupUser(authCode) {
                'Authorization': `Bearer ${authCode}`,
                'COntent-Type': 'application/vnd.api+json'
             }
+         },
+         (error, response, body) => {
+            if (error) {
+               reject(error);
+            } else if (response) {
+               new JSONAPIDeserializer({
+                  keyForAttribute: 'snake_case'
+               }).deserialize(JSON.parse(body), (err, users) => {
+                  if (err) {
+                     reject(err);
+                  } else if (users) {
+                     resolve(users);
+                  }
+               });
+            }
+         }
+      );
+   });
+}
+
+function storeUserPSID(authCode, id, attributes) {
+   return new Promise((resolve, reject) => {
+      const body = {
+         data: {
+            type: 'users',
+            id,
+            attributes
+         }
+      };
+
+      request({
+            url: 'https://testing.baseup.me/api/v1/users/get_auth_user/',
+            headers: {
+               'Authorization': `Bearer ${authCode}`,
+               'COntent-Type': 'application/vnd.api+json'
+            },
+            json: body
          },
          (error, response, body) => {
             if (error) {
