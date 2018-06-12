@@ -9,7 +9,7 @@ module.exports = {
 function getBranches(slug) {
    return new Promise((resolve, reject) => {
       request({
-         uri: 'https://staging.baseup.me/api/v1/branches/get/',
+         uri: 'https://testing.baseup.me/api/v1/branches/get/',
          qs: {
             include: 'account',
             slug
@@ -27,9 +27,8 @@ function getBranches(slug) {
 
 function getAuthBaseupUser(authCode) {
    return new Promise((resolve, reject) => {
-      console.log('Auth Code: ', authCode);
       request({
-            url: 'https://staging.baseup.me/api/v1/users/get_auth_user/',
+            url: 'https://testing.baseup.me/api/v1/users/get_auth_user/',
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'COntent-Type': 'application/vnd.api+json'
