@@ -60,10 +60,11 @@ function storeUserPSID(authCode, id, attributes) {
          data: {
             type: 'users',
             id,
-            attributes
+            attributes: JSON.stringify(attributes)
          }
       };
 
+      console.log('ATTRIBUTES: ', attributes);
       console.log('BODY: ', body);
 
       request({
