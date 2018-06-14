@@ -32,7 +32,7 @@ function getAuthBaseupUser(authCode) {
             url: 'https://testing.baseup.me/api/v1/users/get_auth_user/',
             headers: {
                'Authorization': `Bearer ${authCode}`,
-               'COntent-Type': 'application/vnd.api+json'
+               'Content-Type': 'application/vnd.api+json'
             }
          },
          (error, response, body) => {
@@ -83,7 +83,7 @@ function storeUserPSID(authCode, id, attributes) {
                console.log('ERROR');
             } else if (response) {
                console.log('NOT ERROR');
-               console.log(JSON.parse(body));
+               console.log(body);
                // new JSONAPIDeserializer({
                //    keyForAttribute: 'snake_case'
                // }).deserialize(JSON.parse(body), (err, users) => {
