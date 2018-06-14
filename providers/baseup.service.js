@@ -68,12 +68,13 @@ function storeUserPSID(authCode, id, attributes) {
       console.log('BODY: ', body);
 
       request({
+            method: 'PATCH',
             url: `https://testing.baseup.me/api/v1/users/${id}`,
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'COntent-Type': 'application/vnd.api+json'
             },
-            json: JSON.stringify(body)
+            body: JSON.stringify(body)
          },
          (error, response, body) => {
             if (error) {
