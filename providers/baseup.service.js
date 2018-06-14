@@ -60,7 +60,7 @@ function storeUserPSID(authCode, id, attributes) {
          data: {
             type: 'users',
             id,
-            attributes: JSON.stringify(attributes)
+            attributes
          }
       };
 
@@ -73,7 +73,7 @@ function storeUserPSID(authCode, id, attributes) {
                'Authorization': `Bearer ${authCode}`,
                'COntent-Type': 'application/vnd.api+json'
             },
-            json: body
+            json: JSON.stringify(body)
          },
          (error, response, body) => {
             if (error) {
