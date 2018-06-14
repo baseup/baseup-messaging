@@ -65,6 +65,7 @@ function storeUserPSID(authCode, id, attributes) {
       };
 
       console.log('ATTRIBUTES: ', attributes);
+      console.log('AUTH: ', authCode);
       console.log('BODY: ', body);
       console.log('ID: ', id);
 
