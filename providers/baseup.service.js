@@ -79,8 +79,8 @@ function storeUserPSID(authCode, id, attributes) {
          (error, response, body) => {
             if (error) {
                console.log(error);
-            } else if (response) {
-               console.log(response);
+            } else if (body) {
+               console.log(body);
             }
          }
       );
