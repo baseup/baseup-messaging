@@ -74,7 +74,7 @@ function storeUserPSID(authCode, id, attributes) {
             url: `https://testing.baseup.me/api/v1/users/${parseInt(id, 10)}`,
             headers: {
                'Authorization': `Bearer ${authCode}`,
-               'COntent-Type': 'application/vnd.api+json'
+               'Content-Type': 'application/vnd.api+json'
             },
             body: JSON.stringify(body)
          },
