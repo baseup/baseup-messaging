@@ -102,10 +102,12 @@ function handleAccountLinking(sender_psid, received_account_linking) {
             metadata: metaData
          };
 
-         baseupServ.storeUserPSID(sender_psid, authResponse.id, attributes).then((updateResponse) => {
-            console.log('updateResponse: ', updateResponse);
-            facebookServ.sendWelcomeMessage(sender_psid, fullname);
-         });
+         console.log('ATTRIBUTES: ', attributes);
+
+         // baseupServ.storeUserPSID(sender_psid, authResponse.id, attributes).then((updateResponse) => {
+         //    console.log('updateResponse: ', updateResponse);
+         //    facebookServ.sendWelcomeMessage(sender_psid, fullname);
+         // });
       });
    }
 }
