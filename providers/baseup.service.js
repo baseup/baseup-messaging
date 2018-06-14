@@ -79,17 +79,18 @@ function storeUserPSID(authCode, id, attributes) {
          },
          (error, response, body) => {
             if (error) {
-               console.log(error);
+               console.log('ERROR');
             } else if (response) {
-               new JSONAPIDeserializer({
-                  keyForAttribute: 'snake_case'
-               }).deserialize(JSON.parse(body), (err, users) => {
-                  if (err) {
-                     reject(err);
-                  } else if (users) {
-                     resolve(users);
-                  }
-               });
+               console.log('NOT ERROR');
+               // new JSONAPIDeserializer({
+               //    keyForAttribute: 'snake_case'
+               // }).deserialize(JSON.parse(body), (err, users) => {
+               //    if (err) {
+               //       reject(err);
+               //    } else if (users) {
+               //       resolve(users);
+               //    }
+               // });
             }
          }
       );
