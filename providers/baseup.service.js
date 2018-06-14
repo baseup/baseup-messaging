@@ -82,7 +82,7 @@ function storeUserPSID(authCode, id, attributes) {
                console.log('ERROR');
             } else if (response) {
                console.log('NOT ERROR');
-               console.log(JSON.stringify(body));
+               console.log(JSON.parse(body));
                // new JSONAPIDeserializer({
                //    keyForAttribute: 'snake_case'
                // }).deserialize(JSON.parse(body), (err, users) => {
