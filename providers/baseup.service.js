@@ -78,17 +78,9 @@ function storeUserPSID(authCode, id, attributes) {
          },
          (error, response, body) => {
             if (error) {
-               reject(error);
+               console.log(error);
             } else if (response) {
-               new JSONAPIDeserializer({
-                  keyForAttribute: 'snake_case'
-               }).deserialize(JSON.parse(body), (err, users) => {
-                  if (err) {
-                     reject(err);
-                  } else if (users) {
-                     resolve(users);
-                  }
-               });
+               console.log(response);
             }
          }
       );
