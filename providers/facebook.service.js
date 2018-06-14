@@ -60,7 +60,7 @@ function sendLogin(recipientId) {
                type: 'template',
                payload: {
                   template_type: 'button',
-                  text: `Hi. ${fullName}, please login to your Base Up Account to continue the subscription.`,
+                  text: `Hi. ${fullName}, please login to your Base Up Account to continue the subscription. If you don't have a Base Up account, you can just Login with Facebook through our app.`,
                   buttons: [{
                      type: 'account_link',
                      url: 'https://testing.baseup.me/messenger-login'

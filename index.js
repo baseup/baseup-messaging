@@ -99,7 +99,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          metaData.psid = sender_psid;
 
          const attributes = {
-            meta_data: metaData
+            metadata: metaData
          };
 
          baseupServ.storeUserPSID(sender_psid, authResponse.id, attributes).then((updateResponse) => {
