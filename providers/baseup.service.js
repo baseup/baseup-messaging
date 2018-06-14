@@ -64,6 +64,8 @@ function storeUserPSID(authCode, id, attributes) {
          }
       };
 
+      console.log('BODY: ', body);
+
       request({
             url: `https://testing.baseup.me/api/v1/users/${id}`,
             headers: {
