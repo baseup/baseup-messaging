@@ -66,6 +66,7 @@ function storeUserPSID(authCode, id, attributes) {
 
       console.log('ATTRIBUTES: ', attributes);
       console.log('BODY: ', body);
+      console.log('ID: ', id);
 
       request({
             method: 'PATCH',
@@ -78,9 +79,17 @@ function storeUserPSID(authCode, id, attributes) {
          },
          (error, response, body) => {
             if (error) {
-               console.log('ERROR: ', error);
-            } else if (body) {
-               console.log('BODY', body);
+               console.log(error);
+            } else if (response) {
+               new JSONAPIDeserializer({
+                  keyForAttribute: 'snake_case'
+               }).deserialize(JSON.parse(body), (err, users) => {
+                  if (err) {
+                     reject(err);
+                  } else if (users) {
+                     resolve(users);
+                  }
+               });
             }
          }
       );
