@@ -103,7 +103,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 
          baseupServ.storeUserPSID(authCode, authResponse.id, attributes).then((updateResponse) => {
             console.log('updateResponse: ', updateResponse);
-            //    facebookServ.sendWelcomeMessage(sender_psid, fullname);
+            facebookServ.sendWelcomeMessage(sender_psid, fullname);
          });
       });
    }

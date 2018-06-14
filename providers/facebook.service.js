@@ -21,11 +21,11 @@ function sendWelcomeMessage(recipientId, fullname) {
          id: recipientId
       },
       message: {
-         text: `WELCOME ${fullname}! I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+         text: `WELCOME ${fullname}! Thank You for linking your Facebook Messenger to your Base Up Account. For your concerns, choose a button below:`,
          quick_replies: [{
                content_type: 'text',
-               title: 'General Inquiries',
-               payload: 'GENERAL_INQUIRIES'
+               title: 'FAQs',
+               payload: 'FAQ'
             },
             {
                content_type: 'text',

@@ -64,11 +64,6 @@ function storeUserPSID(authCode, id, attributes) {
          }
       };
 
-      console.log('ATTRIBUTES: ', attributes);
-      console.log('AUTH: ', authCode);
-      console.log('BODY: ', body);
-      console.log('ID: ', id);
-
       request({
             method: 'PATCH',
             url: `https://testing.baseup.me/api/v1/users/${id}/`,
@@ -80,19 +75,17 @@ function storeUserPSID(authCode, id, attributes) {
          },
          (error, response, body) => {
             if (error) {
-               console.log('ERROR');
+               console.log(error.errors);
             } else if (response) {
-               console.log('NOT ERROR');
-               console.log(body);
-               // new JSONAPIDeserializer({
-               //    keyForAttribute: 'snake_case'
-               // }).deserialize(JSON.parse(body), (err, users) => {
-               //    if (err) {
-               //       reject(err);
-               //    } else if (users) {
-               //       resolve(users);
-               //    }
-               // });
+               new JSONAPIDeserializer({
+                  keyForAttribute: 'snake_case'
+               }).deserialize(JSON.parse(body), (err, users) => {
+                  if (err) {
+                     reject(err);
+                  } else if (users) {
+                     resolve(users);
+                  }
+               });
             }
          }
       );
