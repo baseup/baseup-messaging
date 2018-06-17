@@ -54,11 +54,10 @@ app.post('/send-message', (req, res) => {
    }, (error, response, body) => {
       if (error) {
          console.log('ERROR: ', error);
-         res.status(400).send(error);
       } else if (response) {
          console.log('SUCCESS: ', body);
-         res.status(200).send(body);
       }
+      res.send(reqBody.psid);
       res.end();
    });
 });
