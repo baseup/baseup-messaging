@@ -50,7 +50,7 @@ app.post('/send-message', (req, res) => {
       headers: {
          'Content-Type': 'application/json'
       },
-      body: dataString
+      body: JSON.stringify(dataString)
    }, (error, response, body) => {
       if (error) {
          console.log('ERROR: ', error);
