@@ -33,32 +33,30 @@ app.get('/webhook', (req, res) => {
 
 app.post('/send-message', (req, res) => {
    const reqBody = req.body;
-   console.log(reqBody);
-   res.send(reqBody);
-   // const dataString = {
-   //    messaging_type: 'RESPONSE',
-   //    recipient: {
-   //       id: reqBody.psid
-   //    },
-   //    message: {
-   //       text: 'Your Booking has been Updated!'
-   //    }
-   // };
+   const dataString = {
+      messaging_type: 'RESPONSE',
+      recipient: {
+         id: reqBody.psid
+      },
+      message: {
+         text: 'Your Booking has been Updated!'
+      }
+   };
 
-   // request({
-   //    url: `https://graph.facebook.com/v2.6/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
-   //    method: 'POST',
-   //    headers: {
-   //       'Content-Type': 'application/json'
-   //    },
-   //    body: dataString
-   // }, (error, response, body) => {
-   //    if (error) {
-   //       res.status(400).send(error);
-   //    } else if (response) {
-   //       res.status(200).send(body);
-   //    }
-   // });
+   request({
+      url: `https://graph.facebook.com/v2.6/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: dataString
+   }, (error, response, body) => {
+      if (error) {
+         res.status(400).send(error);
+      } else if (response) {
+         res.status(200).send(body);
+      }
+   });
 });
 
 app.post('/webhook', (req, res) => {
