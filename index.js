@@ -32,6 +32,7 @@ app.get('/webhook', (req, res) => {
 });
 
 app.post('/send-message', (req, res) => {
+
    const reqBody = req.body;
    const dataString = {
       messaging_type: 'RESPONSE',
@@ -58,6 +59,7 @@ app.post('/send-message', (req, res) => {
          console.log('SUCCESS: ', body);
          res.status(200).send(body);
       }
+      res.end();
    });
 });
 
