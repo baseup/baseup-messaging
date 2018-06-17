@@ -21,7 +21,7 @@ function sendWelcomeMessage(recipientId, fullname) {
          id: recipientId
       },
       message: {
-         text: `WELCOME ${fullname}! Thank You for linking your Facebook Messenger to your Base Up Account. For your concerns, choose a button below:`,
+         text: `WELCOME ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
          quick_replies: [{
                content_type: 'text',
                title: 'FAQs',

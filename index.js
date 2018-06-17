@@ -26,9 +26,37 @@ app.get('/webhook', (req, res) => {
    if (req.query['hub.verify_token'] === facebookConst.VALIDATION_TOKEN) {
       res.status(200).send(req.query['hub.challenge']);
    } else {
-      console.error("Failed validation. Make sure the validation tokens match.");
+      console.error('Failed validation. Make sure the validation tokens match.');
       res.sendStatus(403);
    }
+});
+
+app.post('/send-message', (req, res) => {
+   const reqBody = req.body;
+   const dataString = {
+      messaging_type: 'RESPONSE',
+      recipient: {
+         id: reqBody.psid
+      },
+      message: {
+         text: 'Your Booking has been Updated!'
+      }
+   };
+
+   request({
+      url: `https://graph.facebook.com/v2.6/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: dataString
+   }, (error, response, body) => {
+      if (error) {
+         res.status(400).send(error);
+      } else if (response) {
+         res.status(200).send(body);
+      }
+   });
 });
 
 app.post('/webhook', (req, res) => {
