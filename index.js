@@ -55,9 +55,9 @@ app.post('/send-message', (req, res) => {
       if (error) {
          res.status(400).send(error);
       } else if (response.error) {
-         res.status(400).send(body);
+         res.status(400).send(JSON.parse(body));
       } else {
-         res.status(200).send(body);
+         res.status(200).send(JSON.parse(body));
       }
       res.end();
    });
