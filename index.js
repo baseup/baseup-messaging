@@ -40,7 +40,7 @@ app.post('/send-message', (req, res) => {
          id: reqBody.psid
       },
       message: {
-         text: 'Your Booking has been Updated!'
+         text: reqBody.message
       }
    };
 
