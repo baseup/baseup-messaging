@@ -34,6 +34,7 @@ app.get('/webhook', (req, res) => {
 app.post('/send-message', (req, res) => {
    const reqBody = req.body;
    console.log(reqBody);
+   res.send(reqBody);
    // const dataString = {
    //    messaging_type: 'RESPONSE',
    //    recipient: {
