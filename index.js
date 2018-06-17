@@ -45,7 +45,7 @@ app.post('/send-message', (req, res) => {
    };
 
    request({
-      url: `https://graph.facebook.com/v2.9/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
+      url: `https://graph.facebook.com/v2.9/me/messages?access_token=${facebookConst.PAGE_ACCESS_TOKEN}`,
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
