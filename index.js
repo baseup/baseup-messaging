@@ -45,7 +45,7 @@ app.post('/send-message', (req, res) => {
    };
 
    request({
-      url: `https://graph.facebook.com/v2.6/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
+      url: `https://graph.facebook.com/v2.9/me/messages?access_token=${facebookConst.VALIDATION_TOKEN}`,
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
@@ -53,11 +53,12 @@ app.post('/send-message', (req, res) => {
       body: JSON.stringify(dataString)
    }, (error, response, body) => {
       if (error) {
-         console.log('ERROR: ', error);
-      } else if (response) {
-         console.log('SUCCESS: ', body);
+         res.status(400).send(error);
+      } else if (response.error) {
+         res.status(400).send(body);
+      } else {
+         res.status(200).send(body);
       }
-      res.send(reqBody.psid);
       res.end();
    });
 });
