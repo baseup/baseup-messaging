@@ -63,7 +63,7 @@ function sendLogin(recipientId) {
                   text: `Hi. ${fullName}, please login to your Base Up Account to continue the subscription. If you don't have a Base Up account, you can just Login with Facebook through our app.`,
                   buttons: [{
                      type: 'account_link',
-                     url: 'https://testing.baseup.me/messenger-login'
+                     url: 'https://staging.baseup.me/messenger-login'
                   }]
                }
             }
@@ -93,7 +93,7 @@ function sendPartners(recipientId) {
                   elements: [{
                      title: 'Felipe and Sons!',
                      subtitle: 'Barberdashery',
-                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                     image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
@@ -111,7 +111,7 @@ function sendPartners(recipientId) {
                      }]
                   }, {
                      title: 'TUF',
-                     image_url: 'https://testing.baseup.me/assets/img/home/partners_messenger/tuf.png',
+                     image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
                      default_action: {
                         type: 'web_url',
                         url: 'http://tufbarbershop.ph/',
