@@ -1,7 +1,7 @@
 /* jshint node: true, devel: true */
 'use strict';
 
-const Nexmo = require('nexmo');
+const cors = require('cors');
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
@@ -12,6 +12,7 @@ const facebookServ = require('./providers/facebook.service');
 
 const facebookConst = require('./settings/facebook.constants');
 
+app.use(cors());
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
