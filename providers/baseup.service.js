@@ -10,7 +10,7 @@ module.exports = {
 function getBranches(slug) {
    return new Promise((resolve, reject) => {
       request({
-         uri: 'https://testing.baseup.me/api/v1/branches/get/',
+         uri: 'https://staging.baseup.me/api/v1/branches/get/',
          qs: {
             include: 'account',
             slug
@@ -29,7 +29,7 @@ function getBranches(slug) {
 function getAuthBaseupUser(authCode) {
    return new Promise((resolve, reject) => {
       request({
-            url: 'https://testing.baseup.me/api/v1/users/get_auth_user/',
+            url: 'https://staging.baseup.me/api/v1/users/get_auth_user/',
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'Content-Type': 'application/vnd.api+json'
@@ -66,7 +66,7 @@ function storeUserPSID(authCode, id, attributes) {
 
       request({
             method: 'PATCH',
-            url: `https://testing.baseup.me/api/v1/users/${id}/`,
+            url: `https://staging.baseup.me/api/v1/users/${id}/`,
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'Content-Type': 'application/vnd.api+json'
