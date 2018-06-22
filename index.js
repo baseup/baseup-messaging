@@ -64,7 +64,7 @@ app.post('/send-message', (req, res) => {
    });
 });
 
-app.post('/webhooks', (req, res) => {
+app.post('/webhook', (req, res) => {
    const body = req.body;
 
    if (body.object === 'page') {
