@@ -17,7 +17,7 @@ module.exports = {
 };
 
 function sendWelcomeMessage(recipientId, fullname) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    const messageData = {
       recipient: {
          id: recipientId
@@ -51,7 +51,7 @@ function sendWelcomeMessage(recipientId, fullname) {
 }
 
 function sendLogin(recipientId) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
       const messageData = {
          recipient: {
@@ -81,7 +81,7 @@ function sendLogin(recipientId) {
 }
 
 function sendPartners(recipientId) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
       const messageData = {
          recipient: {
@@ -136,7 +136,7 @@ function sendPartners(recipientId) {
 }
 
 function sendNoFeature(recipientId) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
       const messageData = {
          recipient: {
@@ -171,7 +171,7 @@ function sendNoFeature(recipientId) {
 }
 
 function sendDone(recipientId) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
       const messageData = {
          recipient: {
@@ -191,7 +191,7 @@ function sendDone(recipientId) {
 }
 
 function sendMainQuickReply(recipientId) {
-   // sendTypingOn(recipientId);
+   sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
       const messageData = {
          recipient: {
@@ -303,7 +303,7 @@ function sendTypingOff(recipientId) {
 
 function callSendAPI(messageData) {
    request({
-      uri: 'https://graph.facebook.com/v2.9/me/messages',
+      uri: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {
          access_token: facebookConst.PAGE_ACCESS_TOKEN
       },

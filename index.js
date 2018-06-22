@@ -68,20 +68,18 @@ app.post('/webhook', (req, res) => {
    const body = req.body;
 
    if (body.object === 'page') {
-      body.entry.forEach((entry) => {
+      const bodyEntry = body.entry[0];
+      const webhook_event = bodyEntry.messaging[0];
+      const sender_psid = webhook_event.sender.id;
 
-         const webhook_event = entry.messaging[0];
-         const sender_psid = webhook_event.sender.id;
+      if (webhook_event.message) {
+         handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+         handlePostback(sender_psid, webhook_event.postback);
+      } else if (webhook_event.account_linking) {
+         handleAccountLinking(sender_psid, webhook_event.account_linking);
+      }
 
-         if (webhook_event.message) {
-            handleMessage(sender_psid, webhook_event.message);
-         } else if (webhook_event.postback) {
-            handlePostback(sender_psid, webhook_event.postback);
-         } else if (webhook_event.account_linking) {
-            handleAccountLinking(sender_psid, webhook_event.account_linking);
-         }
-
-      });
       res.status(200).send('EVENT_RECEIVED');
    } else {
       res.sendStatus(404);
