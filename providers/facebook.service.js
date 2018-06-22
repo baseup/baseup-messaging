@@ -4,11 +4,13 @@ const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
+   sendDone: sendDone,
    sendLogin: sendLogin,
    callSendAPI: callSendAPI,
    sendTypingOn: sendTypingOn,
    sendPartners: sendPartners,
    sendTypingOff: sendTypingOff,
+   sendNoFeature: sendNoFeature,
    sendReadReceipt: sendReadReceipt,
    sendWelcomeMessage: sendWelcomeMessage,
    sendMainQuickReply: sendMainQuickReply
@@ -21,7 +23,7 @@ function sendWelcomeMessage(recipientId, fullname) {
          id: recipientId
       },
       message: {
-         text: `WELCOME ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
+         text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
          quick_replies: [{
                content_type: 'text',
                title: 'FAQs',
@@ -104,10 +106,6 @@ function sendPartners(recipientId) {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
                         title: 'View Website'
-                     }, {
-                        type: 'postback',
-                        title: 'Check Branch',
-                        payload: 'FELIPEANDSONS'
                      }]
                   }, {
                      title: 'TUF',
@@ -122,14 +120,65 @@ function sendPartners(recipientId) {
                         type: 'web_url',
                         url: 'http://tufbarbershop.ph/',
                         title: 'View Website'
-                     }, {
-                        type: 'postback',
-                        title: 'Check Branch',
-                        payload: 'TUF'
                      }]
                   }]
                }
             }
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
+function sendNoFeature(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: `${fullName}, This feature is not yet available right now. But it will be available soon! What else can i do for you?`,
+            quick_replies: [{
+                  content_type: 'text',
+                  title: 'FAQs',
+                  payload: 'FAQ'
+               },
+               {
+                  content_type: 'text',
+                  title: 'Check Partners',
+                  payload: 'CHECK_PARTNERS'
+               }, {
+                  content_type: 'text',
+                  title: 'I\'\m good for now!',
+                  payload: 'DONE'
+               }
+            ]
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
+function sendDone(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: `Always happy to serve you. Hope you have a great day ${fullName}`
          }
       };
 
@@ -152,18 +201,13 @@ function sendMainQuickReply(recipientId) {
             text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
             quick_replies: [{
                   content_type: 'text',
-                  title: 'General Inquiries',
-                  payload: 'GENERAL_INQUIRIES'
+                  title: 'FAQs',
+                  payload: 'FAQ'
                },
                {
                   content_type: 'text',
                   title: 'Check Partners',
                   payload: 'CHECK_PARTNERS'
-               },
-               {
-                  content_type: 'text',
-                  title: 'Other Concerns',
-                  payload: 'OTHER_CONCERNS'
                }
             ]
          }
@@ -271,13 +315,13 @@ function callSendAPI(messageData) {
          const recipientId = body.recipient_id;
          const messageId = body.message_id;
 
-         if (messageId) {
-            console.log('Successfully sent message with id %s to recipient %s',
-               messageId, recipientId);
-         } else {
-            console.log('Successfully called Send API for recipient %s',
-               recipientId);
-         }
+         // if (messageId) {
+         //    console.log('Successfully sent message with id %s to recipient %s',
+         //       messageId, recipientId);
+         // } else {
+         //    console.log('Successfully called Send API for recipient %s',
+         //       recipientId);
+         // }
       } else {
          console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
       }

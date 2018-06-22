@@ -71,10 +71,7 @@ app.post('/webhook', (req, res) => {
       body.entry.forEach((entry) => {
 
          const webhook_event = entry.messaging[0];
-         console.log('Webhook Event: ', webhook_event);
-
          const sender_psid = webhook_event.sender.id;
-         console.log('Sender PSID: ' + sender_psid);
 
          if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);
@@ -95,9 +92,14 @@ function handleMessage(sender_psid, received_message) {
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
+   console.log('QUICK REPLY? ', quickreply);
    if (quickreply) {
       if (quickreply.payload === 'CHECK_PARTNERS') {
          facebookServ.sendPartners(sender_psid);
+      } else if (quickreply.payload === 'FAQ') {
+         facebookServ.sendNoFeature(sender_psid);
+      } else if (quickreply.payload === 'DONE') {
+         facebookServ.sendDone(sender_psid);
       }
    } else {
       facebookServ.sendMainQuickReply(sender_psid);
@@ -109,7 +111,6 @@ function handlePostback(sender_psid, received_postback) {
    const payload = received_postback.payload;
 
    if (title === 'Check Branch') {
-      console.log(payload.toLowerCase());
       baseupServ.getBranches(payload.toLowerCase()).then((result) => {
          console.log('BRANCH SUCCESS: ', result);
       }).catch((error) => {
@@ -135,7 +136,6 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          };
 
          baseupServ.storeUserPSID(authCode, authResponse.id, attributes).then((updateResponse) => {
-            console.log('updateResponse: ', updateResponse);
             facebookServ.sendWelcomeMessage(sender_psid, fullname);
          });
       });
