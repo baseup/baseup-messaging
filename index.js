@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
    res.send('HELLO WORLD');
 });
 
-app.get('/webhook', (req, res) => {
+app.get('/webhooks', (req, res) => {
    if (req.query['hub.verify_token'] === facebookConst.VALIDATION_TOKEN) {
       res.status(200).send(req.query['hub.challenge']);
    } else {

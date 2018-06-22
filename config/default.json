@@ -2,5 +2,5 @@
    "app_secret": "fa3356908d5784bcca7a3dffa710d2ba",
    "access_token": "EAAZAln6Pa60wBAPfq3rDAgic63ZCbmJFaF7GagPLtFN2DZAVZAZCChHlwpS6kiewZBriU3HHuD8yYlNGX5Lsy3fdYi6sUpRE7XxkUrzt4wHJUcND1uCROuUVUY4IXETvju6R5E1xkla1UHnKtwLt0KEuAZCq8aTBA9JfhZCZChxUXYwZDZD",
    "validation_token": "teamworkmakesdreamwork",
-   "server_URL": "https://baseup-messaging.herokuapp.com/webhook"
+   "server_URL": "https://baseup-messaging.herokuapp.com/webhooks"
 }
