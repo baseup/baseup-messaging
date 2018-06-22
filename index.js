@@ -64,12 +64,10 @@ app.post('/send-message', (req, res) => {
    });
 });
 
-app.post('/webhook', (req, res) => {
+app.post('/webhooks', (req, res) => {
    const body = req.body;
 
    if (body.object === 'page') {
-      console.log('BODY ENTRY: ', body.entry.length);
-      console.log('BODY LENGTH', body.entry.length);
       body.entry.forEach((entry) => {
 
          const webhook_event = entry.messaging[0];
