@@ -214,19 +214,19 @@ function sendFAQ(recipientId) {
             text: `These are the Frequently Asked Questions: `,
             quick_replies: [{
                content_type: 'text',
-               title: 'Where to View Bookings',
+               title: 'Booking Viewing',
                payload: 'WHERE_BOOKINGS'
             }, {
                content_type: 'text',
-               title: 'How to Pay Appointments',
+               title: 'Paying Appointment',
                payload: 'PAY_APPOINTMENTS'
             }, {
                content_type: 'text',
-               title: 'How to move Appointments',
+               title: 'Moving Appointment',
                payload: 'MOVE_APPOINTMENTS'
             }, {
                content_type: 'text',
-               title: 'How to cancel Appointments',
+               title: 'Canceling Appointments',
                payload: 'CANCEL_APPOINTMENTS'
             }, {
                content_type: 'text',
