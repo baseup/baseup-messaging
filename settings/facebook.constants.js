@@ -16,13 +16,18 @@ const SERVER_URL = (process.env.SERVER_URL) ?
    (process.env.SERVER_URL) :
    config.get('server_URL');
 
+const PAGE_PSID = (process.env.PAGE_PSID) ?
+   (process.env.PAGE_PSID) :
+   config.get('page_psid');
+
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
    console.error("Missing config values");
    process.exit(1);
 }
 module.exports = {
+   PAGE_PSID: PAGE_PSID,
+   SERVER_URL: SERVER_URL,
    APP_SECRET: APP_SECRET,
    VALIDATION_TOKEN: VALIDATION_TOKEN,
-   PAGE_ACCESS_TOKEN: PAGE_ACCESS_TOKEN,
-   SERVER_URL: SERVER_URL
+   PAGE_ACCESS_TOKEN: PAGE_ACCESS_TOKEN
 };
