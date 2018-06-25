@@ -193,6 +193,8 @@ function handleMessageStatus(psid, received_message) {
                break;
          }
          resolve(false);
+      } else {
+         resolve(true);
       }
    });
 }
