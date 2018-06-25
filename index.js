@@ -95,25 +95,25 @@ function handleMessage(sender_psid, received_message) {
 
    console.log('QUICK REPLY? ', quickreply);
    if (quickreply) {
-      console.log('FAQ CONST: ', faqConst[quickreply.payload]);
-      console.log('MESSAGE CONST: ', messageConst[quickreply.payload]);
 
-      switch (quickreply.payload) {
-         case 'CHECK_PARTNERS':
-            facebookServ.sendPartners(sender_psid);
-            break;
-         case 'FAQ':
-            facebookServ.sendFAQ(sender_psid);
-            break;
-         case 'DONE':
-            replyMessage = messageConst.DONE;
-            facebookServ.sendMessage(sender_psid, replyMessage);
-            break;
-         case 'OTHER_CONCERNS':
-            facebookServ.sendOtherConcerns(sender_psid);
-            break;
-         default:
-            facebookServ.sendMainQuickReply(sender_psid);
+      if (faqConst[quickreply.payload]) {
+         facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
+      } else if (messageConst[quickreply.payload]) {
+         facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
+      } else {
+         switch (quickreply.payload) {
+            case 'CHECK_PARTNERS':
+               facebookServ.sendPartners(sender_psid);
+               break;
+            case 'FAQ':
+               facebookServ.sendFAQ(sender_psid);
+               break;
+            case 'OTHER_CONCERNS':
+               facebookServ.sendOtherConcerns(sender_psid);
+               break;
+            default:
+               facebookServ.sendMainQuickReply(sender_psid);
+         }
       }
    } else {
       facebookServ.sendMainQuickReply(sender_psid);
