@@ -6,7 +6,7 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const app = express();
-let status = '';
+let messageStatus = '';
 
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
@@ -103,7 +103,7 @@ function handleMessage(sender_psid, received_message) {
 
    if (quickreply) {
       if (faqConst[quickreply.payload]) {
-         status = 'FEEDBACK';
+         messageStatus = 'FEEDBACK';
          facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
       } else if (messageConst[quickreply.payload]) {
          facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
@@ -182,15 +182,15 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 function handleMessageStatus(psid, received_message) {
    return new Promise((resolve) => {
       const text = received_message.text;
-      console.log('STATUS: ', status);
-      if (status) {
-         switch (status) {
+      console.log('STATUS: ', messageStatus);
+      if (messageStatus) {
+         switch (messageStatus) {
             case 'FEEDBACK':
                // Save Feedback Here
                console.log('SAVE FEEDBACK: ', text);
                facebookServ.sendMessage(psid, 'Your Feedback has been noted.');
                facebookServ.sendDefaultMessage(psid);
-               status = '';
+               messageStatus = '';
                break;
          }
          resolve(false);
