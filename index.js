@@ -110,7 +110,7 @@ function handlePostback(sender_psid, received_postback) {
 
    if (title === 'Check Branch') {
       baseupServ.getBranches(payload.toLowerCase()).then((result) => {
-         console.log('BRANCH SUCCESS: ', result);
+         console.log('BRANCH SUCCESS: ', JSON.stringify(result));
       }).catch((error) => {
          console.log('BRANCH ERROR: ', error);
       });
