@@ -91,7 +91,8 @@ function handleMessage(sender_psid, received_message) {
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
-   console.log('QUICK REPLY? ', quickreply);
+   console.log('QUICK REPLY? ', JSON.parse(quickreply));
+
    if (quickreply) {
       if (quickreply.payload === 'CHECK_PARTNERS') {
          facebookServ.sendPartners(sender_psid);
@@ -109,6 +110,8 @@ function handlePostback(sender_psid, received_postback) {
    const title = received_postback.title;
    const payload = received_postback.payload;
 
+   console.log('PARSE PAYLAOD: ', JSON.parse(payload));
+
    if (title === 'Check Branch') {
       baseupServ.getBranches(payload.toLowerCase()).then((result) => {
          const replies = [];
@@ -116,7 +119,10 @@ function handlePostback(sender_psid, received_postback) {
             replies.push({
                content_type: 'text',
                title: val.alias,
-               payload: val.id
+               payload: JSON.stringify({
+                  branch: 'BRANCH',
+                  branch_id: val.id
+               })
             });
          }
          console.log('REPLIES: ', JSON.stringify(replies));
