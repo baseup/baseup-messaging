@@ -13,6 +13,7 @@ module.exports = {
    sendTypingOff: sendTypingOff,
    sendNoFeature: sendNoFeature,
    sendReadReceipt: sendReadReceipt,
+   sendOtherConcerns: sendOtherConcerns,
    sendWelcomeMessage: sendWelcomeMessage,
    sendMainQuickReply: sendMainQuickReply
 };
@@ -192,20 +193,22 @@ function sendNoFeature(recipientId) {
          message: {
             text: `${fullName}, This feature is not yet available right now. But it will be available soon! What else can i do for you?`,
             quick_replies: [{
-                  content_type: 'text',
-                  title: 'FAQs',
-                  payload: 'FAQ'
-               },
-               {
-                  content_type: 'text',
-                  title: 'Check Partners',
-                  payload: 'CHECK_PARTNERS'
-               }, {
-                  content_type: 'text',
-                  title: 'I\'\m good for now!',
-                  payload: 'DONE'
-               }
-            ]
+               content_type: 'text',
+               title: 'FAQs',
+               payload: 'FAQ'
+            }, {
+               content_type: 'text',
+               title: 'Check Partners',
+               payload: 'CHECK_PARTNERS'
+            }, {
+               content_type: 'text',
+               title: 'Other Concerns',
+               payload: 'OTHER_CONCERNS'
+            }, {
+               content_type: 'text',
+               title: 'I\'\m good for now!',
+               payload: 'DONE'
+            }]
          }
       };
 
@@ -237,6 +240,26 @@ function sendDone(recipientId) {
    });
 }
 
+function sendOtherConcerns(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: `Our Customer Service Supervisor will be talking to you shortly. Please wait a little ${fullName}. Thank you.`
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
 function sendMainQuickReply(recipientId) {
    sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
@@ -245,7 +268,7 @@ function sendMainQuickReply(recipientId) {
             id: recipientId
          },
          message: {
-            text: `Hi. ${fullName} I'm BotBot, BaseUp 's automated assistant. I'm here to help. For your concerns, choose a button below:`,
+            text: `Hi. ${fullName} I'm BaseUp's automated assistant. I'm here to help. For your concerns, choose a button below:`,
             quick_replies: [{
                   content_type: 'text',
                   title: 'FAQs',

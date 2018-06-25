@@ -72,8 +72,6 @@ app.post('/webhooks', (req, res) => {
       const webhook_event = bodyEntry.messaging[0];
       const sender_psid = webhook_event.sender.id;
 
-      console.log('WEBHOOK EVENT: ', JSON.stringify(webhook_event));
-      console.log('SENDER PSID: ', sender_psid);
       if (webhook_event.message) {
          handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
@@ -100,6 +98,8 @@ function handleMessage(sender_psid, received_message) {
          facebookServ.sendNoFeature(sender_psid);
       } else if (quickreply.payload === 'DONE') {
          facebookServ.sendDone(sender_psid);
+      } else if (quickreply.payload === 'OTHER_CONCERNS') {
+         facebookServ.sendOtherConcerns(sender_psid);
       }
    } else {
       facebookServ.sendMainQuickReply(sender_psid);
