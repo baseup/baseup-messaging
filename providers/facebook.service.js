@@ -138,14 +138,16 @@ function sendPartners(recipientId) {
                         webview_height_ratio: 'full',
                      },
                      buttons: [{
-                        type: 'web_url',
-                        url: 'http://felipeandsons.com/',
-                        title: 'View Website'
-                     }, {
-                        type: 'postback',
-                        title: 'Check Branch',
-                        payload: 'FELIPEANDSONS'
-                     }]
+                           type: 'web_url',
+                           url: 'http://felipeandsons.com/',
+                           title: 'View Website'
+                        }
+                        // , {
+                        //    type: 'postback',
+                        //    title: 'Check Branch',
+                        //    payload: 'FELIPEANDSONS'
+                        // }
+                     ]
                   }, {
                      title: 'TUF',
                      image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
@@ -156,14 +158,16 @@ function sendPartners(recipientId) {
                         webview_height_ratio: 'full',
                      },
                      buttons: [{
-                        type: 'web_url',
-                        url: 'http://tufbarbershop.ph/',
-                        title: 'View Website'
-                     }, {
-                        type: 'postback',
-                        title: 'Check Branch',
-                        payload: 'TUF'
-                     }]
+                           type: 'web_url',
+                           url: 'http://tufbarbershop.ph/',
+                           title: 'View Website'
+                        }
+                        // , {
+                        //    type: 'postback',
+                        //    title: 'Check Branch',
+                        //    payload: 'TUF'
+                        // }
+                     ]
                   }]
                }
             }
