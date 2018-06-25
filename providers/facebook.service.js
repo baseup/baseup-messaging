@@ -6,6 +6,7 @@ const facebookConst = require('../settings/facebook.constants');
 module.exports = {
    sendDone: sendDone,
    sendLogin: sendLogin,
+   sendBranch: sendBranch,
    callSendAPI: callSendAPI,
    sendTypingOn: sendTypingOn,
    sendPartners: sendPartners,
@@ -15,6 +16,40 @@ module.exports = {
    sendWelcomeMessage: sendWelcomeMessage,
    sendMainQuickReply: sendMainQuickReply
 };
+
+function sendBranch(recipientId, fullname) {
+   sendTypingOn(recipientId);
+   const messageData = {
+      recipient: {
+         id: recipientId
+      },
+      message: {
+         text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
+         quick_replies: [{
+               content_type: 'text',
+               title: 'FAQs',
+               payload: 'FAQ'
+            },
+            {
+               content_type: 'text',
+               title: 'Check Partners',
+               payload: 'CHECK_PARTNERS'
+            },
+            {
+               content_type: 'text',
+               title: 'Other Concerns',
+               payload: 'OTHER_CONCERNS'
+            }
+         ]
+      }
+   };
+
+   callSendAPI(messageData);
+   setTimeout(() => {
+      sendTypingOff(recipientId);
+      sendReadReceipt(recipientId);
+   }, 2000);
+}
 
 function sendWelcomeMessage(recipientId, fullname) {
    sendTypingOn(recipientId);
