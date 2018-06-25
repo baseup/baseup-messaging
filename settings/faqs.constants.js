@@ -9,6 +9,7 @@ const CANCEL_APPOINTMENTS = "To cancel your appointment, just go to My Reservati
 const GIVE_FEEDBACK = "Please write your feedback here. We would love to hear from you and help out";
 
 module.exports = {
+   GIVE_FEEDBACK: GIVE_FEEDBACK,
    WHERE_BOOKINGS: WHERE_BOOKINGS,
    PAY_APPOINTMENTS: PAY_APPOINTMENTS,
    MOVE_APPOINTMENTS: MOVE_APPOINTMENTS,

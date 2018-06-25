@@ -68,14 +68,10 @@ app.post('/send-message', (req, res) => {
 
 app.post('/webhooks', (req, res) => {
    const body = req.body;
-   console.log('BODY: ', body);
    if (body.object === 'page') {
-
-
       body.entry.forEach((bodyEntry) => {
          bodyEntry.messaging.forEach((webhook_event) => {
             const sender_psid = webhook_event.sender.id;
-
             console.log('WEBHOOK EVENT: ', JSON.stringify(webhook_event));
 
             if (webhook_event.message) {
@@ -100,9 +96,7 @@ function handleMessage(sender_psid, received_message) {
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
-   console.log('QUICK REPLY? ', quickreply);
    if (quickreply) {
-
       if (faqConst[quickreply.payload]) {
          facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
       } else if (messageConst[quickreply.payload]) {
@@ -151,7 +145,7 @@ function handlePostback(sender_psid, received_postback) {
          }
          console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {
-         console.log('BRANCH ERROR: ', error);
+         console.log('BRANCH ERROR: ', JSON.stringify(error));
       });
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendLogin(sender_psid);
