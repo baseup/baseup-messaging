@@ -15,6 +15,7 @@ module.exports = {
    sendNoFeature: sendNoFeature,
    sendReadReceipt: sendReadReceipt,
    sendOtherConcerns: sendOtherConcerns,
+   sendDefaultMessage: sendDefaultMessage,
    sendWelcomeMessage: sendWelcomeMessage,
    sendMainQuickReply: sendMainQuickReply
 };
@@ -232,6 +233,43 @@ function sendFAQ(recipientId) {
                content_type: 'text',
                title: 'Give Feedback?',
                payload: 'GIVE_FEEDBACK'
+            }]
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
+function sendDefaultMessage(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: `What else can i do for you ${fullName}?`,
+            quick_replies: [{
+               content_type: 'text',
+               title: 'FAQs',
+               payload: 'FAQ'
+            }, {
+               content_type: 'text',
+               title: 'Check Partners',
+               payload: 'CHECK_PARTNERS'
+            }, {
+               content_type: 'text',
+               title: 'Other Concerns',
+               payload: 'OTHER_CONCERNS'
+            }, {
+               content_type: 'text',
+               title: 'I\'\m good for now!',
+               payload: 'DONE'
             }]
          }
       };

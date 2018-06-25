@@ -6,6 +6,7 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const app = express();
+let status = '';
 
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
@@ -75,7 +76,11 @@ app.post('/webhooks', (req, res) => {
             console.log('WEBHOOK EVENT: ', JSON.stringify(webhook_event));
 
             if (webhook_event.message) {
-               handleMessage(sender_psid, webhook_event.message);
+               handleMessageStatus(sender_psid, webhook_event.message).then((status) => {
+                  if (status) {
+                     handleMessage(sender_psid, webhook_event.message);
+                  }
+               });
             } else if (webhook_event.postback) {
                handlePostback(sender_psid, webhook_event.postback);
             } else if (webhook_event.account_linking) {
@@ -98,7 +103,8 @@ function handleMessage(sender_psid, received_message) {
 
    if (quickreply) {
       if (faqConst[quickreply.payload]) {
-         facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload], 'FEEDBACK');
+         status = 'FEEDBACK';
+         facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
       } else if (messageConst[quickreply.payload]) {
          facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
       } else {
@@ -171,6 +177,24 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          });
       });
    }
+}
+
+function handleMessageStatus(psid, received_message) {
+   return new Promise((resolve) => {
+      const text = received_message.text;
+      if (status) {
+         switch (status) {
+            case 'FEEDBACK':
+               // Save Feedback Here
+               console.log('SAVE FEEDBACK: ', text);
+               facebookServ.sendMessage(psid, 'Your Feedback has been noted.');
+               facebookServ.sendDefaultMessage(psid);
+               status = '';
+               break;
+         }
+         resolve(false);
+      }
+   });
 }
 
 app.listen(app.get('port'), () => {
