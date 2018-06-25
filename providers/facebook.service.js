@@ -281,7 +281,7 @@ function sendNoFeature(recipientId) {
    });
 }
 
-function sendMessage(recipientId, message, payload) {
+function sendMessage(recipientId, message) {
    sendTypingOn(recipientId);
    const messageData = {
       recipient: {
@@ -291,10 +291,6 @@ function sendMessage(recipientId, message, payload) {
          text: message
       }
    };
-
-   if (payload) {
-      messageData.message.payload = payload;
-   }
 
    callSendAPI(messageData);
    setTimeout(() => {

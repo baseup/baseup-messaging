@@ -98,11 +98,7 @@ function handleMessage(sender_psid, received_message) {
 
    if (quickreply) {
       if (faqConst[quickreply.payload]) {
-         if (quickreply.payload === 'GIVE_FEEDBACK') {
-            facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload], 'FEEDBACK');
-         } else {
-            facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
-         }
+         facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload], 'FEEDBACK');
       } else if (messageConst[quickreply.payload]) {
          facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
       } else {
