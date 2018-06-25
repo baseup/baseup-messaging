@@ -10,6 +10,8 @@ const app = express();
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
 
+const faqConst = require('./settings/faqs.constants');
+const messageConst = require('./settings/message.constants');
 const facebookConst = require('./settings/facebook.constants');
 
 app.use(cors());
@@ -87,19 +89,31 @@ app.post('/webhooks', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
+   let replyMessage = "";
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
    console.log('QUICK REPLY? ', quickreply);
    if (quickreply) {
-      if (quickreply.payload === 'CHECK_PARTNERS') {
-         facebookServ.sendPartners(sender_psid);
-      } else if (quickreply.payload === 'FAQ') {
-         facebookServ.sendNoFeature(sender_psid);
-      } else if (quickreply.payload === 'DONE') {
-         facebookServ.sendDone(sender_psid);
-      } else if (quickreply.payload === 'OTHER_CONCERNS') {
-         facebookServ.sendOtherConcerns(sender_psid);
+      console.log('FAQ CONST: ', faqConst[quickreply.payload]);
+      console.log('MESSAGE CONST: ', messageConst[quickreply.payload]);
+
+      switch (quickreply.payload) {
+         case 'CHECK_PARTNERS':
+            facebookServ.sendPartners(sender_psid);
+            break;
+         case 'FAQ':
+            facebookServ.sendFAQ(sender_psid);
+            break;
+         case 'DONE':
+            replyMessage = messageConst.DONE;
+            facebookServ.sendMessage(sender_psid, replyMessage);
+            break;
+         case 'OTHER_CONCERNS':
+            facebookServ.sendOtherConcerns(sender_psid);
+            break;
+         default:
+            facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
       facebookServ.sendMainQuickReply(sender_psid);
@@ -115,12 +129,17 @@ function handlePostback(sender_psid, received_postback) {
          const replies = [];
          for (const val of result) {
             replies.push({
-               content_type: 'text',
                title: val.alias,
-               payload: JSON.stringify({
-                  branch: 'BRANCH',
-                  branch_id: val.id
-               })
+               subtitle: val.title,
+               buttons: [{
+                  type: 'postback',
+                  title: 'Branch Info',
+                  payload: 'BRANCH_INFO'
+               }, {
+                  type: 'postback',
+                  title: 'Book',
+                  payload: 'BOOK'
+               }]
             });
          }
          console.log('REPLIES: ', JSON.stringify(replies));

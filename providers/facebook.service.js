@@ -4,9 +4,10 @@ const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
 module.exports = {
-   sendDone: sendDone,
+   sendFAQ: sendFAQ,
    sendLogin: sendLogin,
    sendBranch: sendBranch,
+   sendMessage: sendMessage,
    callSendAPI: callSendAPI,
    sendTypingOn: sendTypingOn,
    sendPartners: sendPartners,
@@ -25,23 +26,42 @@ function sendBranch(recipientId, fullname) {
          id: recipientId
       },
       message: {
-         text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
-         quick_replies: [{
-               content_type: 'text',
-               title: 'FAQs',
-               payload: 'FAQ'
-            },
-            {
-               content_type: 'text',
-               title: 'Check Partners',
-               payload: 'CHECK_PARTNERS'
-            },
-            {
-               content_type: 'text',
-               title: 'Other Concerns',
-               payload: 'OTHER_CONCERNS'
+         attachment: {
+            type: 'template',
+            payload: {
+               template_type: 'generic',
+               elements: [{
+                  title: 'Felipe and Sons!',
+                  subtitle: 'Barberdashery',
+                  image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                  default_action: {
+                     type: 'web_url',
+                     url: 'http://felipeandsons.com/',
+                     messenger_extensions: false,
+                     webview_height_ratio: 'full',
+                  },
+                  buttons: [{
+                     type: 'web_url',
+                     url: 'http://felipeandsons.com/',
+                     title: 'View Website'
+                  }]
+               }, {
+                  title: 'TUF',
+                  image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
+                  default_action: {
+                     type: 'web_url',
+                     url: 'http://tufbarbershop.ph/',
+                     messenger_extensions: false,
+                     webview_height_ratio: 'full',
+                  },
+                  buttons: [{
+                     type: 'web_url',
+                     url: 'http://tufbarbershop.ph/',
+                     title: 'View Website'
+                  }]
+               }]
             }
-         ]
+         }
       }
    };
 
@@ -183,6 +203,47 @@ function sendPartners(recipientId) {
    });
 }
 
+function sendFAQ(recipientId) {
+   sendTypingOn(recipientId);
+   getCustomerName(recipientId).then(fullName => {
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: `These are the Frequently Asked Questions: `,
+            quick_replies: [{
+               content_type: 'text',
+               title: 'Where to View Bookings',
+               payload: 'WHERE_BOOKINGS'
+            }, {
+               content_type: 'text',
+               title: 'How to Pay Appointments',
+               payload: 'PAY_APPOINTMENTS'
+            }, {
+               content_type: 'text',
+               title: 'How to move Appointments',
+               payload: 'MOVE_APPOINTMENTS'
+            }, {
+               content_type: 'text',
+               title: 'How to cancel Appointments',
+               payload: 'CANCEL_APPOINTMENTS'
+            }, {
+               content_type: 'text',
+               title: 'Give Feedback?',
+               payload: 'GIVE_FEEDBACK'
+            }]
+         }
+      };
+
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+   });
+}
+
 function sendNoFeature(recipientId) {
    sendTypingOn(recipientId);
    getCustomerName(recipientId).then(fullName => {
@@ -220,24 +281,22 @@ function sendNoFeature(recipientId) {
    });
 }
 
-function sendDone(recipientId) {
+function sendMessage(recipientId, message) {
    sendTypingOn(recipientId);
-   getCustomerName(recipientId).then(fullName => {
-      const messageData = {
-         recipient: {
-            id: recipientId
-         },
-         message: {
-            text: `Always happy to serve you. Hope you have a great day ${fullName}`
-         }
-      };
+   const messageData = {
+      recipient: {
+         id: recipientId
+      },
+      message: {
+         text: message
+      }
+   };
 
-      callSendAPI(messageData);
-      setTimeout(() => {
-         sendTypingOff(recipientId);
-         sendReadReceipt(recipientId);
-      }, 2000);
-   });
+   callSendAPI(messageData);
+   setTimeout(() => {
+      sendTypingOff(recipientId);
+      sendReadReceipt(recipientId);
+   }, 2000);
 }
 
 function sendOtherConcerns(recipientId) {
