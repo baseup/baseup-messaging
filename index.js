@@ -66,7 +66,7 @@ app.post('/send-message', (req, res) => {
 
 app.post('/webhooks', (req, res) => {
    const body = req.body;
-
+   console.log('BODY: ', body);
    if (body.object === 'page') {
       const bodyEntry = body.entry[0];
       const webhook_event = bodyEntry.messaging[0];
