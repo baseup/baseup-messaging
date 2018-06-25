@@ -70,17 +70,24 @@ app.post('/webhooks', (req, res) => {
    const body = req.body;
    console.log('BODY: ', body);
    if (body.object === 'page') {
-      const bodyEntry = body.entry[0];
-      const webhook_event = bodyEntry.messaging[0];
-      const sender_psid = webhook_event.sender.id;
 
-      if (webhook_event.message) {
-         handleMessage(sender_psid, webhook_event.message);
-      } else if (webhook_event.postback) {
-         handlePostback(sender_psid, webhook_event.postback);
-      } else if (webhook_event.account_linking) {
-         handleAccountLinking(sender_psid, webhook_event.account_linking);
-      }
+
+      body.entry.forEach((bodyEntry) => {
+         bodyEntry.messaging.forEach((webhook_event) => {
+            const sender_psid = webhook_event.sender.id;
+
+            console.log(webhook_event);
+
+            if (webhook_event.message) {
+               handleMessage(sender_psid, webhook_event.message);
+            } else if (webhook_event.postback) {
+               handlePostback(sender_psid, webhook_event.postback);
+            } else if (webhook_event.account_linking) {
+               handleAccountLinking(sender_psid, webhook_event.account_linking);
+            }
+         });
+      });
+
 
       res.status(200).send('EVENT_RECEIVED');
    } else {
