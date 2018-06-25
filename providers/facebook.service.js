@@ -106,6 +106,10 @@ function sendPartners(recipientId) {
                         type: 'web_url',
                         url: 'http://felipeandsons.com/',
                         title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'FELIPEANDSONS'
                      }]
                   }, {
                      title: 'TUF',
@@ -120,6 +124,10 @@ function sendPartners(recipientId) {
                         type: 'web_url',
                         url: 'http://tufbarbershop.ph/',
                         title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'TUF'
                      }]
                   }]
                }
