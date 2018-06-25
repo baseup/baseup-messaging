@@ -182,6 +182,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 function handleMessageStatus(psid, received_message) {
    return new Promise((resolve) => {
       const text = received_message.text;
+      console.log('STATUS: ', status);
       if (status) {
          switch (status) {
             case 'FEEDBACK':
