@@ -278,6 +278,10 @@ function sendMainQuickReply(recipientId) {
                   content_type: 'text',
                   title: 'Check Partners',
                   payload: 'CHECK_PARTNERS'
+               }, {
+                  content_type: 'text',
+                  title: 'Other Concerns',
+                  payload: 'OTHER_CONCERNS'
                }
             ]
          }
