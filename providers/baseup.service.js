@@ -20,7 +20,15 @@ function getBranches(slug) {
          if (error) {
             reject(error);
          } else if (response) {
-            resolve(body);
+            new JSONAPIDeserializer({
+               keyForAttribute: 'snake_case'
+            }).deserialize(JSON.parse(body), (err, users) => {
+               if (err) {
+                  reject(err);
+               } else if (users) {
+                  resolve(users);
+               }
+            });
          }
       });
    });
