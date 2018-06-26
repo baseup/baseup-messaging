@@ -80,7 +80,6 @@ function sendWelcomeMessage(recipientId, fullname) {
          id: recipientId
       },
       message: {
-         text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
          attachment: {
             type: 'image',
             payload: {
