@@ -33,15 +33,9 @@ function sendBranch(recipientId) {
                template_type: 'list',
                top_element_style: 'large',
                elements: [{
-                  title: 'Classic T-Shirt Collection',
+                  title: 'Branches of Felipe And Sons',
                   subtitle: 'See all our colors',
-                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                  default_action: {
-                     type: 'web_url',
-                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                     messenger_extensions: false,
-                     webview_height_ratio: 'tall'
-                  }
+                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1'
                }, {
                   title: 'Classic T-Shirt Collection',
                   subtitle: 'See all our colors',
@@ -72,11 +66,6 @@ function sendBranch(recipientId) {
                      messenger_extensions: true,
                      webview_height_ratio: 'full'
                   }
-               }],
-               buttons: [{
-                  type: 'postback',
-                  title: 'Check Branch',
-                  payload: 'TUF'
                }]
             }
          }
