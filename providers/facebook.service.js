@@ -38,7 +38,11 @@ function sendBranch(recipientId) {
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                   buttons: [{
                      type: 'postback',
-                     title: 'Check Branch',
+                     title: 'Details',
+                     payload: 'TUF'
+                  }, {
+                     type: 'postback',
+                     title: 'Book',
                      payload: 'TUF'
                   }],
                   default_action: {
@@ -53,7 +57,11 @@ function sendBranch(recipientId) {
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                   buttons: [{
                      type: 'postback',
-                     title: 'Check Branch',
+                     title: 'Details',
+                     payload: 'TUF'
+                  }, {
+                     type: 'postback',
+                     title: 'Book',
                      payload: 'TUF'
                   }],
                   default_action: {
