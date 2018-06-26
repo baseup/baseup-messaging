@@ -35,11 +35,11 @@ function sendBranch(recipientId) {
                elements: [{
                   title: 'Branches of Felipe And Sons',
                   subtitle: 'See all our colors',
-                  image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png'
+                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png'
                }, {
                   title: 'Classic T-Shirt Collection',
                   subtitle: 'See all our colors',
-                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                   buttons: [{
                      type: 'postback',
                      title: 'Book',
@@ -47,14 +47,14 @@ function sendBranch(recipientId) {
                   }],
                   default_action: {
                      type: 'web_url',
-                     url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                     url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                      messenger_extensions: true,
                      webview_height_ratio: 'full'
                   }
                }, {
                   title: 'Classic T-Shirt Collection',
                   subtitle: 'See all our colors',
-                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                   buttons: [{
                      type: 'postback',
                      title: 'Book',
@@ -62,7 +62,7 @@ function sendBranch(recipientId) {
                   }],
                   default_action: {
                      type: 'web_url',
-                     url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                     url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                      messenger_extensions: true,
                      webview_height_ratio: 'full'
                   }
