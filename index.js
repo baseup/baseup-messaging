@@ -148,7 +148,9 @@ function handlePostback(sender_psid, received_postback) {
 
          const chunk = _.chunk(replies, 4);
 
-         for (let index = 0; index < chunk; index++) {
+         console.log('CHUNK: ', chunk);
+
+         for (let index = 0; index < chunk.length; index++) {
             facebookServ.sendBranch(sender_psid, chunk[index]);
          }
 
