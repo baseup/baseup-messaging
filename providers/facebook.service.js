@@ -33,39 +33,25 @@ function sendBranch(recipientId) {
                template_type: 'list',
                top_element_style: 'large',
                elements: [{
-                  title: 'Branches of Felipe And Sons',
+                  title: 'Select Branches: ',
                   subtitle: 'See all our colors',
-                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png'
+                  image_url: 'https://baseup.co/assets/img/baseup-blue.png'
                }, {
                   title: 'Classic T-Shirt Collection',
                   subtitle: 'See all our colors',
-                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                   buttons: [{
                      type: 'postback',
                      title: 'Book',
                      payload: 'BOOK'
-                  }],
-                  default_action: {
-                     type: 'web_url',
-                     url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
-                     messenger_extensions: true,
-                     webview_height_ratio: 'full'
-                  }
+                  }]
                }, {
                   title: 'Classic T-Shirt Collection',
                   subtitle: 'See all our colors',
-                  image_url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
                   buttons: [{
                      type: 'postback',
                      title: 'Book',
                      payload: 'BOOK'
-                  }],
-                  default_action: {
-                     type: 'web_url',
-                     url: 'https://baseup.co/assets/img/home/partners_messenger/felipe.png',
-                     messenger_extensions: true,
-                     webview_height_ratio: 'full'
-                  }
+                  }]
                }]
             }
          }
