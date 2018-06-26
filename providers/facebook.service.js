@@ -81,6 +81,13 @@ function sendWelcomeMessage(recipientId, fullname) {
       },
       message: {
          text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
+         attachment: {
+            type: 'image',
+            payload: {
+               url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+               is_reusable: true
+            }
+         },
          quick_replies: [{
                content_type: 'text',
                title: 'FAQs',
