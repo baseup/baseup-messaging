@@ -137,19 +137,15 @@ function handlePostback(sender_psid, received_postback) {
          for (const val of result) {
             replies.push({
                title: val.alias,
-               subtitle: val.title,
+               subtitle: val.address,
                buttons: [{
-                  type: 'postback',
-                  title: 'Branch Info',
-                  payload: 'BRANCH_INFO'
-               }, {
                   type: 'postback',
                   title: 'Book',
                   payload: 'BOOK'
                }]
             });
          }
-         facebookServ.sendBranch(sender_psid);
+         facebookServ.sendBranch(sender_psid, replies);
          console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {
          console.log('BRANCH ERROR: ', JSON.stringify(error));

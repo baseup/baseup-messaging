@@ -20,7 +20,7 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
-function sendBranch(recipientId) {
+function sendBranch(recipientId, elements) {
    sendTypingOn(recipientId);
    const messageData = {
       recipient: {
@@ -32,27 +32,7 @@ function sendBranch(recipientId) {
             payload: {
                template_type: 'list',
                top_element_style: 'large',
-               elements: [{
-                  title: 'Select Branches: ',
-                  subtitle: 'See all our colors',
-                  image_url: 'https://baseup.co/assets/img/baseup-blue.png'
-               }, {
-                  title: 'Classic T-Shirt Collection',
-                  subtitle: 'See all our colors',
-                  buttons: [{
-                     type: 'postback',
-                     title: 'Book',
-                     payload: 'BOOK'
-                  }]
-               }, {
-                  title: 'Classic T-Shirt Collection',
-                  subtitle: 'See all our colors',
-                  buttons: [{
-                     type: 'postback',
-                     title: 'Book',
-                     payload: 'BOOK'
-                  }]
-               }]
+               elements
             }
          }
       }
