@@ -31,20 +31,11 @@ function sendBranch(recipientId) {
             type: 'template',
             payload: {
                template_type: 'list',
-               top_element_style: 'LARGE',
+               top_element_style: 'large',
                elements: [{
                   title: "Classic T-Shirt Collection",
                   subtitle: "See all our colors",
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                  buttons: [{
-                     type: 'postback',
-                     title: 'Details',
-                     payload: 'TUF'
-                  }, {
-                     type: 'postback',
-                     title: 'Book',
-                     payload: 'TUF'
-                  }],
                   default_action: {
                      type: 'web_url',
                      url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
@@ -57,12 +48,23 @@ function sendBranch(recipientId) {
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                   buttons: [{
                      type: 'postback',
-                     title: 'Details',
-                     payload: 'TUF'
-                  }, {
+                     title: 'Book',
+                     payload: 'BOOK'
+                  }],
+                  default_action: {
+                     type: 'web_url',
+                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     messenger_extensions: 'FALSE',
+                     webview_height_ratio: 'FULL'
+                  }
+               }, , {
+                  title: "Classic T-Shirt Collection",
+                  subtitle: "See all our colors",
+                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                  buttons: [{
                      type: 'postback',
                      title: 'Book',
-                     payload: 'TUF'
+                     payload: 'BOOK'
                   }],
                   default_action: {
                      type: 'web_url',
