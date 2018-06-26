@@ -33,27 +33,18 @@ function sendBranch(recipientId) {
                template_type: 'list',
                top_element_style: 'large',
                elements: [{
-                  title: "Classic T-Shirt Collection",
-                  subtitle: "See all our colors",
-                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1'
-               }, {
-                  title: "Classic T-Shirt Collection",
-                  subtitle: "See all our colors",
+                  title: 'Classic T-Shirt Collection',
+                  subtitle: 'See all our colors',
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                  buttons: [{
-                     type: 'postback',
-                     title: 'Book',
-                     payload: 'BOOK'
-                  }],
                   default_action: {
                      type: 'web_url',
                      url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                     messenger_extensions: 'FALSE',
-                     webview_height_ratio: 'FULL'
+                     messenger_extensions: false,
+                     webview_height_ratio: 'tall'
                   }
                }, {
-                  title: "Classic T-Shirt Collection",
-                  subtitle: "See all our colors",
+                  title: 'Classic T-Shirt Collection',
+                  subtitle: 'See all our colors',
                   image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                   buttons: [{
                      type: 'postback',
@@ -63,8 +54,23 @@ function sendBranch(recipientId) {
                   default_action: {
                      type: 'web_url',
                      url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
-                     messenger_extensions: 'FALSE',
-                     webview_height_ratio: 'FULL'
+                     messenger_extensions: true,
+                     webview_height_ratio: 'full'
+                  }
+               }, {
+                  title: 'Classic T-Shirt Collection',
+                  subtitle: 'See all our colors',
+                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                  buttons: [{
+                     type: 'postback',
+                     title: 'Book',
+                     payload: 'BOOK'
+                  }],
+                  default_action: {
+                     type: 'web_url',
+                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     messenger_extensions: true,
+                     webview_height_ratio: 'full'
                   }
                }],
                buttons: [{
