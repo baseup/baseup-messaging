@@ -83,6 +83,8 @@ function sendWelcomeMessage(recipientId, fullname) {
          attachment: {
             type: 'image',
             payload: {
+               template_type: 'button',
+               text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
                url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                is_reusable: true
             }
