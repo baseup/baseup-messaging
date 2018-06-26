@@ -20,7 +20,7 @@ module.exports = {
    sendMainQuickReply: sendMainQuickReply
 };
 
-function sendBranch(recipientId, fullname) {
+function sendBranch(recipientId) {
    sendTypingOn(recipientId);
    const messageData = {
       recipient: {
@@ -30,36 +30,28 @@ function sendBranch(recipientId, fullname) {
          attachment: {
             type: 'template',
             payload: {
-               template_type: 'generic',
+               template_type: 'list',
+               top_element_style: 'LARGE',
                elements: [{
-                  title: 'Felipe and Sons!',
-                  subtitle: 'Barberdashery',
-                  image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
+                  title: '<TITLE_TEXT>',
+                  subtitle: '<SUBTITLE_TEXT>',
+                  image_url: '<IMAGE_URL_FOR_THUMBNAIL>',
+                  buttons: [{
+                     type: 'postback',
+                     title: 'Check Branch',
+                     payload: 'TUF'
+                  }],
                   default_action: {
                      type: 'web_url',
-                     url: 'http://felipeandsons.com/',
-                     messenger_extensions: false,
-                     webview_height_ratio: 'full',
-                  },
-                  buttons: [{
-                     type: 'web_url',
-                     url: 'http://felipeandsons.com/',
-                     title: 'View Website'
-                  }]
-               }, {
-                  title: 'TUF',
-                  image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
-                  default_action: {
-                     type: 'web_url',
-                     url: 'http://tufbarbershop.ph/',
-                     messenger_extensions: false,
-                     webview_height_ratio: 'full',
-                  },
-                  buttons: [{
-                     type: 'web_url',
-                     url: 'http://tufbarbershop.ph/',
-                     title: 'View Website'
-                  }]
+                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     messenger_extensions: 'FALSE',
+                     webview_height_ratio: 'FULL'
+                  }
+               }],
+               buttons: [{
+                  type: 'postback',
+                  title: 'Check Branch',
+                  payload: 'TUF'
                }]
             }
          }
@@ -83,8 +75,6 @@ function sendWelcomeMessage(recipientId, fullname) {
          attachment: {
             type: 'image',
             payload: {
-               template_type: 'button',
-               text: `Welcome ${fullname}! Thank You for linking me to your Base Up Account. For your concerns, choose a button below:`,
                url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                is_reusable: true
             }
@@ -168,16 +158,14 @@ function sendPartners(recipientId) {
                         webview_height_ratio: 'full',
                      },
                      buttons: [{
-                           type: 'web_url',
-                           url: 'http://felipeandsons.com/',
-                           title: 'View Website'
-                        }
-                        // , {
-                        //    type: 'postback',
-                        //    title: 'Check Branch',
-                        //    payload: 'FELIPEANDSONS'
-                        // }
-                     ]
+                        type: 'web_url',
+                        url: 'http://felipeandsons.com/',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'FELIPEANDSONS'
+                     }]
                   }, {
                      title: 'TUF',
                      image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
@@ -188,16 +176,14 @@ function sendPartners(recipientId) {
                         webview_height_ratio: 'full',
                      },
                      buttons: [{
-                           type: 'web_url',
-                           url: 'http://tufbarbershop.ph/',
-                           title: 'View Website'
-                        }
-                        // , {
-                        //    type: 'postback',
-                        //    title: 'Check Branch',
-                        //    payload: 'TUF'
-                        // }
-                     ]
+                        type: 'web_url',
+                        url: 'http://tufbarbershop.ph/',
+                        title: 'View Website'
+                     }, {
+                        type: 'postback',
+                        title: 'Check Branch',
+                        payload: 'TUF'
+                     }]
                   }]
                }
             }
