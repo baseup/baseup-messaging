@@ -33,9 +33,24 @@ function sendBranch(recipientId) {
                template_type: 'list',
                top_element_style: 'LARGE',
                elements: [{
-                  title: '<TITLE_TEXT>',
-                  subtitle: '<SUBTITLE_TEXT>',
-                  image_url: '<IMAGE_URL_FOR_THUMBNAIL>',
+                  title: "Classic T-Shirt Collection",
+                  subtitle: "See all our colors",
+                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                  buttons: [{
+                     type: 'postback',
+                     title: 'Check Branch',
+                     payload: 'TUF'
+                  }],
+                  default_action: {
+                     type: 'web_url',
+                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     messenger_extensions: 'FALSE',
+                     webview_height_ratio: 'FULL'
+                  }
+               }, {
+                  title: "Classic T-Shirt Collection",
+                  subtitle: "See all our colors",
+                  image_url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
                   buttons: [{
                      type: 'postback',
                      title: 'Check Branch',
