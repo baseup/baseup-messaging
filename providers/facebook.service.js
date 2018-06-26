@@ -47,7 +47,7 @@ function sendBranch(recipientId) {
                   }],
                   default_action: {
                      type: 'web_url',
-                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
                      messenger_extensions: true,
                      webview_height_ratio: 'full'
                   }
@@ -62,7 +62,7 @@ function sendBranch(recipientId) {
                   }],
                   default_action: {
                      type: 'web_url',
-                     url: 'https://i1.wp.com/humorside.com/wp-content/uploads/2017/12/thank-you-meme-01.jpg?w=700&ssl=1',
+                     url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
                      messenger_extensions: true,
                      webview_height_ratio: 'full'
                   }
