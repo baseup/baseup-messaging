@@ -1,6 +1,7 @@
 /* jshint node: true, devel: true */
 'use strict';
 
+const _ = require('lodash');
 const cors = require('cors');
 const express = require('express');
 const request = require('request');
@@ -89,7 +90,6 @@ app.post('/webhooks', (req, res) => {
          });
       });
 
-
       res.status(200).send('EVENT_RECEIVED');
    } else {
       res.sendStatus(404);
@@ -145,7 +145,13 @@ function handlePostback(sender_psid, received_postback) {
                }]
             });
          }
-         facebookServ.sendBranch(sender_psid, replies);
+
+         const chunk = _.chunk(replies, 4);
+
+         for (let index = 0; index < chunk; index++) {
+            facebookServ.sendBranch(sender_psid, chunk[index]);
+         }
+
          console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {
          console.log('BRANCH ERROR: ', JSON.stringify(error));
