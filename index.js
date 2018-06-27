@@ -153,9 +153,10 @@ function handlePostback(sender_psid, received_postback) {
 
          const functionSendBranch = () => {
             if (chunkCount < chunk.length) {
+               console.log('Chunk Count: ', chunkCount);
+               console.log('Chunk: ', chunk[chunkCount]);
                facebookServ.sendBranch(sender_psid, chunk[chunkCount]).then(() => {
                   chunkCount++;
-                  console.log(chunkCount);
                   functionSendBranch();
                });
             }
