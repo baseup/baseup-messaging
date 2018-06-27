@@ -192,6 +192,7 @@ function handleGetBranch(psid, payload, type) {
       const replies = [];
 
       for (const val of result) {
+         console.log('VALUE: ', val);
          const button = (type === 'Book') ? {
             type: 'postback',
             title: type,
@@ -199,7 +200,7 @@ function handleGetBranch(psid, payload, type) {
          } : {
             type: 'web_url',
             title: type,
-            url: `https://baseup.co/widget/${val.slug}/${val.id}`
+            url: `https://staging.baseup.co/widget/${val.slug}/${val.id}`
          };
 
          replies.push({
