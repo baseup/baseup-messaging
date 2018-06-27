@@ -7,7 +7,7 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const app = express();
-let messageStatus = '';
+let messageReply = '';
 
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
@@ -77,7 +77,7 @@ app.post('/webhooks', (req, res) => {
             console.log('WEBHOOK EVENT: ', JSON.stringify(webhook_event));
 
             if (webhook_event.message) {
-               handleMessageStatus(sender_psid, webhook_event.message).then((status) => {
+               handleMessageReply(sender_psid, webhook_event.message).then((status) => {
                   if (status) {
                      handleMessage(sender_psid, webhook_event.message);
                   }
@@ -104,7 +104,7 @@ function handleMessage(sender_psid, received_message) {
    if (quickreply) {
       if (faqConst[quickreply.payload]) {
          if (quickreply.payload === 'GIVE_FEEDBACK') {
-            messageStatus = 'FEEDBACK';
+            messageReply = 'FEEDBACK';
          }
          facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
       } else if (messageConst[quickreply.payload]) {
@@ -134,38 +134,13 @@ function handlePostback(sender_psid, received_postback) {
    const payload = received_postback.payload;
 
    if (title === 'Check Branch') {
-      baseupServ.getBranches(payload.toLowerCase()).then((result) => {
-         const replies = [];
-         for (const val of result) {
-            replies.push({
-               title: val.alias,
-               subtitle: val.address,
-               buttons: [{
-                  type: 'postback',
-                  title: 'Book',
-                  payload: 'BOOK'
-               }]
-            });
-         }
-         const dividend = (replies.length % 4 === 1) ? 3 : 4;
-         let chunkCount = 0;
-         const chunk = _.chunk(replies, dividend);
+      handleGetBranch(sender_psid, payload, 'View Details');
+   } else if (title === 'Book Appointment') {
+      handleGetBranch(sender_psid, payload, 'Book');
+   } else if (title === 'View Details') {
 
-         const functionSendBranch = () => {
-            if (chunkCount < chunk.length) {
-               console.log('Chunk Count: ', chunkCount);
-               console.log('Chunk: ', chunk[chunkCount]);
-               facebookServ.sendBranch(sender_psid, chunk[chunkCount]).then(() => {
-                  chunkCount++;
-                  functionSendBranch();
-               });
-            }
-         };
-         functionSendBranch();
+   } else if (title === 'Book') {
 
-      }).catch((error) => {
-         console.log('BRANCH ERROR: ', JSON.stringify(error));
-      });
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendLogin(sender_psid);
    }
@@ -192,25 +167,56 @@ function handleAccountLinking(sender_psid, received_account_linking) {
    }
 }
 
-function handleMessageStatus(psid, received_message) {
+function handleMessageReply(psid, received_message) {
    return new Promise((resolve) => {
       const text = received_message.text;
-      console.log("PSID: ", psid);
-      console.log("STATUS: ", messageStatus);
-      if (messageStatus && psid !== facebookConst.PAGE_PSID) {
-         switch (messageStatus) {
+      if (messageReply && psid !== facebookConst.PAGE_PSID) {
+         switch (messageReply) {
             case 'FEEDBACK':
                // Save Feedback Here
                console.log('SAVE FEEDBACK: ', text);
                facebookServ.sendMessage(psid, 'Your Feedback has been noted.');
                facebookServ.sendDefaultMessage(psid);
-               messageStatus = '';
+               messageReply = '';
                break;
          }
          resolve(false);
       } else {
          resolve(true);
       }
+   });
+}
+
+function handleGetBranch(psid, payload, type) {
+   baseupServ.getBranches(payload.toLowerCase()).then((result) => {
+      const replies = [];
+      for (const val of result) {
+         replies.push({
+            title: val.alias,
+            subtitle: val.address,
+            buttons: [{
+               type: 'postback',
+               title: type,
+               payload: val.id
+            }]
+         });
+      }
+      const dividend = (replies.length % 4 === 1) ? 3 : 4;
+      let chunkCount = 0;
+      const chunk = _.chunk(replies, dividend);
+
+      const functionSendBranch = () => {
+         if (chunkCount < chunk.length) {
+            facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
+               chunkCount++;
+               functionSendBranch();
+            });
+         }
+      };
+      functionSendBranch();
+
+   }).catch((error) => {
+      console.log('BRANCH ERROR: ', JSON.stringify(error));
    });
 }
 
