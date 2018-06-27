@@ -35,7 +35,24 @@ function sendBranch(recipientId, elements) {
                   top_element_style: 'compact',
                   elements
                }
-            }
+            },
+            quick_replies: [{
+               content_type: 'text',
+               title: 'FAQs',
+               payload: 'FAQ'
+            }, {
+               content_type: 'text',
+               title: 'Check Partners',
+               payload: 'CHECK_PARTNERS'
+            }, {
+               content_type: 'text',
+               title: 'Other Concerns',
+               payload: 'OTHER_CONCERNS'
+            }, {
+               content_type: 'text',
+               title: 'I\'\m good for now!',
+               payload: 'DONE'
+            }]
          }
       };
 
