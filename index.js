@@ -200,7 +200,7 @@ function handleGetBranch(psid, payload, type) {
          } : {
             type: 'web_url',
             title: type,
-            url: `https://staging.baseup.co/widget/${val.slug}/${val.id}`
+            url: `https://staging.baseup.co/widget/${val.account.slug}/${val.id}`
          };
 
          replies.push({
