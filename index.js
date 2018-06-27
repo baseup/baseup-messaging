@@ -103,7 +103,9 @@ function handleMessage(sender_psid, received_message) {
 
    if (quickreply) {
       if (faqConst[quickreply.payload]) {
-         messageStatus = 'FEEDBACK';
+         if (quickreply.payload === 'GIVE_FEEDBACK') {
+            messageStatus = 'FEEDBACK';
+         }
          facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
       } else if (messageConst[quickreply.payload]) {
          facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
