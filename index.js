@@ -190,15 +190,22 @@ function handleMessageReply(psid, received_message) {
 function handleGetBranch(psid, payload, type) {
    baseupServ.getBranches(payload).then((result) => {
       const replies = [];
+
       for (const val of result) {
+         const button = (type === 'Book') ? {
+            type: 'postback',
+            title: type,
+            payload: val.id
+         } : {
+            type: 'web_url',
+            title: type,
+            url: `https://baseup.co/widget/${val.slug}/${val.id}`
+         };
+
          replies.push({
             title: val.alias,
             subtitle: val.address,
-            buttons: [{
-               type: 'postback',
-               title: type,
-               payload: val.id
-            }]
+            buttons: [button]
          });
       }
       const dividend = (replies.length % 4 === 1) ? 3 : 4;
