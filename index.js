@@ -192,7 +192,7 @@ function handleGetBranch(psid, payload, type) {
       const replies = [];
 
       for (const val of result) {
-         console.log('VALUE: ', val);
+         console.log('VALUE: ', JSON.stringify(val));
          const button = (type === 'Book Appointment') ? {
             type: 'postback',
             title: type,
