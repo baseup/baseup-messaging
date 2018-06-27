@@ -160,6 +160,7 @@ function handlePostback(sender_psid, received_postback) {
                });
             }
          };
+         functionSendBranch();
 
          console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {
