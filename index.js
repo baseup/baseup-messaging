@@ -147,9 +147,9 @@ function handlePostback(sender_psid, received_postback) {
                }]
             });
          }
-
+         const dividend = (replies.length % 4 === 1) ? 3 : 4;
          let chunkCount = 0;
-         const chunk = _.chunk(replies, 4);
+         const chunk = _.chunk(replies, dividend);
 
          const functionSendBranch = () => {
             if (chunkCount < chunk.length) {
