@@ -188,7 +188,7 @@ function handleMessageReply(psid, received_message) {
 }
 
 function handleGetBranch(psid, payload, type) {
-   baseupServ.getBranches(payload).then((result) => {
+   baseupServ.getBranches(payload.toLowerCase()).then((result) => {
       const replies = [];
 
       for (const val of result) {
