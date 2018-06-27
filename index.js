@@ -139,8 +139,6 @@ function handlePostback(sender_psid, received_postback) {
       handleGetBranch(sender_psid, payload, 'Book');
    } else if (title === 'View Details') {
 
-   } else if (title === 'Book') {
-
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendLogin(sender_psid);
    }
@@ -200,7 +198,7 @@ function handleGetBranch(psid, payload, type) {
          } : {
             type: 'web_url',
             title: type,
-            url: `https://staging.baseup.me/widget/${val.account.slug}/${val.id}`
+            url: `https://staging.baseup.me/widget/${val.account.slug}/${val.id}/?messenger=${psid}`
          };
 
          replies.push({
