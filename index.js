@@ -148,21 +148,20 @@ function handlePostback(sender_psid, received_postback) {
             });
          }
 
-         const chunk = _.chunk(replies, 4);
          let chunkCount = 0;
-         console.log('CHUNK: ', JSON.stringify(chunk));
+         const chunk = _.chunk(replies, 4);
 
          const functionSendBranch = () => {
             if (chunkCount < chunk.length) {
                facebookServ.sendBranch(sender_psid, chunk[chunkCount]).then(() => {
                   chunkCount++;
+                  console.log(chunkCount);
                   functionSendBranch();
                });
             }
          };
          functionSendBranch();
 
-         console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {
          console.log('BRANCH ERROR: ', JSON.stringify(error));
       });
