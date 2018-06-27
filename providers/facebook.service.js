@@ -164,11 +164,11 @@ function sendPartners(recipientId) {
                      }, {
                         type: 'postback',
                         title: 'Check Branch',
-                        payload: 'FELIPEANDSONS'
+                        payload: 'felipeandsons'
                      }, {
                         type: 'postback',
                         title: 'Book Appointment',
-                        payload: 'FELIPEANDSONS'
+                        payload: 'felipeandsons'
                      }]
                   }, {
                      title: 'TUF',
@@ -186,11 +186,11 @@ function sendPartners(recipientId) {
                      }, {
                         type: 'postback',
                         title: 'Check Branch',
-                        payload: 'TUF'
+                        payload: 'tuf'
                      }, {
                         type: 'postback',
                         title: 'Book Appointment',
-                        payload: 'TUF'
+                        payload: 'tuf'
                      }]
                   }]
                }
