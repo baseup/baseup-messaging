@@ -149,12 +149,17 @@ function handlePostback(sender_psid, received_postback) {
          }
 
          const chunk = _.chunk(replies, 4);
-
+         let chunkCount = 0;
          console.log('CHUNK: ', JSON.stringify(chunk));
 
-         for (let index = 0; index < chunk.length; index++) {
-            facebookServ.sendBranch(sender_psid, chunk[index]);
-         }
+         const functionSendBranch = () => {
+            if (chunkCount < chunk.length) {
+               facebookServ.sendBranch(sender_psid, chunk[chunkCount]).then(() => {
+                  chunkCount++;
+                  functionSendBranch();
+               });
+            }
+         };
 
          console.log('REPLIES: ', JSON.stringify(replies));
       }).catch((error) => {

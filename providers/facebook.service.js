@@ -21,28 +21,31 @@ module.exports = {
 };
 
 function sendBranch(recipientId, elements) {
-   sendTypingOn(recipientId);
-   const messageData = {
-      recipient: {
-         id: recipientId
-      },
-      message: {
-         attachment: {
-            type: 'template',
-            payload: {
-               template_type: 'list',
-               top_element_style: 'compact',
-               elements
+   return new Promise((resolve) => {
+      sendTypingOn(recipientId);
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            attachment: {
+               type: 'template',
+               payload: {
+                  template_type: 'list',
+                  top_element_style: 'compact',
+                  elements
+               }
             }
          }
-      }
-   };
+      };
 
-   callSendAPI(messageData);
-   setTimeout(() => {
-      sendTypingOff(recipientId);
-      sendReadReceipt(recipientId);
-   }, 2000);
+      callSendAPI(messageData);
+      setTimeout(() => {
+         sendTypingOff(recipientId);
+         sendReadReceipt(recipientId);
+      }, 2000);
+      resolve(true);
+   });
 }
 
 function sendWelcomeMessage(recipientId, fullname) {
