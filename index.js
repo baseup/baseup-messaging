@@ -193,7 +193,7 @@ function handleGetBranch(psid, payload, type) {
 
       for (const val of result) {
          console.log('VALUE: ', val);
-         const button = (type === 'Book') ? {
+         const button = (type === 'Book Appointment') ? {
             type: 'postback',
             title: type,
             payload: val.id
