@@ -86,7 +86,7 @@ function sendLogin(recipientId) {
                               type: 'template',
                               payload: {
                                     template_type: 'button',
-                                    text: `Hi. ${fullName}, please login to your Base Up Account to continue the subscription. If you don't have a Base Up account, you can just Login with Facebook through our app.`,
+                                    text: `Hi ${fullName}, please login to your Base Up Account to continue the subscription. If you don't have a Base Up account, you can just Login with Facebook through our app.`,
                                     buttons: [{
                                           type: 'account_link',
                                           url: 'https://staging.baseup.me/messenger-login'
@@ -243,7 +243,7 @@ function sendMainQuickReply(recipientId, type) {
                         id: recipientId
                   },
                   message: {
-                        text: `Hi. ${fullName} I'm Vicky. BaseUp's automated bot. How can I help you today?`,
+                        text: `Hi ${fullName}, I'm Vicky. BaseUp's automated bot. How can I help you today?`,
                   }
             };
 
