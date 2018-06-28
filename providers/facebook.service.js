@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const request = require('request');
 
 const baseupServ = require('./baseup.service');
@@ -16,19 +17,23 @@ const quickRepliesBtn = [{
             content_type: 'text',
             title: 'Other Concerns',
             payload: 'OTHER_CONCERNS'
+      }, {
+            content_type: 'text',
+            title: 'Subscribe',
+            payload: 'SUBSCRIBE'
+      }, {
+            content_type: 'text',
+            title: 'I\'\m good for now!',
+            payload: 'DONE'
       }
 ];
 
-const btnWithSubscribe = quickRepliesBtn.push({
-      content_type: 'text',
-      title: 'Subscribe',
-      payload: 'SUBSCRIBE'
+const btnWithSubscribe = _.remove(quickRepliesBtn, (val) => {
+      return val.payload === 'DONE';
 });
 
-const btnWithDone = quickRepliesBtn.push({
-      content_type: 'text',
-      title: 'I\'\m good for now!',
-      payload: 'DONE'
+const btnWithDone = _.remove(quickRepliesBtn, (val) => {
+      return val.payload === 'SUBSCRIBE';
 });
 
 module.exports = {
