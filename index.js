@@ -90,6 +90,7 @@ app.post('/webhooks', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
+   let message = '';
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
@@ -102,7 +103,11 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendPartners(sender_psid);
             break;
          case 'OTHER_CONCERNS':
-            const message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
+            message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
+            facebookServ.sendMessage(sender_psid, message);
+            break;
+         case 'DONE':
+            message = 'Always Happy to serve you. Hope you have a great day!';
             facebookServ.sendMessage(sender_psid, message);
             break;
          case 'SUBSCRIBE':
