@@ -32,7 +32,6 @@ const btnWithDone = quickRepliesBtn.push({
 });
 
 module.exports = {
-      sendFAQ: sendFAQ,
       sendLogin: sendLogin,
       sendBranch: sendBranch,
       sendMessage: sendMessage,
