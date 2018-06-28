@@ -12,8 +12,6 @@ let messageReply = '';
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
 
-const faqConst = require('./settings/faqs.constants');
-const messageConst = require('./settings/message.constants');
 const facebookConst = require('./settings/facebook.constants');
 
 app.use(cors());
@@ -74,14 +72,9 @@ app.post('/webhooks', (req, res) => {
       body.entry.forEach((bodyEntry) => {
          bodyEntry.messaging.forEach((webhook_event) => {
             const sender_psid = webhook_event.sender.id;
-            console.log('WEBHOOK EVENT: ', JSON.stringify(webhook_event));
 
             if (webhook_event.message) {
-               handleMessageReply(sender_psid, webhook_event.message).then((status) => {
-                  if (status) {
-                     handleMessage(sender_psid, webhook_event.message);
-                  }
-               });
+               handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                handlePostback(sender_psid, webhook_event.postback);
             } else if (webhook_event.account_linking) {
@@ -97,32 +90,26 @@ app.post('/webhooks', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-   let replyMessage = "";
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
 
    if (quickreply) {
-      if (faqConst[quickreply.payload]) {
-         if (quickreply.payload === 'GIVE_FEEDBACK') {
-            messageReply = 'FEEDBACK';
-         }
-         facebookServ.sendMessage(sender_psid, faqConst[quickreply.payload]);
-      } else if (messageConst[quickreply.payload]) {
-         facebookServ.sendMessage(sender_psid, messageConst[quickreply.payload]);
-      } else {
-         switch (quickreply.payload) {
-            case 'CHECK_PARTNERS':
-               facebookServ.sendPartners(sender_psid);
-               break;
-            case 'FAQ':
-               facebookServ.sendFAQ(sender_psid);
-               break;
-            case 'OTHER_CONCERNS':
-               facebookServ.sendOtherConcerns(sender_psid);
-               break;
-            default:
-               facebookServ.sendMainQuickReply(sender_psid);
-         }
+      switch (quickreply.payload) {
+         case 'CHECK_PARTNERS':
+            facebookServ.sendPartners(sender_psid);
+            break;
+         case 'MAKE_APPOINTMENT':
+            facebookServ.sendPartners(sender_psid);
+            break;
+         case 'OTHER_CONCERNS':
+            const message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
+            facebookServ.sendMessage(sender_psid, message);
+            break;
+         case 'SUBSCRIBE':
+            facebookServ.sendLogin(sender_psid);
+            break;
+         default:
+            facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
       facebookServ.sendMainQuickReply(sender_psid);
@@ -133,14 +120,10 @@ function handlePostback(sender_psid, received_postback) {
    const title = received_postback.title;
    const payload = received_postback.payload;
 
-   if (title === 'Check Branch') {
-      handleGetBranch(sender_psid, payload, 'View Details');
-   } else if (title === 'Book Appointment') {
-      handleGetBranch(sender_psid, payload, 'Book');
-   } else if (title === 'View Details') {
+   if (title === 'View Details') {
 
    } else if (payload === 'GET_STARTED') {
-      facebookServ.sendLogin(sender_psid);
+      facebookServ.sendMainQuickReply(sender_psid, 'welcome');
    }
 }
 
@@ -163,26 +146,6 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          });
       });
    }
-}
-
-function handleMessageReply(psid, received_message) {
-   return new Promise((resolve) => {
-      const text = received_message.text;
-      if (messageReply && psid !== facebookConst.PAGE_PSID) {
-         switch (messageReply) {
-            case 'FEEDBACK':
-               // Save Feedback Here
-               console.log('SAVE FEEDBACK: ', text);
-               facebookServ.sendMessage(psid, 'Your Feedback has been noted.');
-               facebookServ.sendDefaultMessage(psid);
-               messageReply = '';
-               break;
-         }
-         resolve(false);
-      } else {
-         resolve(true);
-      }
-   });
 }
 
 function handleGetBranch(psid, payload, type) {
