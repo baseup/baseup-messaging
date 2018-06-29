@@ -48,7 +48,9 @@ function getBusinesses() {
                               keyForAttribute: 'snake_case'
                         }).deserialize(JSON.parse(body), (err, users) => {
                               if (err) {
-                                    reject(err);
+                                    reject({
+                                          deserilizer: err
+                                    });
                               } else if (users) {
                                     resolve(users);
                               }

@@ -205,7 +205,6 @@ function handleGetBusiness(psid, payload) {
          return value.metadata.launch;
       });
 
-      console.log('RESULT: ', JSON.stringify(filterActive));
       for (const val of filterActive) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
@@ -231,6 +230,7 @@ function handleGetBusiness(psid, payload) {
       const chunk = _.chunk(businesses, 10);
 
       const functionSendBusiness = () => {
+         console.log('CHUNKS: ', JSON.stringify(chunk));
          if (chunkCount < chunk.length) {
             console.log('CHUNK: ', JSON.stringify(chunk[chunkCount]));
             facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
