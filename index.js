@@ -14,18 +14,6 @@ const facebookServ = require('./providers/facebook.service');
 
 const facebookConst = require('./settings/facebook.constants');
 
-const staticBusiness = [{
-   name: 'Felipe and Sons',
-   slug: 'felipeandsons',
-   image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
-   site: 'http://felipeandsons.com/'
-}, {
-   name: 'TUF',
-   slug: 'tuf',
-   image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
-   site: 'http://tufbarbershop.com/'
-}];
-
 app.use(cors());
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
@@ -113,6 +101,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendPartners(sender_psid);
             break;
          case 'MAKE_APPOINTMENT':
+            handleGetBusiness(sender_psid, quickreply.payload);
             facebookServ.sendPartners(sender_psid);
             break;
          case 'OTHER_CONCERNS':
@@ -140,7 +129,7 @@ function handlePostback(sender_psid, received_postback) {
 
    if (title === 'Book Appointment') {
       handleGetBranch(sender_psid, payload, 'Book');
-   } else if (title === 'View Details') {
+   } else if (title === 'Check Branch') {
       handleGetBranch(sender_psid, payload, 'View Details');
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendMainQuickReply(sender_psid, 'welcome');
@@ -211,11 +200,27 @@ function handleGetBranch(psid, payload, type) {
 
 function handleGetBusiness(psid, payload) {
    baseupServ.getBusinesses().then((result) => {
-      const replies = [];
-      for (const val of result) {
-         console.log('VALUE: ', JSON.stringify(val));
+      const businesses = [];
 
+      for (const val of result) {
+         const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
+         const data = {
+            title: val.name,
+            subtitle: `${val.address}, ${val.city} ${val.province} ${val.postal_code}, ${val.country}`,
+            buttons: [{
+               type: 'postback',
+               title,
+               payload: val.slug
+            }]
+         };
+
+         if (val.business_logo) {
+            data.image_url = val.business_logo;
+         }
+         businesses.push(data);
       }
+      console.log('VALUE: ', JSON.stringify(businesses));
+      facebookServ.sendPartners(psid, businesses);
    }).catch((error) => {
       console.log('BRANCH ERROR: ', JSON.stringify(error));
    });

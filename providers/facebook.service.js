@@ -11,7 +11,7 @@ const quickRepliesBtn = [{
       },
       {
             content_type: 'text',
-            title: 'Check Base Up Partners',
+            title: 'Check Partners',
             payload: 'CHECK_PARTNERS'
       }, {
             content_type: 'text',
@@ -109,7 +109,7 @@ function sendLogin(recipientId) {
       });
 }
 
-function sendPartners(recipientId) {
+function sendPartners(recipientId, businesses) {
       sendTypingOn(recipientId);
       getCustomerName(recipientId).then(fullName => {
             const messageData = {
@@ -121,52 +121,7 @@ function sendPartners(recipientId) {
                               type: 'template',
                               payload: {
                                     template_type: 'generic',
-                                    elements: [{
-                                          title: 'Felipe and Sons!',
-                                          subtitle: 'Barberdashery',
-                                          image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
-                                          default_action: {
-                                                type: 'web_url',
-                                                url: 'http://felipeandsons.com/',
-                                                messenger_extensions: false,
-                                                webview_height_ratio: 'full',
-                                          },
-                                          buttons: [{
-                                                type: 'web_url',
-                                                url: 'http://felipeandsons.com/',
-                                                title: 'View Website'
-                                          }, {
-                                                type: 'postback',
-                                                title: 'Check Branch',
-                                                payload: 'felipeandsons'
-                                          }, {
-                                                type: 'postback',
-                                                title: 'Book Appointment',
-                                                payload: 'felipeandsons'
-                                          }]
-                                    }, {
-                                          title: 'TUF',
-                                          image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
-                                          default_action: {
-                                                type: 'web_url',
-                                                url: 'http://tufbarbershop.ph/',
-                                                messenger_extensions: false,
-                                                webview_height_ratio: 'full',
-                                          },
-                                          buttons: [{
-                                                type: 'web_url',
-                                                url: 'http://tufbarbershop.ph/',
-                                                title: 'View Website'
-                                          }, {
-                                                type: 'postback',
-                                                title: 'Check Branch',
-                                                payload: 'tuf'
-                                          }, {
-                                                type: 'postback',
-                                                title: 'Book Appointment',
-                                                payload: 'tuf'
-                                          }]
-                                    }]
+                                    elements: businesses
                               }
                         }
                   }
