@@ -159,18 +159,21 @@ function handleAccountLinking(sender_psid, received_account_linking) {
 
 function handleGetBranch(psid, payload, type) {
    baseupServ.getBranches(payload.toLowerCase()).then((result) => {
-      const replies = [];
+      const replies = [{
+         title: result[0].account.name,
+         subtitle: `${result[0].account.address}, ${result[0].account.city} ${result[0].account.province}`,
+      }];
 
       console.log('RESULT: ', JSON.stringify(result));
       for (const val of result) {
          const button = (type === 'Book Appointment') ? {
-            type: 'postback',
-            title: type,
-            payload: val.id
-         } : {
             type: 'web_url',
             title: type,
             url: `https://staging.baseup.me/widget/${val.account.slug}/${val.id}/?messenger=${psid}`
+         } : {
+            type: 'postback',
+            title: type,
+            payload: val.id
          };
 
          replies.push({
