@@ -202,7 +202,7 @@ function handleGetBusiness(psid, payload) {
    baseupServ.getBusinesses().then((result) => {
       const businesses = [];
       const filterActive = result.filter((value) => {
-         return value.metadata.launch && value.metadata.online;
+         return value.metadata.launch;
       });
 
       console.log('RESULT: ', JSON.stringify(filterActive));
