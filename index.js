@@ -202,7 +202,7 @@ function handleGetBusiness(psid, payload) {
    baseupServ.getBusinesses().then((result) => {
       const businesses = [];
       const filterActive = result.filter((value) => {
-         return value.metadata.launch;
+         return value.metadata.launch && value.metadata.online;
       });
 
       console.log('RESULT: ', JSON.stringify(filterActive));
@@ -232,6 +232,7 @@ function handleGetBusiness(psid, payload) {
 
       const functionSendBusiness = () => {
          if (chunkCount < chunk.length) {
+            console.log('CHUNK: ', JSON.stringify(chunk[chunkCount]));
             facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
                chunkCount++;
                functionSendBusiness();
