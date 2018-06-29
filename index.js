@@ -201,8 +201,10 @@ function handleGetBranch(psid, payload, type) {
 function handleGetBusiness(psid, payload) {
    baseupServ.getBusinesses().then((result) => {
       const businesses = [];
-
-      for (const val of result) {
+      const filterActive = result.filter((value) => {
+         return value.status === 'A';
+      });
+      for (const val of filterActive) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
             title: val.name,
