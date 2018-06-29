@@ -164,7 +164,6 @@ function handleGetBranch(psid, payload, type) {
          subtitle: `${result[0].account.address}, ${result[0].account.city} ${result[0].account.province}`,
       }];
 
-      console.log('RESULT: ', JSON.stringify(result));
       for (const val of result) {
          const button = (type === 'Book Appointment') ? {
             type: 'web_url',
@@ -186,13 +185,15 @@ function handleGetBranch(psid, payload, type) {
       const chunk = _.chunk(replies, dividend);
       let chunkCount = chunk.length - 1;
 
+      console.log('COUNT: ', chunkCount);
+      console.log('LENGTH: ', chunk.length);
       const functionSendBranch = () => {
-         if (chunkCount === 0) {
-            facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
-               chunkCount--;
+         facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
+            chunkCount--;
+            if (chunkCount !== 0) {
                functionSendBranch();
-            });
-         }
+            }
+         });
       };
       functionSendBranch();
 
@@ -233,14 +234,14 @@ function handleGetBusiness(psid, payload) {
       const chunk = _.chunk(businesses, 10);
 
       const functionSendBusiness = () => {
-         if (chunkCount < chunk.length) {
-            facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
-               chunkCount++;
+         facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
+            chunkCount++;
+            if (chunkCount < chunk.length) {
                functionSendBusiness();
-            }).catch(() => {
-               console.log('Send Partner Error');
-            });
-         }
+            }
+         }).catch(() => {
+            console.log('Send Partner Error');
+         });
       };
       functionSendBusiness();
 
