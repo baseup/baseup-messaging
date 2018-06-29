@@ -228,8 +228,7 @@ function handleGetBusiness(psid, payload) {
       }
 
       let chunkCount = 0;
-      const dividend = (businesses.length % 10 === 1) ? 9 : 10;
-      const chunk = _.chunk(businesses, dividend);
+      const chunk = _.chunk(businesses, 10);
 
       const functionSendBusiness = () => {
          if (chunkCount < chunk.length) {
