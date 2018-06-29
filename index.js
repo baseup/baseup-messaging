@@ -161,8 +161,8 @@ function handleGetBranch(psid, payload, type) {
    baseupServ.getBranches(payload.toLowerCase()).then((result) => {
       const replies = [];
 
+      console.log('RESULT: ', JSON.stringify(result));
       for (const val of result) {
-         console.log('VALUE: ', JSON.stringify(val));
          const button = (type === 'Book Appointment') ? {
             type: 'postback',
             title: type,
@@ -231,7 +231,6 @@ function handleGetBusiness(psid, payload) {
 
       const functionSendBusiness = () => {
          if (chunkCount < chunk.length) {
-            console.log('CHUNK: ', JSON.stringify(chunk[chunkCount]));
             facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
                chunkCount++;
                functionSendBusiness();
