@@ -204,6 +204,8 @@ function handleGetBusiness(psid, payload) {
       const filterActive = result.filter((value) => {
          return value.status === 'A';
       });
+
+      console.log('RESULT: ', JSON.stringify(result));
       for (const val of filterActive) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
