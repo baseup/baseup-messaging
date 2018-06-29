@@ -230,12 +230,13 @@ function handleGetBusiness(psid, payload) {
       const chunk = _.chunk(businesses, 10);
 
       const functionSendBusiness = () => {
-         console.log('CHUNKS: ', JSON.stringify(chunk));
          if (chunkCount < chunk.length) {
             console.log('CHUNK: ', JSON.stringify(chunk[chunkCount]));
             facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
                chunkCount++;
                functionSendBusiness();
+            }).catch(() => {
+               console.log('Send Partner Error');
             });
          }
       };
