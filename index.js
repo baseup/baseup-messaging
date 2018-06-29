@@ -242,7 +242,7 @@ function handleGetBusiness(psid, payload) {
       functionSendBusiness();
 
    }).catch((error) => {
-      console.log('BRANCH ERROR: ', JSON.stringify(error));
+      console.log('BUSINESS ERROR: ', JSON.stringify(error));
    });
 }
 
