@@ -14,6 +14,18 @@ const facebookServ = require('./providers/facebook.service');
 
 const facebookConst = require('./settings/facebook.constants');
 
+const staticBusiness = [{
+   name: 'Felipe and Sons',
+   slug: 'felipeandsons',
+   image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/felipe.png',
+   site: 'http://felipeandsons.com/'
+}, {
+   name: 'TUF',
+   slug: 'tuf',
+   image_url: 'https://staging.baseup.me/assets/img/home/partners_messenger/tuf.png',
+   site: 'http://tufbarbershop.com/'
+}];
+
 app.use(cors());
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
@@ -97,6 +109,7 @@ function handleMessage(sender_psid, received_message) {
    if (quickreply) {
       switch (quickreply.payload) {
          case 'CHECK_PARTNERS':
+            handleGetBusiness(sender_psid, quickreply.payload);
             facebookServ.sendPartners(sender_psid);
             break;
          case 'MAKE_APPOINTMENT':
@@ -125,8 +138,10 @@ function handlePostback(sender_psid, received_postback) {
    const title = received_postback.title;
    const payload = received_postback.payload;
 
-   if (title === 'View Details') {
-
+   if (title === 'Book Appointment') {
+      handleGetBranch(sender_psid, payload, 'Book');
+   } else if (title === 'View Details') {
+      handleGetBranch(sender_psid, payload, 'View Details');
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendMainQuickReply(sender_psid, 'welcome');
    }
@@ -189,6 +204,18 @@ function handleGetBranch(psid, payload, type) {
       };
       functionSendBranch();
 
+   }).catch((error) => {
+      console.log('BRANCH ERROR: ', JSON.stringify(error));
+   });
+}
+
+function handleGetBusiness(psid, payload) {
+   baseupServ.getBusinesses().then((result) => {
+      const replies = [];
+      for (const val of result) {
+         console.log('VALUE: ', JSON.stringify(val));
+
+      }
    }).catch((error) => {
       console.log('BRANCH ERROR: ', JSON.stringify(error));
    });
