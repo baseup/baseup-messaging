@@ -208,13 +208,16 @@ function handleGetBusiness(psid, payload) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
             title: val.name,
-            subtitle: `${val.address}, ${val.city} ${val.province} ${val.postal_code}, ${val.country}`,
             buttons: [{
                type: 'postback',
                title,
                payload: val.slug
             }]
          };
+
+         if (val.address) {
+            data.subtitle = `${val.address}, ${val.city} ${val.province}`;
+         }
 
          if (val.business_logo) {
             data.image_url = val.business_logo;
@@ -223,7 +226,7 @@ function handleGetBusiness(psid, payload) {
       }
 
       let chunkCount = 0;
-      const dividend = (businesses.length % 10 === 1) ? 3 : 4;
+      const dividend = (businesses.length % 10 === 1) ? 9 : 10;
       const chunk = _.chunk(businesses, dividend);
 
       const functionSendBusiness = () => {
