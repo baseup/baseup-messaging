@@ -221,8 +221,21 @@ function handleGetBusiness(psid, payload) {
          }
          businesses.push(data);
       }
-      console.log('VALUE: ', JSON.stringify(businesses));
-      facebookServ.sendPartners(psid, businesses);
+
+      let chunkCount = 0;
+      const dividend = (businesses.length % 10 === 1) ? 3 : 4;
+      const chunk = _.chunk(businesses, dividend);
+
+      const functionSendBusiness = () => {
+         if (chunkCount < chunk.length) {
+            facebookServ.sendPartners(psid, chunk[chunkCount]).then(() => {
+               chunkCount++;
+               functionSendBusiness();
+            });
+         }
+      };
+      functionSendBusiness();
+
    }).catch((error) => {
       console.log('BRANCH ERROR: ', JSON.stringify(error));
    });
