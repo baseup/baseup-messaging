@@ -66,7 +66,7 @@ function sendBranch(recipientId, elements) {
                   elements
                }
             },
-            quick_replies: quickRepliesBtn
+            quick_replies: btnWithDone
          }
       };
 

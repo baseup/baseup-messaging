@@ -183,13 +183,13 @@ function handleGetBranch(psid, payload, type) {
          });
       }
       const dividend = (replies.length % 4 === 1) ? 3 : 4;
-      let chunkCount = 0;
       const chunk = _.chunk(replies, dividend);
+      let chunkCount = chunk.length - 1;
 
       const functionSendBranch = () => {
-         if (chunkCount < chunk.length) {
+         if (chunkCount === 0) {
             facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
-               chunkCount++;
+               chunkCount--;
                functionSendBranch();
             });
          }
