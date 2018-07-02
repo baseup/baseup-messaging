@@ -119,7 +119,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
-      if (received_message.test(/(what\sis\smy\spsid\splease|get\spsid\splease)/gmi)) {
+      if (text.test(/(what\sis\smy\spsid\splease|get\spsid\splease)/gmi)) {
          facebookServ.sendMessage(sender_psid, `Your PSID is ${sender_psid}`);
       } else {
          facebookServ.sendMainQuickReply(sender_psid);
