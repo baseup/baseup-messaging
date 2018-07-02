@@ -28,7 +28,8 @@ const collections = [{
    }
 ];
 
-const quickRepliesBtn = _.remove(collections, (val) => {
+const quickRepliesBtn = collections;
+_.remove(quickRepliesBtn, (val) => {
    return val.payload === 'DONE' || val.payload === 'SUBSCRIBE';
 });
 
