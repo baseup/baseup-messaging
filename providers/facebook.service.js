@@ -4,7 +4,39 @@ const request = require('request');
 const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
-const collections = [{
+const quickRepliesBtn = [{
+   content_type: 'text',
+   title: 'Make an appointment',
+   payload: 'MAKE_APPOINTMENT'
+}, {
+   content_type: 'text',
+   title: 'Check Partners',
+   payload: 'CHECK_PARTNERS'
+}, {
+   content_type: 'text',
+   title: 'Other Concerns',
+   payload: 'OTHER_CONCERNS'
+}];
+
+const btnWithDone = [{
+   content_type: 'text',
+   title: 'Make an appointment',
+   payload: 'MAKE_APPOINTMENT'
+}, {
+   content_type: 'text',
+   title: 'Check Partners',
+   payload: 'CHECK_PARTNERS'
+}, {
+   content_type: 'text',
+   title: 'Other Concerns',
+   payload: 'OTHER_CONCERNS'
+}, {
+   content_type: 'text',
+   title: 'I\'\m good for now!',
+   payload: 'DONE'
+}];
+
+const btnWithSubscribe = [{
    content_type: 'text',
    title: 'Make an appointment',
    payload: 'MAKE_APPOINTMENT'
@@ -20,28 +52,7 @@ const collections = [{
    content_type: 'text',
    title: 'Subscribe',
    payload: 'SUBSCRIBE'
-}, {
-   content_type: 'text',
-   title: 'I\'\m good for now!',
-   payload: 'DONE'
 }];
-
-const quickRepliesBtn = collections;
-_.remove(quickRepliesBtn, (val) => {
-   return val.payload === 'DONE' || val.payload === 'SUBSCRIBE';
-});
-
-const btnWithDone = collections;
-console.log('BUTTON WITH DONE: ', btnWithDone);
-
-_.remove(btnWithDone, (val) => {
-   return val.payload === 'SUBSCRIBE';
-});
-
-const btnWithSubscribe = collections;
-_.remove(btnWithSubscribe, (val) => {
-   return val.payload === 'SUBSCRIBE';
-});
 
 module.exports = {
    sendLogin: sendLogin,
