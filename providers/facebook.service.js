@@ -200,21 +200,25 @@ function sendNoFeature(recipientId) {
 }
 
 function sendMessage(recipientId, message) {
-   sendTypingOn(recipientId);
-   const messageData = {
-      recipient: {
-         id: recipientId
-      },
-      message: {
-         text: message
-      }
-   };
+   return new Promise((resolve) => {
+      sendTypingOn(recipientId);
+      const messageData = {
+         recipient: {
+            id: recipientId
+         },
+         message: {
+            text: message
+         }
+      };
 
-   callSendAPI(messageData);
-   setTimeout(() => {
-      sendTypingOff(recipientId);
-      sendReadReceipt(recipientId);
-   }, 2000);
+      callSendAPI(messageData).then(() => {
+         resolve(true);
+         setTimeout(() => {
+            sendTypingOff(recipientId);
+            sendReadReceipt(recipientId);
+         }, 2000);
+      });
+   });
 }
 
 function sendMainQuickReply(recipientId, type) {
@@ -258,31 +262,6 @@ function getCustomerName(recipientId) {
             console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
          }
       });
-   });
-}
-
-function notifyHumanOperators(recipientId) {
-   request({
-      uri: 'https://graph.facebook.com/v2.9/' + recipientId,
-      qs: {
-         access_token: facebookConst.PAGE_ACCESS_TOKEN,
-         fields: 'first_name,last_name'
-      },
-      method: 'GET',
-   }, (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-         const firstName = JSON.parse(body).first_name;
-         const lastName = JSON.parse(body).last_name;
-         const fullName = (firstName + ' ' + lastName);
-         // firebase.database().ref('agents').once('value', (snapshot) => {
-         //    snapshot.forEach((childSnapshot) => {
-         //       const currentKey = childSnapshot.key;
-         //       sendTextMessage(currentKey, fullName + ' ' + USER_NOTIFICATION_TO_AGENT);
-         //    });
-         // });
-      } else {
-         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
-      }
    });
 }
 
