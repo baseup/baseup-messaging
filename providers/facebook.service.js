@@ -244,7 +244,7 @@ function sendMainQuickReply(recipientId, type) {
    });
 }
 
-function notifyHumanOperators(recipientId) {
+function notifyHumanOperators(recipientId, sendId) {
    request({
       uri: 'https://graph.facebook.com/v2.9/' + recipientId,
       qs: {
@@ -257,7 +257,7 @@ function notifyHumanOperators(recipientId) {
          const firstName = JSON.parse(body).first_name;
          const lastName = JSON.parse(body).last_name;
          const fullName = (firstName + ' ' + lastName);
-         sendMessage(recipientId, `${fullName} IS TRYING TO REACH YOU AT BASEUP PAGE!`);
+         sendMessage(sendId, `${fullName} is tying to reach you at Baseup Page! Reply ASAP!`);
       } else {
          console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
       }

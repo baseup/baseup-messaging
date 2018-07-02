@@ -109,7 +109,7 @@ function handleMessage(sender_psid, received_message) {
             message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
             facebookServ.sendMessage(sender_psid, message).then(() => {
                const customerServ = 2080237678700295;
-               facebookServ.notifyHumanOperators(customerServ);
+               facebookServ.notifyHumanOperators(sender_psid, customerServ);
             });
             break;
          case 'DONE':
