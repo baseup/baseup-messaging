@@ -165,7 +165,7 @@ function handleGetBranch(psid, payload, type) {
       }];
 
       for (const val of result) {
-         const button = (type === 'Book Appointment') ? {
+         const button = (type === 'Book') ? {
             type: 'web_url',
             title: type,
             url: `https://staging.baseup.me/widget/${val.account.slug}/${val.id}/?messenger=${psid}`
