@@ -93,6 +93,7 @@ function handleMessage(sender_psid, received_message) {
    let message = '';
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
+   const getPSID = /(what\sis\smy\spsid\splease|get\spsid\splease)/gmi;
 
    if (quickreply) {
       switch (quickreply.payload) {
@@ -119,7 +120,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
-      if (text.test(/(what\sis\smy\spsid\splease|get\spsid\splease)/gmi)) {
+      if (text.test(getPSID)) {
          facebookServ.sendMessage(sender_psid, `Your PSID is ${sender_psid}`);
       } else {
          facebookServ.sendMainQuickReply(sender_psid);
