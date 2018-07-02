@@ -70,12 +70,13 @@ function sendBranch(recipientId, elements) {
          }
       };
 
-      callSendAPI(messageData);
-      setTimeout(() => {
-         sendTypingOff(recipientId);
-         sendReadReceipt(recipientId);
-      }, 2000);
-      resolve(true);
+      callSendAPI(messageData).then(() => {
+         resolve(true);
+         setTimeout(() => {
+            sendTypingOff(recipientId);
+            sendReadReceipt(recipientId);
+         }, 2000);
+      });
    });
 }
 
@@ -300,28 +301,32 @@ function sendTypingOff(recipientId) {
 }
 
 function callSendAPI(messageData) {
-   request({
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {
-         access_token: facebookConst.PAGE_ACCESS_TOKEN
-      },
-      method: 'POST',
-      json: messageData
+   return new Promise((resolve) => {
+      request({
+         uri: 'https://graph.facebook.com/v2.6/me/messages',
+         qs: {
+            access_token: facebookConst.PAGE_ACCESS_TOKEN
+         },
+         method: 'POST',
+         json: messageData
 
-   }, (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-         const recipientId = body.recipient_id;
-         const messageId = body.message_id;
+      }, (error, response, body) => {
+         if (!error && response.statusCode == 200) {
+            const recipientId = body.recipient_id;
+            const messageId = body.message_id;
 
-         if (messageId) {
-            console.log('Successfully sent message with id %s to recipient %s',
-               messageId, recipientId);
+            if (messageId) {
+               resolve(true);
+               console.log('Successfully sent message with id %s to recipient %s',
+                  messageId, recipientId);
+            } else {
+               resolve(true);
+               console.log('Successfully called Send API for recipient %s',
+                  recipientId);
+            }
          } else {
-            console.log('Successfully called Send API for recipient %s',
-               recipientId);
+            console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
          }
-      } else {
-         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
-      }
+      });
    });
 }
