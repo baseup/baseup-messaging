@@ -4,7 +4,7 @@ const request = require('request');
 const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
-const quickRepliesBtn = [{
+const collections = [{
       content_type: 'text',
       title: 'Make an appointment',
       payload: 'MAKE_APPOINTMENT'
@@ -28,11 +28,17 @@ const quickRepliesBtn = [{
    }
 ];
 
-const btnWithSubscribe = _.remove(quickRepliesBtn, (val) => {
-   return val.payload === 'DONE';
+const quickRepliesBtn = _.remove(collections, (val) => {
+   return val.payload === 'DONE' || val.payload === 'SUBSCRIBE';
 });
 
-const btnWithDone = _.remove(quickRepliesBtn, (val) => {
+const btnWithDone = collections;
+_.remove(btnWithDone, (val) => {
+   return val.payload === 'SUBSCRIBE';
+});
+
+const btnWithSubscribe = collections;
+_.remove(btnWithSubscribe, (val) => {
    return val.payload === 'SUBSCRIBE';
 });
 
@@ -129,12 +135,13 @@ function sendPartners(recipientId, businesses) {
          quick_replies: btnWithDone
       };
 
-      callSendAPI(messageData);
-      setTimeout(() => {
-         sendTypingOff(recipientId);
-         sendReadReceipt(recipientId);
-      }, 2000);
-      resolve(true);
+      callSendAPI(messageData).then(() => {
+         setTimeout(() => {
+            sendTypingOff(recipientId);
+            sendReadReceipt(recipientId);
+         }, 2000);
+         resolve(true);
+      });
    });
 }
 
