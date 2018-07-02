@@ -185,8 +185,6 @@ function handleGetBranch(psid, payload, type) {
       const chunk = _.chunk(replies, dividend);
       let chunkCount = 0;
 
-      console.log('COUNT: ', chunkCount);
-      console.log('LENGTH: ', chunk.length);
       const functionSendBranch = () => {
          facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
             chunkCount++;

@@ -5,28 +5,26 @@ const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
 const collections = [{
-      content_type: 'text',
-      title: 'Make an appointment',
-      payload: 'MAKE_APPOINTMENT'
-   },
-   {
-      content_type: 'text',
-      title: 'Check Partners',
-      payload: 'CHECK_PARTNERS'
-   }, {
-      content_type: 'text',
-      title: 'Other Concerns',
-      payload: 'OTHER_CONCERNS'
-   }, {
-      content_type: 'text',
-      title: 'Subscribe',
-      payload: 'SUBSCRIBE'
-   }, {
-      content_type: 'text',
-      title: 'I\'\m good for now!',
-      payload: 'DONE'
-   }
-];
+   content_type: 'text',
+   title: 'Make an appointment',
+   payload: 'MAKE_APPOINTMENT'
+}, {
+   content_type: 'text',
+   title: 'Check Partners',
+   payload: 'CHECK_PARTNERS'
+}, {
+   content_type: 'text',
+   title: 'Other Concerns',
+   payload: 'OTHER_CONCERNS'
+}, {
+   content_type: 'text',
+   title: 'Subscribe',
+   payload: 'SUBSCRIBE'
+}, {
+   content_type: 'text',
+   title: 'I\'\m good for now!',
+   payload: 'DONE'
+}];
 
 const quickRepliesBtn = collections;
 _.remove(quickRepliesBtn, (val) => {
@@ -34,6 +32,8 @@ _.remove(quickRepliesBtn, (val) => {
 });
 
 const btnWithDone = collections;
+console.log('BUTTON WITH DONE: ', btnWithDone);
+
 _.remove(btnWithDone, (val) => {
    return val.payload === 'SUBSCRIBE';
 });
@@ -325,16 +325,10 @@ function callSendAPI(messageData) {
 
             if (messageId) {
                resolve(true);
-               console.log('Successfully sent message with id %s to recipient %s',
-                  messageId, recipientId);
             } else {
                resolve(true);
-               console.log('Successfully called Send API for recipient %s',
-                  recipientId);
             }
-         } else {
-            console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
-         }
+         } else {}
       });
    });
 }
