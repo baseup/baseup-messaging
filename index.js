@@ -107,7 +107,10 @@ function handleMessage(sender_psid, received_message) {
             break;
          case 'OTHER_CONCERNS':
             message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
-            facebookServ.sendMessage(sender_psid, message);
+            facebookServ.sendMessage(sender_psid, message).then(() => {
+               const customerServ = 2080237678700295;
+               facebookServ.notifyHumanOperators(customerServ);
+            });
             break;
          case 'DONE':
             message = 'Always Happy to serve you. Hope you have a great day!';

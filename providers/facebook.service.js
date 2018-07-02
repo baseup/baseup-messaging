@@ -65,7 +65,8 @@ module.exports = {
    sendNoFeature: sendNoFeature,
    sendReadReceipt: sendReadReceipt,
    sendDefaultMessage: sendDefaultMessage,
-   sendMainQuickReply: sendMainQuickReply
+   sendMainQuickReply: sendMainQuickReply,
+   notifyHumanOperators: notifyHumanOperators
 };
 
 function sendBranch(recipientId, elements) {
@@ -240,6 +241,26 @@ function sendMainQuickReply(recipientId, type) {
          sendTypingOff(recipientId);
          sendReadReceipt(recipientId);
       }, 2000);
+   });
+}
+
+function notifyHumanOperators(recipientId) {
+   request({
+      uri: 'https://graph.facebook.com/v2.9/' + recipientId,
+      qs: {
+         access_token: facebookConst.PAGE_ACCESS_TOKEN,
+         fields: 'first_name,last_name'
+      },
+      method: 'GET',
+   }, (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+         const firstName = JSON.parse(body).first_name;
+         const lastName = JSON.parse(body).last_name;
+         const fullName = (firstName + ' ' + lastName);
+         sendMessage(recipientId, `${fullName} IS TRYING TO REACH YOU AT BASEUP PAGE!`);
+      } else {
+         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
+      }
    });
 }
 
