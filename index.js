@@ -183,14 +183,14 @@ function handleGetBranch(psid, payload, type) {
       }
       const dividend = (replies.length % 4 === 1) ? 3 : 4;
       const chunk = _.chunk(replies, dividend);
-      let chunkCount = chunk.length;
+      let chunkCount = 0;
 
+      console.log('COUNT: ', chunkCount);
       console.log('LENGTH: ', chunk.length);
       const functionSendBranch = () => {
-         chunkCount--;
          facebookServ.sendBranch(psid, chunk[chunkCount]).then(() => {
-            console.log('COUNT: ', chunkCount);
-            if (chunkCount !== 0) {
+            chunkCount++;
+            if (chunkCount < chunk.length) {
                functionSendBranch();
             }
          });
