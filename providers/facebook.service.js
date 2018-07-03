@@ -95,6 +95,7 @@ function sendLogin(recipientId) {
             id: recipientId
          },
          message: {
+            quick_replies: startOverQR,
             attachment: {
                type: 'template',
                payload: {
@@ -105,8 +106,7 @@ function sendLogin(recipientId) {
                      url: 'https://staging.baseup.me/messenger-login'
                   }]
                }
-            },
-            quick_replies: startOverQR
+            }
          }
       };
 
