@@ -98,10 +98,10 @@ function handleMessage(sender_psid, received_message) {
    if (quickreply) {
       switch (quickreply.payload) {
          case 'CHECK_PARTNERS':
-            handleGetBusiness(sender_psid, quickreply.payload);
+            handleGetPartners(sender_psid, quickreply.payload);
             break;
          case 'MAKE_APPOINTMENT':
-            handleGetBusiness(sender_psid, quickreply.payload);
+            handleGetPartners(sender_psid, quickreply.payload);
             break;
          case 'OTHER_CONCERNS':
             message = 'Someone from our team will get in touch with you shortly. Hold on tight!';
@@ -210,13 +210,14 @@ function handleGetBranch(psid, payload, type) {
    });
 }
 
-function handleGetBusiness(psid, payload) {
+function handleGetPartners(psid, payload) {
    baseupServ.getBusinesses().then((result) => {
       const businesses = [];
       const filterActive = result.filter((value) => {
          return value.metadata.launch;
       });
 
+      console.log('BUSINESS: ', JSON.stringify(filterActive));
       for (const val of filterActive) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
