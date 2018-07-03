@@ -106,7 +106,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendPartners(sender_psid);
             break;
          case 'OTHER_CONCERNS':
-            message = 'Our Customer Service Supervisor will be talking to you shortly. Please wait a little. Thank you.';
+            message = 'Our Customer Service Representative will be talking to you shortly. Please wait a little. Thank you.';
             facebookServ.sendMessage(sender_psid, message).then(() => {
                const customerServ = 2080237678700295;
                facebookServ.notifyHumanOperators(sender_psid, customerServ);
@@ -160,7 +160,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
          };
 
          baseupServ.storeUserPSID(authCode, authResponse.id, attributes).then((updateResponse) => {
-            facebookServ.sendWelcomeMessage(sender_psid, fullname);
+            facebookServ.sendMainQuickReply(sender_psid, 'welcome');
          });
       });
    }

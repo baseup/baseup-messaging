@@ -10,8 +10,12 @@ const quickRepliesBtn = [{
    payload: 'MAKE_APPOINTMENT'
 }, {
    content_type: 'text',
-   title: 'Check Partners',
+   title: 'Check BaseUp Partners',
    payload: 'CHECK_PARTNERS'
+}, {
+   content_type: 'text',
+   title: 'Need Inspiration?',
+   payload: 'NEED_INSPIRATION'
 }, {
    content_type: 'text',
    title: 'Other Concerns',
@@ -50,7 +54,7 @@ const btnWithSubscribe = [{
    payload: 'OTHER_CONCERNS'
 }, {
    content_type: 'text',
-   title: 'Subscribe',
+   title: 'Link BaseUp Account',
    payload: 'SUBSCRIBE'
 }];
 
