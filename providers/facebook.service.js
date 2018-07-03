@@ -105,7 +105,8 @@ function sendLogin(recipientId) {
                      url: 'https://staging.baseup.me/messenger-login'
                   }]
                }
-            }
+            },
+            quick_replies: startOverQR
          }
       };
 
