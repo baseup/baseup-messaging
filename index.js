@@ -142,7 +142,7 @@ function handlePostback(sender_psid, received_postback) {
    } else if (title === 'Check Branch') {
       handleGetBranch(sender_psid, payload, 'View Details');
    } else if (payload === 'GET_STARTED') {
-      facebookServ.sendMainQuickReply(sender_psid, 'welcome');
+      facebookServ.sendMainQuickReply(sender_psid);
    }
 }
 
