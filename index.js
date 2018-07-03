@@ -141,6 +141,8 @@ function handlePostback(sender_psid, received_postback) {
       handleGetBranch(sender_psid, payload, 'Book');
    } else if (title === 'Check Branch') {
       handleGetBranch(sender_psid, payload, 'View Details');
+   } else if (title === 'View Details') {
+      handleGetBranchDetails(sender_psid, payload);
    } else if (payload === 'GET_STARTED') {
       facebookServ.sendMainQuickReply(sender_psid);
    }
@@ -167,6 +169,10 @@ function handleAccountLinking(sender_psid, received_account_linking) {
    }
 }
 
+function handleGetBranchDetails(psid, payload) {
+   console.log('DETAILS: ', payload);
+}
+
 function handleGetBranch(psid, payload, type) {
    baseupServ.getBranches(payload.toLowerCase()).then((result) => {
       const replies = [{
@@ -182,7 +188,7 @@ function handleGetBranch(psid, payload, type) {
          } : {
             type: 'postback',
             title: type,
-            payload: val.id
+            payload: JSON.stringify(val)
          };
 
          replies.push({
@@ -217,7 +223,6 @@ function handleGetPartners(psid, payload) {
          return value.metadata.launch;
       });
 
-      console.log('BUSINESS: ', JSON.stringify(filterActive));
       for (const val of filterActive) {
          const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
          const data = {
