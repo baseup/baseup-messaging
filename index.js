@@ -173,7 +173,7 @@ function handleGetBranchDetails(psid, details) {
    const data = JSON.parse(details);
    const message = `Name: ${data.name} \n Address: ${data.address} \n Phone: ${data.phone} \n Alias: ${data.alias}`;
 
-   facebookServ.sendMessage(psid, message);
+   facebookServ.sendMessage(psid, message, 'mainQR');
 }
 
 function handleGetBranch(psid, payload, type) {

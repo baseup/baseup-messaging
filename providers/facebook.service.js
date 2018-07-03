@@ -197,7 +197,8 @@ function sendMessage(recipientId, message, quick_replies) {
             id: recipientId
          },
          message: {
-            text: message
+            text: message,
+            quick_replies
          }
       };
 
