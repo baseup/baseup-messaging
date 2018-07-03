@@ -124,7 +124,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
-      if (text === 'what is my psid please') {
+      if (text && text === 'what is my psid please') {
          facebookServ.sendMessage(sender_psid, `Your PSID is ${sender_psid}`);
       } else {
          facebookServ.sendMainQuickReply(sender_psid);
