@@ -106,7 +106,7 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendPartners(sender_psid);
             break;
          case 'OTHER_CONCERNS':
-            message = 'Our Customer Service Representative will be talking to you shortly. Please wait a little. Thank you.';
+            message = 'Someone from our team will get in touch with you shortly. Hold on tight!';
             facebookServ.sendMessage(sender_psid, message).then(() => {
                const customerServ = 2080237678700295;
                facebookServ.notifyHumanOperators(sender_psid, customerServ);

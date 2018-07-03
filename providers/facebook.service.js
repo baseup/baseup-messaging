@@ -4,58 +4,42 @@ const request = require('request');
 const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
-const quickRepliesBtn = [{
+const mainQR = [{
    content_type: 'text',
    title: 'Make an appointment',
    payload: 'MAKE_APPOINTMENT'
 }, {
    content_type: 'text',
-   title: 'Check BaseUp Partners',
+   title: 'Check BaseUp partners',
    payload: 'CHECK_PARTNERS'
 }, {
    content_type: 'text',
-   title: 'Need Inspiration?',
+   title: 'Need inspiration?',
    payload: 'NEED_INSPIRATION'
 }, {
    content_type: 'text',
-   title: 'Other Concerns',
+   title: 'Link BaseUp account',
+   payload: 'SUBSCRIBE'
+}, {
+   content_type: 'text',
+   title: 'Other concerns',
    payload: 'OTHER_CONCERNS'
 }];
 
-const btnWithDone = [{
+const inpirationQR = [{
    content_type: 'text',
-   title: 'Make an appointment',
-   payload: 'MAKE_APPOINTMENT'
-}, {
-   content_type: 'text',
-   title: 'Check Partners',
-   payload: 'CHECK_PARTNERS'
-}, {
-   content_type: 'text',
-   title: 'Other Concerns',
-   payload: 'OTHER_CONCERNS'
+   title: 'More Inspiration?',
+   payload: 'MORE_INSPIRATION'
 }, {
    content_type: 'text',
    title: 'I\'\m good for now!',
    payload: 'DONE'
 }];
 
-const btnWithSubscribe = [{
+const startOverQR = [{
    content_type: 'text',
    title: 'Make an appointment',
-   payload: 'MAKE_APPOINTMENT'
-}, {
-   content_type: 'text',
-   title: 'Check Partners',
-   payload: 'CHECK_PARTNERS'
-}, {
-   content_type: 'text',
-   title: 'Other Concerns',
-   payload: 'OTHER_CONCERNS'
-}, {
-   content_type: 'text',
-   title: 'Link BaseUp Account',
-   payload: 'SUBSCRIBE'
+   payload: 'START_OVER'
 }];
 
 module.exports = {
@@ -89,7 +73,7 @@ function sendBranch(recipientId, elements) {
                   elements
                }
             },
-            quick_replies: btnWithDone
+            quick_replies: startOverQR
          }
       };
 
@@ -149,7 +133,7 @@ function sendPartners(recipientId, businesses) {
                }
             }
          },
-         quick_replies: btnWithDone
+         quick_replies: startOverQR
       };
 
       callSendAPI(messageData).then(() => {
@@ -171,7 +155,7 @@ function sendDefaultMessage(recipientId) {
          },
          message: {
             text: `What else can i do for you ${fullName}?`,
-            quick_replies: btnWithDone
+            quick_replies: mainQR
          }
       };
 
@@ -204,7 +188,7 @@ function sendNoFeature(recipientId) {
    });
 }
 
-function sendMessage(recipientId, message) {
+function sendMessage(recipientId, message, quick_replies) {
    return new Promise((resolve) => {
       sendTypingOn(recipientId);
       const messageData = {
@@ -238,7 +222,7 @@ function sendMainQuickReply(recipientId, type) {
          }
       };
 
-      messageData.message.quick_replies = (type && type === 'welcome') ? btnWithSubscribe : quickRepliesBtn;
+      messageData.message.quick_replies = (type && type === 'welcome') ? btnWithSubscribe : mainQR;
 
       callSendAPI(messageData);
       setTimeout(() => {
