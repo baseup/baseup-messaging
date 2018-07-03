@@ -99,11 +99,9 @@ function handleMessage(sender_psid, received_message) {
       switch (quickreply.payload) {
          case 'CHECK_PARTNERS':
             handleGetBusiness(sender_psid, quickreply.payload);
-            facebookServ.sendPartners(sender_psid);
             break;
          case 'MAKE_APPOINTMENT':
             handleGetBusiness(sender_psid, quickreply.payload);
-            facebookServ.sendPartners(sender_psid);
             break;
          case 'OTHER_CONCERNS':
             message = 'Someone from our team will get in touch with you shortly. Hold on tight!';
