@@ -169,8 +169,11 @@ function handleAccountLinking(sender_psid, received_account_linking) {
    }
 }
 
-function handleGetBranchDetails(psid, payload) {
-   console.log('DETAILS: ', payload);
+function handleGetBranchDetails(psid, details) {
+   const data = JSON.parse(details);
+   const message = `Name: ${data.name} \n Address: ${data.address} \n Phone: ${data.phone} \n Alias: ${data.alias}`;
+
+   facebookServ.sendMessage(psid, message);
 }
 
 function handleGetBranch(psid, payload, type) {
@@ -188,7 +191,12 @@ function handleGetBranch(psid, payload, type) {
          } : {
             type: 'postback',
             title: type,
-            payload: JSON.stringify(val)
+            payload: JSON.stringify({
+               name: val.name,
+               address: val.address,
+               phone: val.phone,
+               alias: val.alias
+            })
          };
 
          replies.push({
