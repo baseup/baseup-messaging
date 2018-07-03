@@ -216,6 +216,10 @@ function sendMainQuickReply(recipientId, type) {
       const messageData = {
          recipient: {
             id: recipientId
+         },
+         message: {
+            text: '',
+            quick_replies: {}
          }
       };
 
