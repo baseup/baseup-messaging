@@ -38,7 +38,7 @@ const inpirationQR = [{
 
 const startOverQR = [{
    content_type: 'text',
-   title: 'Make an appointment',
+   title: 'Start Over',
    payload: 'START_OVER'
 }];
 
