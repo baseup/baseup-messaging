@@ -10,7 +10,7 @@ const mainQR = [{
    payload: 'MAKE_APPOINTMENT'
 }, {
    content_type: 'text',
-   title: 'Check BaseUp partners',
+   title: 'View BaseUp partners',
    payload: 'CHECK_PARTNERS'
 }, {
    content_type: 'text',
@@ -156,7 +156,6 @@ function sendDefaultMessage(recipientId) {
          },
          message: {
             text: `What else can i do for you ${fullName}?`,
-            quick_replies: mainQR
          }
       };
 
@@ -189,7 +188,7 @@ function sendNoFeature(recipientId) {
    });
 }
 
-function sendMessage(recipientId, message, quick_replies) {
+function sendMessage(recipientId, message, type) {
    return new Promise((resolve) => {
       sendTypingOn(recipientId);
       const messageData = {
@@ -197,10 +196,13 @@ function sendMessage(recipientId, message, quick_replies) {
             id: recipientId
          },
          message: {
-            text: message,
-            quick_replies
+            text: message
          }
       };
+
+      if (type && type === 'mainQR') {
+         messageData.message.quick_replies = mainQR;
+      }
 
       callSendAPI(messageData).then(() => {
          resolve(true);
