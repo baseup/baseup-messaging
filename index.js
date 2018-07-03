@@ -117,6 +117,9 @@ function handleMessage(sender_psid, received_message) {
          case 'SUBSCRIBE':
             facebookServ.sendLogin(sender_psid);
             break;
+         case 'START_OVER':
+            facebookServ.sendMainQuickReply(sender_psid);
+            break;
          default:
             facebookServ.sendMainQuickReply(sender_psid);
       }

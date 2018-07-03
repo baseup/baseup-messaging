@@ -99,7 +99,7 @@ function sendLogin(recipientId) {
                type: 'template',
                payload: {
                   template_type: 'button',
-                  text: `Hi ${fullName}, Please login to your Base Up Account to continue the subscription.`,
+                  text: `Hi ${fullName}, You can now link your BaseUp account to get appointment notifications on Messenger. Login to your BaseUp account to activate.`,
                   buttons: [{
                      type: 'account_link',
                      url: 'https://staging.baseup.me/messenger-login'
@@ -131,9 +131,9 @@ function sendPartners(recipientId, businesses) {
                   template_type: 'generic',
                   elements: businesses
                }
-            }
-         },
-         quick_replies: startOverQR
+            },
+            quick_replies: startOverQR
+         }
       };
 
       callSendAPI(messageData).then(() => {
@@ -216,13 +216,12 @@ function sendMainQuickReply(recipientId, type) {
       const messageData = {
          recipient: {
             id: recipientId
-         },
-         message: {
-            text: `Hi ${fullName}, I'm Vicky. BaseUp's automated bot. How can I help you today?`,
          }
       };
 
-      messageData.message.quick_replies = (type && type === 'welcome') ? btnWithSubscribe : mainQR;
+      messageData.message.text = (type && type === 'welcome') ? `Welcome ${fullName}, Thank you for linking your BaseUp account. I'm Vicky. BaseUp's automated bot. How can I help you today?` : `Hi ${fullName}, I'm Vicky. BaseUp's automated bot. How can I help you today?`;
+
+      messageData.message.quick_replies = (type && type === 'welcome') ? startOverQR : mainQR;
 
       callSendAPI(messageData);
       setTimeout(() => {
