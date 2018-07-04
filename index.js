@@ -111,7 +111,7 @@ function handleMessage(sender_psid, received_message) {
 
                const functionSendConcerns = () => {
                   console.log(customerServ[count]);
-                  facebookServ.notifyHumanOperators(customerServ[count], customerServ).then(() => {
+                  facebookServ.notifyHumanOperators(sender_psid, customerServ[count]).then(() => {
                      count++;
                      if (count < customerServ.length) {
                         functionSendConcerns();
