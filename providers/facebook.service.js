@@ -240,22 +240,25 @@ function sendMainQuickReply(recipientId, type) {
 }
 
 function notifyHumanOperators(recipientId, sendId) {
-   request({
-      uri: 'https://graph.facebook.com/v2.9/' + recipientId,
-      qs: {
-         access_token: facebookConst.PAGE_ACCESS_TOKEN,
-         fields: 'first_name,last_name'
-      },
-      method: 'GET',
-   }, (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-         const firstName = JSON.parse(body).first_name;
-         const lastName = JSON.parse(body).last_name;
-         const fullName = (firstName + ' ' + lastName);
-         sendMessage(sendId, `${fullName} is tying to reach you at Baseup Page! Reply ASAP!`);
-      } else {
-         console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
-      }
+   return new Promise((resolve) => {
+      request({
+         uri: 'https://graph.facebook.com/v2.9/' + recipientId,
+         qs: {
+            access_token: facebookConst.PAGE_ACCESS_TOKEN,
+            fields: 'first_name,last_name'
+         },
+         method: 'GET',
+      }, (error, response, body) => {
+         if (!error && response.statusCode == 200) {
+            const firstName = JSON.parse(body).first_name;
+            const lastName = JSON.parse(body).last_name;
+            const fullName = (firstName + ' ' + lastName);
+            sendMessage(sendId, `${fullName} is tying to reach you at Baseup Page! Reply ASAP!`);
+            resolve(true);
+         } else {
+            console.error('Failed calling Send API', response.statusCode, response.statusMessage, body.error);
+         }
+      });
    });
 }
 

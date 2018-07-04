@@ -106,11 +106,19 @@ function handleMessage(sender_psid, received_message) {
          case 'OTHER_CONCERNS':
             message = 'Someone from our team will get in touch with you shortly. Hold on tight!';
             facebookServ.sendMessage(sender_psid, message).then(() => {
+               let count = 0;
                const customerServ = [2080237678700295, 2018533118171338];
 
-               for (let val of customerServ) {
-                  facebookServ.notifyHumanOperators(val, customerServ);
-               }
+               const functionSendConcerns = () => {
+                  if (count < customerServ.length) {
+                     facebookServ.notifyHumanOperators(customerServ[count], customerServ).then(() => {
+                        count++;
+                        functionSendConcerns();
+                     });
+                  }
+               };
+
+               functionSendConcerns();
             });
             break;
          case 'DONE':
