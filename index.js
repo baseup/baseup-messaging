@@ -110,12 +110,12 @@ function handleMessage(sender_psid, received_message) {
                const customerServ = [2080237678700295, 2018533118171338];
 
                const functionSendConcerns = () => {
-                  if (count < customerServ.length) {
-                     facebookServ.notifyHumanOperators(customerServ[count], customerServ).then(() => {
-                        count++;
+                  facebookServ.notifyHumanOperators(customerServ[count], customerServ).then(() => {
+                     count++;
+                     if (count < customerServ.length) {
                         functionSendConcerns();
-                     });
-                  }
+                     }
+                  });
                };
 
                functionSendConcerns();
