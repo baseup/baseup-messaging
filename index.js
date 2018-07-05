@@ -13,6 +13,7 @@ const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
 
 const facebookConst = require('./settings/facebook.constants');
+const inspirationConst = require('./settings/inspiration.constants');
 
 app.use(cors());
 app.set('port', process.env.PORT || 5000);
@@ -131,6 +132,12 @@ function handleMessage(sender_psid, received_message) {
             break;
          case 'START_OVER':
             facebookServ.sendMainQuickReply(sender_psid);
+            break;
+         case 'NEED_INSPIRATION' || 'MORE_INSPIRATION':
+            message = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
+            console.log('MESSAGE: ', JSON.stringify(message));
+            console.log('INSPIRATION CONST: ', JSON.stringify(inspirationConst));
+            facebookServ.sendMessage(sender_psid, message.quote);
             break;
          default:
             facebookServ.sendMainQuickReply(sender_psid);
