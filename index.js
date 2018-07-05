@@ -91,6 +91,8 @@ app.post('/webhooks', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
+   let random = [];
+   let quoteID = 0;
    let message = '';
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
@@ -133,9 +135,24 @@ function handleMessage(sender_psid, received_message) {
          case 'START_OVER':
             facebookServ.sendMainQuickReply(sender_psid);
             break;
-         case 'NEED_INSPIRATION' || 'MORE_INSPIRATION':
-            message = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
-            facebookServ.sendMessage(sender_psid, message.quote, 'inpirationQR');
+         case 'NEED_INSPIRATION':
+            random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
+            message = random.quote;
+            quoteID = random.id;
+            facebookServ.sendMessage(sender_psid, message, 'inpirationQR');
+            break;
+         case 'MORE_INSPIRATION':
+            const sendInpiration = () => {
+               random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
+               if (random.id !== quoteID) {
+                  message = random.quote;
+                  quoteID = random.id;
+                  facebookServ.sendMessage(sender_psid, message.quote, 'inpirationQR');
+               } else {
+                  sendInpiration();
+               }
+            };
+            sendInpiration();
             break;
          default:
             facebookServ.sendMainQuickReply(sender_psid);
