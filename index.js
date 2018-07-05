@@ -137,16 +137,18 @@ function handleMessage(sender_psid, received_message) {
             break;
          case 'NEED_INSPIRATION':
             random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
-            message = random.quote;
             quoteID = random.id;
+            message = random.quote;
             facebookServ.sendMessage(sender_psid, message, 'inpirationQR');
             break;
          case 'MORE_INSPIRATION':
             const sendInpiration = () => {
                random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
+               console.log('RANDOM: ', JSON.stringify(random));
+               console.log('QUOTEID: ', JSON.stringify(quoteID));
                if (random.id !== quoteID) {
-                  message = random.quote;
                   quoteID = random.id;
+                  message = random.quote;
                   facebookServ.sendMessage(sender_psid, message.quote, 'inpirationQR');
                } else {
                   sendInpiration();
