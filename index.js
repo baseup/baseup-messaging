@@ -76,6 +76,7 @@ app.post('/webhooks', (req, res) => {
 
             if (webhook_event.message) {
                console.log('MESSAGE: ', webhook_event.message.text);
+               console.log('MESSAGE: ', parseUnicode(webhook_event.message.text));
                handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                handlePostback(sender_psid, webhook_event.postback);
@@ -304,6 +305,14 @@ function handleGetPartners(psid, payload) {
    }).catch((error) => {
       console.log('BUSINESS ERROR: ', JSON.stringify(error));
    });
+}
+
+function parseUnicode(str) {
+   var r = /\\u([\d\w]{4})/gi;
+   str = str.replace(r, function (match, grp) {
+      return String.fromCharCode(parseInt(grp, 16));
+   });
+   return str;
 }
 
 app.listen(app.get('port'), () => {
