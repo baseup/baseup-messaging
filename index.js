@@ -7,7 +7,7 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const app = express();
-let messageReply = '';
+let quoteID = 0;
 
 const baseupServ = require('./providers/baseup.service');
 const facebookServ = require('./providers/facebook.service');
@@ -92,7 +92,6 @@ app.post('/webhooks', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
    let random = [];
-   let quoteID = 0;
    let message = '';
    const text = received_message.text;
    const quickreply = received_message.quick_reply;
@@ -146,6 +145,7 @@ function handleMessage(sender_psid, received_message) {
                random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
                console.log('RANDOM: ', JSON.stringify(random));
                console.log('QUOTEID: ', JSON.stringify(quoteID));
+               console.log('CONDITION: ', random.id !== quoteID);
                if (random.id !== quoteID) {
                   quoteID = random.id;
                   message = random.quote;
