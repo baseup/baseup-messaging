@@ -143,9 +143,6 @@ function handleMessage(sender_psid, received_message) {
          case 'MORE_INSPIRATION':
             const sendInpiration = () => {
                random = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
-               console.log('RANDOM: ', JSON.stringify(random));
-               console.log('QUOTEID: ', JSON.stringify(quoteID));
-               console.log('CONDITION: ', random.id !== quoteID);
                if (random.id !== quoteID) {
                   quoteID = random.id;
                   message = random.quote;

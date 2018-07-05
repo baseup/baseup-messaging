@@ -34,6 +34,10 @@ const inpirationQR = [{
    content_type: 'text',
    title: 'I\'\m good for now!',
    payload: 'DONE'
+}, {
+   content_type: 'text',
+   title: 'Start Over',
+   payload: 'START_OVER'
 }];
 
 const startOverQR = [{
