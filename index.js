@@ -135,9 +135,7 @@ function handleMessage(sender_psid, received_message) {
             break;
          case 'NEED_INSPIRATION' || 'MORE_INSPIRATION':
             message = inspirationConst[Math.floor(Math.random() * inspirationConst.length)];
-            console.log('MESSAGE: ', JSON.stringify(message));
-            console.log('INSPIRATION CONST: ', JSON.stringify(inspirationConst));
-            facebookServ.sendMessage(sender_psid, message.quote);
+            facebookServ.sendMessage(sender_psid, message.quote, 'inpirationQR');
             break;
          default:
             facebookServ.sendMainQuickReply(sender_psid);

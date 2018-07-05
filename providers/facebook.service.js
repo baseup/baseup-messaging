@@ -202,6 +202,8 @@ function sendMessage(recipientId, message, type) {
 
       if (type && type === 'mainQR') {
          messageData.message.quick_replies = mainQR;
+      } else if (type && type === 'inpirationQR') {
+         messageData.message.quick_replies = inpirationQR;
       }
 
       callSendAPI(messageData).then(() => {
