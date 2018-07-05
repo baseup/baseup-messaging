@@ -149,7 +149,7 @@ function handleMessage(sender_psid, received_message) {
                if (random.id !== quoteID) {
                   quoteID = random.id;
                   message = random.quote;
-                  facebookServ.sendMessage(sender_psid, message.quote, 'inpirationQR');
+                  facebookServ.sendMessage(sender_psid, message, 'inpirationQR');
                } else {
                   sendInpiration();
                }
