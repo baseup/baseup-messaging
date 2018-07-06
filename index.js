@@ -78,7 +78,7 @@ app.post('/webhooks', (req, res) => {
 
                         if (webhook_event.message) {
                               console.log('MESSAGE: ', webhook_event.message.text);
-                              console.log('MESSAGE: ', emoji.EMOJI_DOCOMO_RE(webhook_event.message.text));
+                              console.log('MESSAGE: ', emoji.EMOJI_MAP[webhook_event.message.text]);
                               handleMessage(sender_psid, webhook_event.message);
                         } else if (webhook_event.postback) {
                               handlePostback(sender_psid, webhook_event.postback);
