@@ -78,9 +78,6 @@ app.post('/webhooks', (req, res) => {
 
             if (webhook_event.message) {
                console.log('MESSAGE: ', webhook_event.message.text);
-               console.log('UNIFIED HTML: ', emoji.unifiedToHTML(webhook_event.message.text));
-               console.log('UNIFIED HTML: ', emoji.unifiedToHTML(webhook_event.message.text).includes('haircut'));
-               console.log('UNIFIED HTML: ', /<[a-z][\s\S]*>/i.test(emoji.unifiedToHTML(webhook_event.message.text)));
                handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                handlePostback(sender_psid, webhook_event.postback);
@@ -163,8 +160,13 @@ function handleMessage(sender_psid, received_message) {
             facebookServ.sendMainQuickReply(sender_psid);
       }
    } else {
+      const isEmojiSpan = /<[a-z][\s\S]*>/i.test(emoji.unifiedToHTML(text));
+      const ishaircutEmoji = emoji.unifiedToHTML(text).includes('title="haircut"');
+
       if (text && text === 'what is my psid please') {
          facebookServ.sendMessage(sender_psid, `Your PSID is ${sender_psid}`);
+      } else if (text && isEmojiSpan && ishaircutEmoji) {
+         handleGetPartners(sender_psid, 'MAKE_APPOINTMENT');
       } else {
          facebookServ.sendMainQuickReply(sender_psid);
       }
