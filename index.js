@@ -80,6 +80,7 @@ app.post('/webhooks', (req, res) => {
                console.log('MESSAGE: ', webhook_event.message.text);
                console.log('EMOJI_MAP: ', emoji.EMOJI_MAP[webhook_event.message.text]);
                console.log('KDDI UNIFIED: ', emoji.kddiToUnified(webhook_event.message.text));
+               console.log('UNIFIED HTML: ', emoji.unifiedToHTML(webhook_event.message.text));
                console.log('DOCOMO UNIFIED: ', emoji.docomoToUnified(webhook_event.message.text));
                console.log('GOOGLE UNIFIED: ', emoji.googleToUnified(webhook_event.message.text));
                console.log('SOFTBANK UNIFIED: ', emoji.softbankToUnified(webhook_event.message.text));
