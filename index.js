@@ -5,7 +5,7 @@ const _ = require('lodash');
 const cors = require('cors');
 const express = require('express');
 const request = require('request');
-const emoji = require('node-emoji');
+const emoji = require('emoji');
 const bodyParser = require('body-parser');
 const app = express();
 
