@@ -233,9 +233,9 @@ function sendMainQuickReply(recipientId, type) {
          }
       };
 
-      messageData.message.text = (type && type === 'welcome') ? `Welcome ${fullName}, Thank you for linking your BaseUp account. I'm Vicky. BaseUp's automated bot. How can I help you today?` : `Hi ${fullName}, I'm Vicky. BaseUp's automated bot. How can I help you today?`;
+      messageData.message.text = (type && type === 'welcome') ? `Thank you for linking your BaseUp account. I'm Vicky. BaseUp's automated bot. How can I help you today?` : `Hi ${fullName}, I'm Vicky. BaseUp's automated bot. How can I help you today?`;
 
-      messageData.message.quick_replies = (type && type === 'welcome') ? startOverQR : mainQR;
+      messageData.message.quick_replies = mainQR;
 
       callSendAPI(messageData);
       setTimeout(() => {
