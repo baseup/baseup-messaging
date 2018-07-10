@@ -228,7 +228,7 @@ function handleGetBranch(psid, payload, type) {
          const button = (type === 'Book') ? {
             type: 'web_url',
             title: type,
-            url: `https://staging.baseup.me/widget/${val.account.slug}/${val.id}/?messenger=${psid}`
+            url: `${process.env.BASE_URL}/widget/${val.account.slug}/${val.id}/?messenger=${psid}`
          } : {
             type: 'postback',
             title: type,

@@ -11,7 +11,7 @@ module.exports = {
 function getBranches(slug) {
    return new Promise((resolve, reject) => {
       request({
-         uri: 'https://staging.baseup.me/api/v1/branches/get/',
+         uri: `${process.env.API_URL}/branches/get/`,
          qs: {
             include: 'account',
             slug
@@ -38,7 +38,7 @@ function getBranches(slug) {
 function getBusinesses() {
    return new Promise((resolve, reject) => {
       request({
-         uri: 'https://staging.baseup.me/api/v1/accounts/businesses/',
+         uri: `${process.env.API_URL}/accounts/businesses/`,
          method: 'GET'
       }, (error, response, body) => {
          if (error) {
@@ -63,7 +63,7 @@ function getBusinesses() {
 function getAuthBaseupUser(authCode) {
    return new Promise((resolve, reject) => {
       request({
-            url: 'https://staging.baseup.me/api/v1/users/get_auth_user/',
+            url: `${process.env.API_URL}/users/get_auth_user/`,
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'Content-Type': 'application/vnd.api+json'
@@ -100,7 +100,7 @@ function storeUserPSID(authCode, id, attributes) {
 
       request({
             method: 'PATCH',
-            url: `https://staging.baseup.me/api/v1/users/${id}/`,
+            url: `${process.env.API_URL}/users/${id}/`,
             headers: {
                'Authorization': `Bearer ${authCode}`,
                'Content-Type': 'application/vnd.api+json'

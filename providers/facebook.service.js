@@ -107,7 +107,7 @@ function sendLogin(recipientId) {
                   text: `Hi ${fullName}, You can now link your BaseUp account to get appointment notifications on Messenger. Login to your BaseUp account to activate.`,
                   buttons: [{
                      type: 'account_link',
-                     url: 'https://staging.baseup.me/messenger-login'
+                     url: `${process.env.BASE_URL}/messenger-login`
                   }]
                }
             }
