@@ -1,3 +1,4 @@
 # FacebookMessengerChatBot
 
 /node_modules
+.env
