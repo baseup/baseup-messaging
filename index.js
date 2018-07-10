@@ -17,6 +17,7 @@ const facebookServ = require('./providers/facebook.service');
 const facebookConst = require('./settings/facebook.constants');
 const inspirationConst = require('./settings/inspiration.constants');
 
+console.log(process.env.BASEURL);
 app.use(cors());
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
