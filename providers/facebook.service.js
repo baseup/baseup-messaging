@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const request = require('request');
 
-const baseupServ = require('./baseup.service');
 const facebookConst = require('../settings/facebook.constants');
 
 const mainQR = [{
@@ -107,7 +106,7 @@ function sendLogin(recipientId) {
                   text: `Hi ${fullName}, You can now link your BaseUp account to get appointment notifications on Messenger. Login to your BaseUp account to activate.`,
                   buttons: [{
                      type: 'account_link',
-                     url: `${process.env.BASE_URL}/messenger-login`
+                     url: `${facebookConst.BASE_URL}/messenger-login`
                   }]
                }
             }
