@@ -77,7 +77,7 @@ app.post('/webhooks', (req, res) => {
                         const sender_psid = webhook_event.sender.id;
 
                         if (webhook_event.message) {
-                              console.log('MESSAGE: ', webhook_event.message.text);
+                              // console.log('MESSAGE: ', webhook_event.message.text);
                               handleMessage(sender_psid, webhook_event.message);
                         } else if (webhook_event.postback) {
                               handlePostback(sender_psid, webhook_event.postback);
@@ -115,7 +115,7 @@ function handleMessage(sender_psid, received_message) {
                               const customerServ = [2080237678700295, 2018533118171338];
 
                               const functionSendConcerns = () => {
-                                    console.log(customerServ[count]);
+                                    // console.log(customerServ[count]);
                                     facebookServ.notifyHumanOperators(sender_psid, customerServ[count]).then(() => {
                                           count++;
                                           if (count < customerServ.length) {
@@ -272,7 +272,7 @@ function handleGetPartners(psid, payload) {
                   return value.id === 2 || value.id === 33 || value.id === 31;
             });
 
-            console.log(filterActive);
+            console.log('BUSINESSES: ', JSON.stringify(filterActive));
             for (const val of filterActive) {
                   const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
                   const data = {
