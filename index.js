@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-      res.send('HELLO WORLD');
+      res.send('HELLO HI');
 });
 
 app.get('/webhooks', (req, res) => {
