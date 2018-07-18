@@ -269,7 +269,7 @@ function handleGetPartners(psid, payload) {
       baseupServ.getBusinesses().then((result) => {
             const businesses = [];
             const filterActive = result.filter((value) => {
-                  return value.metadata.launch;
+                  return value.id === 2 || value.id === 33 || value.id === 31;
             });
 
             for (const val of filterActive) {
