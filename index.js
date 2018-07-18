@@ -272,6 +272,7 @@ function handleGetPartners(psid, payload) {
                   return value.id === 2 || value.id === 33 || value.id === 31;
             });
 
+            console.log(filterActive);
             for (const val of filterActive) {
                   const title = (payload === 'MAKE_APPOINTMENT') ? 'Book Appointment' : 'Check Branch';
                   const data = {
