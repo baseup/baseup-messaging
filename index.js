@@ -197,6 +197,7 @@ function handleAccountLinking(sender_psid, received_account_linking) {
       const status = received_account_linking.status;
       const authCode = received_account_linking.authorization_code;
 
+      console.log(received_account_linking);
       if (status === 'linked') {
             baseupServ.getAuthBaseupUser(authCode).then((authResponse) => {
                   const metaData = authResponse.metadata;
