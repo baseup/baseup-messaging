@@ -17,7 +17,7 @@ const mainQR = [{
    payload: 'NEED_INSPIRATION'
 }, {
    content_type: 'text',
-   title: 'Link BaseUp account',
+   title: 'Subscribe BaseUp Bot',
    payload: 'SUBSCRIBE'
 }, {
    content_type: 'text',
