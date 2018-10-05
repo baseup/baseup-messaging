@@ -320,7 +320,7 @@ function handleGetPartners(psid, payload) {
             payload: val.slug
           }]
         };
-
+        console.log(val);
         if (val.address) {
           data.subtitle = `${val.address}, ${val.city} ${val.province}`;
         }
