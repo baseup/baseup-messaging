@@ -140,6 +140,8 @@ function sendPartners(recipientId, businesses) {
          }
       };
 
+      console.log(businesses);
+      console.log(startOverQR);
       console.log(messageData);
       callSendAPI(messageData).then(() => {
          setTimeout(() => {
