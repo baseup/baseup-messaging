@@ -327,13 +327,14 @@ function handleGetPartners(psid, payload) {
         if (val.business_logo) {
           data.image_url = val.business_logo;
         }
-        console.log(data);
         businesses.push(data);
       }
 
       let chunkCount = 0;
       const chunk = _.chunk(businesses, 10);
 
+      console.log('PSID: ', psid);
+      console.log('CHUNK: ', chunk[chunkCount]);
       const functionSendBusiness = () => {
         facebookServ
           .sendPartners(psid, chunk[chunkCount])
