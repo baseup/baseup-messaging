@@ -324,9 +324,9 @@ function handleGetPartners(psid, payload) {
           data.subtitle = `${val.address}, ${val.city} ${val.province}`;
         }
 
-        if (val.business_logo) {
-          data.image_url = `${facebookConst.BASE_URL}/${val.business_logo}`;
-        }
+        // if (val.business_logo) {
+        //   data.image_url = `${facebookConst.BASE_URL}/${val.business_logo}`;
+        // }
         businesses.push(data);
       }
 
