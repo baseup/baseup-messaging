@@ -333,8 +333,6 @@ function handleGetPartners(psid, payload) {
       let chunkCount = 0;
       const chunk = _.chunk(businesses, 10);
 
-      console.log('PSID: ', psid);
-      console.log('CHUNK: ', chunk[chunkCount]);
       const functionSendBusiness = () => {
         facebookServ
           .sendPartners(psid, chunk[chunkCount])

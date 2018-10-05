@@ -140,6 +140,7 @@ function sendPartners(recipientId, businesses) {
          }
       };
 
+      console.log(messageData);
       callSendAPI(messageData).then(() => {
          setTimeout(() => {
             sendTypingOff(recipientId);
