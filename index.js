@@ -321,7 +321,7 @@ function handleGetPartners(psid, payload) {
           }]
         };
         if (val.address) {
-          data.subtitle = `${val.address}, ${val.city}`;
+          data.subtitle = `${val.address}`;
         }
 
         if (val.business_logo) {

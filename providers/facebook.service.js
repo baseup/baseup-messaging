@@ -133,21 +133,10 @@ function sendPartners(recipientId, businesses) {
                type: 'template',
                payload: {
                   template_type: 'generic',
-                  elements: [{
-                     "title": "Welcome!",
-                     "subtitle": "We have the right hat for everyone.",
-                     "buttons": [{
-                        "type": "web_url",
-                        "title": "View Website"
-                     }, {
-                        "type": "postback",
-                        "title": "Start Chatting",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD"
-                     }]
-                  }]
-               },
-               quick_replies: startOverQR
-            }
+                  elements: businesses
+               }
+            },
+            quick_replies: startOverQR
          }
       };
 
