@@ -321,11 +321,11 @@ function handleGetPartners(psid, payload) {
           }]
         };
         if (val.address) {
-          data.subtitle = `${val.address}`;
+          data.subtitle = `${val.address}, ${val.city} ${val.province}`;
         }
 
         if (val.business_logo) {
-          data.image_url = val.business_logo;
+          data.image_url = `${facebookConst.BASE_URL}/${val.business_logo}`;
         }
         businesses.push(data);
       }
