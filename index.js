@@ -52,8 +52,7 @@ app.post("/send-message", (req, res) => {
     }
   };
 
-  request(
-    {
+  request({
       url: `https://graph.facebook.com/v2.9/me/messages?access_token=${
         facebookConst.PAGE_ACCESS_TOKEN
       }`,
@@ -84,7 +83,6 @@ app.post("/webhooks", (req, res) => {
         const sender_psid = webhook_event.sender.id;
 
         if (webhook_event.message) {
-          console.log("MESSAGE: ", webhook_event.message.text);
           handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback) {
           handlePostback(sender_psid, webhook_event.postback);
@@ -184,6 +182,7 @@ function handleMessage(sender_psid, received_message) {
       if (text === "what is my psid please") {
         facebookServ.sendMessage(sender_psid, `Your PSID is ${sender_psid}`);
       } else if (isEmojiSpan && ishaircutEmoji) {
+        console.log('EMOJI');
         handleGetPartners(sender_psid, "MAKE_APPOINTMENT");
       } else {
         facebookServ.sendMainQuickReply(sender_psid);
@@ -213,7 +212,6 @@ function handleAccountLinking(sender_psid, received_account_linking) {
   const status = received_account_linking.status;
   const authCode = received_account_linking.authorization_code;
 
-  console.log(received_account_linking);
   if (status === "linked") {
     baseupServ.getAuthBaseupUser(authCode).then(authResponse => {
       const metaData = authResponse.metadata;
@@ -246,35 +244,31 @@ function handleGetBranch(psid, payload, type) {
   baseupServ
     .getBranches(payload.toLowerCase())
     .then(result => {
-      const replies = [
-        {
-          title: result[0].account.name,
-          subtitle: `${result[0].account.address}, ${result[0].account.city} ${
+      const replies = [{
+        title: result[0].account.name,
+        subtitle: `${result[0].account.address}, ${result[0].account.city} ${
             result[0].account.province
           }`
-        }
-      ];
+      }];
 
       for (const val of result) {
         const button =
-          type === "Book"
-            ? {
-                type: "web_url",
-                title: type,
-                url: `${facebookConst.BASE_URL}/widget/${val.account.slug}/${
+          type === "Book" ? {
+            type: "web_url",
+            title: type,
+            url: `${facebookConst.BASE_URL}/widget/${val.account.slug}/${
                   val.id
                 }/?messenger=${psid}`
-              }
-            : {
-                type: "postback",
-                title: type,
-                payload: JSON.stringify({
-                  name: val.name,
-                  address: val.address,
-                  phone: val.phone,
-                  alias: val.alias
-                })
-              };
+          } : {
+            type: "postback",
+            title: type,
+            payload: JSON.stringify({
+              name: val.name,
+              address: val.address,
+              phone: val.phone,
+              alias: val.alias
+            })
+          };
 
         replies.push({
           title: val.alias,
@@ -315,19 +309,16 @@ function handleGetPartners(psid, payload) {
         );
       });
 
-      console.log("BUSINESSES: ", JSON.stringify(filterActive));
       for (const val of filterActive) {
         const title =
           payload === "MAKE_APPOINTMENT" ? "Book Appointment" : "Check Branch";
         const data = {
           title: val.name,
-          buttons: [
-            {
-              type: "postback",
-              title,
-              payload: val.slug
-            }
-          ]
+          buttons: [{
+            type: "postback",
+            title,
+            payload: val.slug
+          }]
         };
 
         if (val.address) {
