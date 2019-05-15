@@ -303,9 +303,10 @@ function handleGetPartners(psid, payload) {
       const filterActive = result.filter(value => {
         return (
           value.id === "2" ||
-          value.id === "33" ||
-          value.id === "31" ||
-          value.id === "43"
+          value.id === "43" ||
+          value.id === "44" ||
+          value.id === "48" ||
+          value.id === "55"
         );
       });
 
